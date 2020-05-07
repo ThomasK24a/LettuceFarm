@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monogame", "Monogame.csproj", "{83B062F3-32D1-4593-9C77-CF1EFBA39813}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LettuceFarm", "LettuceFarm.csproj", "{1E2FC110-C263-4E12-AAB2-D3D94473D0AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{83B062F3-32D1-4593-9C77-CF1EFBA39813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83B062F3-32D1-4593-9C77-CF1EFBA39813}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83B062F3-32D1-4593-9C77-CF1EFBA39813}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83B062F3-32D1-4593-9C77-CF1EFBA39813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E2FC110-C263-4E12-AAB2-D3D94473D0AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E2FC110-C263-4E12-AAB2-D3D94473D0AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E2FC110-C263-4E12-AAB2-D3D94473D0AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E2FC110-C263-4E12-AAB2-D3D94473D0AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {25BC6C3F-A3ED-44A9-A84B-03C4E9B35C9C}
+		SolutionGuid = {B1E94348-2DCE-461F-95BA-A1214A7B39E6}
 	EndGlobalSection
 EndGlobal

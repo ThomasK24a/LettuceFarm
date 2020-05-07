@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Monogame
+namespace LettuceFarm
 {
     public static class Program
     {
