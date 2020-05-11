@@ -55,17 +55,7 @@ namespace LettuceFarm.UI.Shop
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            /*
-            Texture2D rect = new Texture2D(Global._graphics.GraphicsDevice, 80, 30);
-            Color[] data = new Color[80 * 30];
-            for (int i = 0; i < data.Length; ++i) data[i] = Color.Chocolate;
-            rect.SetData(data);
-
-            Vector2 coor = new Vector2(10, 20);
-            Global._spriteBatch.Begin();
-            Global._spriteBatch.Draw(rect, coor, Color.White);
-            Global._spriteBatch.End();
-            */
+            
             Controls.Add(itemBackground);
             Controls.Add(buyButton);
 

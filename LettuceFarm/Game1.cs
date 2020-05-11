@@ -9,6 +9,7 @@ namespace LettuceFarm
     {
         Texture2D animals;
         Shop shop;
+        GameMap map;
 
         public Game1()
         {
@@ -20,9 +21,9 @@ namespace LettuceFarm
         protected override void Initialize()
         {
             Global._spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            map = new GameMap(this, 20, 15);
             shop = new Shop(this);
-
+            map.InitializeComponent();
             // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
             base.Initialize();
@@ -40,15 +41,15 @@ namespace LettuceFarm
                 Exit();
 
             // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         { 
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            // TODO: Add your drawing code here
 
+            // TODO: Add your drawing code here
+            map.Draw();
             base.Draw(gameTime);
         }
     }

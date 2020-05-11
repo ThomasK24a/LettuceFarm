@@ -40,6 +40,5 @@ namespace LettuceFarm.UI.Shop
             //    game.Components.Add(sellTab[i]);
             //}
         }
-
     }
 }
