@@ -24,11 +24,11 @@ namespace LettuceFarm.UI.Shop
             buyTab[4] = new ShopSlot(game, new Vector2(250, 225), placeholderSprite, 100);
             buyTab[5] = new ShopSlot(game, new Vector2(500, 225), placeholderSprite, 1000);
 
-            for(int i = 0; i < buyTab.Length; i++)
-            {
-                game.Components.Add(buyTab[i]);
-            }
-
+            //for(int i = 0; i < buyTab.Length; i++)
+            //{
+            //    game.Components.Add(buyTab[i]);
+            //}
+           
             sellTab[0] = new ShopSlot(game, new Vector2(0, 40), placeholderSprite, 10);
             sellTab[1] = new ShopSlot(game, new Vector2(250, 40), placeholderSprite, 20);
             sellTab[2] = new ShopSlot(game, new Vector2(500, 40), placeholderSprite, 30);
