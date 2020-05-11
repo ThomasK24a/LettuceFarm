@@ -1,4 +1,5 @@
-﻿using LettuceFarm.UI.Shop;
+﻿using LettuceFarm.UI.Inventory;
+using LettuceFarm.UI.Shop;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,7 +11,8 @@ namespace LettuceFarm
         Texture2D animals;
         Shop shop;
         GameMap map;
-
+        Inventory inventory;
+		
         public Game1()
         {
             Global._graphics = new GraphicsDeviceManager(this);
@@ -24,6 +26,8 @@ namespace LettuceFarm
             map = new GameMap(this, 20, 15);
             shop = new Shop(this);
             map.InitializeComponent();
+            inventory = new Inventory(this);
+			
             // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
             base.Initialize();
