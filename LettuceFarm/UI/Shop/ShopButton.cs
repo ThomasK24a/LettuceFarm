@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using MonoGame.UI.Forms;
 namespace LettuceFarm.UI.Shop
 {
-    class ShopItem
+    class ShopButton : Button
     {
+        private int price;
     }
 }

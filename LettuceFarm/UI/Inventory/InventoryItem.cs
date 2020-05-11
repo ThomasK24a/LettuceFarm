@@ -4,7 +4,6 @@ using System.Text;
 
 namespace LettuceFarm.UI.Inventory
 {
-
     class InventoryItem
     {
 

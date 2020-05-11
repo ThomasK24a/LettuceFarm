@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LettuceFarm.UI.Shop;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -6,29 +7,29 @@ namespace LettuceFarm
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-
         Texture2D animals;
+        Shop shop;
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            Global._graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            Global._spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            shop = new Shop(this);
+
+            // TODO: Add your initialization logic here
+            this.IsMouseVisible = true;
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // TODO: use this.Content to load your game content here
             animals = this.Content.Load<Texture2D>("Sprites/animals");
         }
@@ -44,11 +45,8 @@ namespace LettuceFarm
         }
 
         protected override void Draw(GameTime gameTime)
-        {
+        { 
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(animals, new Vector2(0,0),Color.White);
-            _spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
