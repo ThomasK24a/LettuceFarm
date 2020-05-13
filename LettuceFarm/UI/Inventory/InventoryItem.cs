@@ -16,6 +16,7 @@ namespace LettuceFarm.UI.Inventory
         FilledRectangle itemBackground;
         bool isSeed;
         Button selectButton;
+        SpriteFont counts;
 
         Game game;
          public InventoryItem(Game game, Vector2 position, Texture2D itemSprite, int itemCount, bool isSeed) : base(game)
@@ -28,13 +29,13 @@ namespace LettuceFarm.UI.Inventory
             selectButton = new Button()
             {
                 Text = "Plant",
-                Size = new Vector2(50, 30),
+                Size = new Vector2(45, 30),
                 BackgroundColor = Color.Green,
                 Location = this.position + new Vector2(45, 100)
             };
             selectButton.Clicked += SelectButton_Clicked;
 
-            itemBackground = new FilledRectangle(  Convert.ToInt32(position.X), Convert.ToInt32(position.Y), 125, 200);
+            itemBackground = new FilledRectangle(  Convert.ToInt32(position.X), Convert.ToInt32(position.Y), 125, 250);
             itemBackground.BackgroundColor = Color.BurlyWood;
         }
 
@@ -59,11 +60,17 @@ namespace LettuceFarm.UI.Inventory
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            Controls.Add(itemBackground);
+            if (!this.isSeed)
+            {
+                Controls.Add(itemBackground);
+
+            }
 
             if (this.isSeed)
             {
+
                 Controls.Add(selectButton);
+
             }
             Global._spriteBatch.Begin();
             Global._spriteBatch.Draw(itemSprite, position + new Vector2(40, 20), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);

@@ -1,4 +1,5 @@
-﻿using LettuceFarm.UI.Inventory;
+﻿
+using LettuceFarm.UI.Inventory;
 using LettuceFarm.UI.Shop;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -36,15 +37,16 @@ namespace LettuceFarm
         protected override void LoadContent()
         {
             // TODO: use this.Content to load your game content here
-            animals = this.Content.Load<Texture2D>("Sprites/animals");
+            
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            
             // TODO: Add your update logic here
+           //inventory.CheckTest(this);
 
             base.Update(gameTime);
         }

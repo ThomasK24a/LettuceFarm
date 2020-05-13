@@ -11,8 +11,7 @@ namespace LettuceFarm.UI.Inventory
     {
         InventoryItem[] inventorySlots;
         InventoryItem[] seeds;
-        int areaWidth;
-        int areaHeight;
+        
         public Inventory(Game game)
         {
             inventorySlots = new InventoryItem[5];
@@ -31,8 +30,10 @@ namespace LettuceFarm.UI.Inventory
             seeds[1] = new InventoryItem(game, new Vector2(350,200), seedSprite, 0,true);
             seeds[2] = new InventoryItem(game, new Vector2(450,200), seedSprite, 0,true);
 
-            void CheckTest()
+            void CheckTest(Game game)
             {
+                int areaWidth;
+                int areaHeight;
                 var mouseState = Mouse.GetState();
                 var mousePosition = new Point(mouseState.X, mouseState.Y);
                 Rectangle area = new Rectangle();
@@ -49,7 +50,7 @@ namespace LettuceFarm.UI.Inventory
 
                         if (area.Contains(mousePosition))
                         {
-                            //Exit();
+                            game.Exit();
                         }
                     }
                 }
@@ -60,6 +61,7 @@ namespace LettuceFarm.UI.Inventory
             for (int i = 0; i < inventorySlots.Length; i++)
             {
                 game.Components.Add(inventorySlots[i]);
+                
             }
             for (int i = 0; i < seeds.Length; i++)
             {
