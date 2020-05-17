@@ -19,16 +19,17 @@ namespace LettuceFarm.UI.Inventory
             
             Texture2D itemSprite = game.Content.Load<Texture2D>("Sprites/Box");
             Texture2D seedSprite = game.Content.Load<Texture2D>("Sprites/Box");
-            
-            inventorySlots[0] = new InventoryItem(game, new Vector2(150, 100), itemSprite, 10,false);
-            inventorySlots[1] = new InventoryItem(game, new Vector2(250, 100), itemSprite, 10,false);
-            inventorySlots[2] = new InventoryItem(game, new Vector2(350, 100), itemSprite, 10,false);
-            inventorySlots[3] = new InventoryItem(game, new Vector2(450, 100), itemSprite, 10,false);
-            inventorySlots[4] = new InventoryItem(game, new Vector2(550, 100), itemSprite, 10,false);
+            SpriteFont font = game.Content.Load<SpriteFont>("defaultFont");
 
-            seeds[0] = new InventoryItem(game, new Vector2(250,200), seedSprite, 0,true);
-            seeds[1] = new InventoryItem(game, new Vector2(350,200), seedSprite, 0,true);
-            seeds[2] = new InventoryItem(game, new Vector2(450,200), seedSprite, 0,true);
+            inventorySlots[0] = new InventoryItem(game, new Vector2(150, 100), itemSprite, font,10,false);
+            inventorySlots[1] = new InventoryItem(game, new Vector2(250, 100), itemSprite, font,10,false);
+            inventorySlots[2] = new InventoryItem(game, new Vector2(350, 100), itemSprite, font,10,false);
+            inventorySlots[3] = new InventoryItem(game, new Vector2(450, 100), itemSprite, font ,10,false);
+            inventorySlots[4] = new InventoryItem(game, new Vector2(550, 100), itemSprite, font ,10,false);
+
+            seeds[0] = new InventoryItem(game, new Vector2(250,200), seedSprite, font, 100,true);
+            seeds[1] = new InventoryItem(game, new Vector2(350,200), seedSprite, font, 100,true);
+            seeds[2] = new InventoryItem(game, new Vector2(450,200), seedSprite, font, 100,true);
 
             void CheckTest(Game game)
             {
