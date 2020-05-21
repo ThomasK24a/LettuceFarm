@@ -19,7 +19,7 @@ namespace LettuceFarm.States
 			: base(game, graphicsDevice, contentManager)
 		{
 			var buttonTexture = content.Load<Texture2D>("Sprites/Button");
-			var buttonFont = content.Load<SpriteFont>("Fonts/Font");
+			var buttonFont = content.Load<SpriteFont>("defaultFont");
 
 			var newGameButton = new Button(buttonTexture, buttonFont)
 			{
