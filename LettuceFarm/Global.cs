@@ -1,7 +1,5 @@
 ﻿
 using LettuceFarm.States;
-using LettuceFarm.UI.Inventory;
-using LettuceFarm.UI.Shop;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,7 +8,7 @@ using System;
 
 namespace LettuceFarm
 {
-    public class Game : Microsoft.Xna.Framework.Game
+    public class Global : Microsoft.Xna.Framework.Game
     {
         //Texture2D animals;
         //Shop shop;
@@ -28,7 +26,7 @@ namespace LettuceFarm
             nextState = state;
         }
 
-        public Game()
+        public Global()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

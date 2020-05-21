@@ -15,7 +15,7 @@ namespace LettuceFarm.States
 
         protected GraphicsDevice graphicsDevice;
 
-        protected Game game;
+        protected Global game;
 
         #endregion
 
@@ -25,7 +25,7 @@ namespace LettuceFarm.States
 
         public abstract void PostUpdate(GameTime gameTime);
 
-        public State(Game game, GraphicsDevice graphicsDevice, ContentManager content)
+        public State(Global game, GraphicsDevice graphicsDevice, ContentManager content)
         {
             this.game = game;
 

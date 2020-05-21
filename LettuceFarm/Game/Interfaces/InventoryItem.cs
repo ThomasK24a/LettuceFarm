@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LettuceFarm.Game
 {
-	class InventoryItem
+	public interface IInventoryItem
 	{
 	}
 }

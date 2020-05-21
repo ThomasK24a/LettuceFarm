@@ -7,7 +7,7 @@ using System.Text;
 
 namespace LettuceFarm.Controls
 {
-    public class Button : GameEntity
+    public class Button : Entity
     {
         #region Fields
 

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LettuceFarm.Game;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LettuceFarm.GameEntity
 {
-	class Crop
+	public abstract class Crop : Entity, ISeed, IInventoryItem
 	{
 	}
 }

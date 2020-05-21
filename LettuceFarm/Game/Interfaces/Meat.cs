@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LettuceFarm.Game
 {
-	interface Meat
+	public interface IMeat
 	{
 	}
 }

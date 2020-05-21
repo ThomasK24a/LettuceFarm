@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LettuceFarm.Game;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LettuceFarm.GameEntity
+namespace LettuceFarm
 {
-	class Livestock
+	public abstract class Livestock : Entity, IInventoryItem, IMeat
 	{
 	}
 }

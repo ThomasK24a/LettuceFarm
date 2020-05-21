@@ -12,13 +12,13 @@ namespace LettuceFarm.States
 {
 	public class MenuState : State
 	{
-		private List<Component> components;
+		private List<Entity> components;
 		private ContentManager contentManager;
 
-		public MenuState(Game game, GraphicsDevice graphicsDevice, ContentManager contentManager)
+		public MenuState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
 			: base(game, graphicsDevice, contentManager)
 		{
-			var buttonTexture = content.Load<Texture2D>("Controls/Button");
+			var buttonTexture = content.Load<Texture2D>("Sprites/Button");
 			var buttonFont = content.Load<SpriteFont>("Fonts/Font");
 
 			var newGameButton = new Button(buttonTexture, buttonFont)
@@ -45,7 +45,7 @@ namespace LettuceFarm.States
 
 			quitGameButton.Click += QuitgameButton_Click;
 
-			components = new List<Component>()
+			components = new List<Entity>()
 			{
 				newGameButton,
 				settingsButton,

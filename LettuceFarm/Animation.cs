@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LettuceFarm
 {
-	class Animation
+	public class Animation
 	{
 	}
 }
