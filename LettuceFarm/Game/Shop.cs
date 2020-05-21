@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LettuceFarm.UI.Inventory
+namespace LettuceFarm.Game
 {
-    class PlayerInventory
-    {
-
-    }
+	class Shop
+	{
+	}
 }
