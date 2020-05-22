@@ -7,16 +7,17 @@ using System.Text;
 
 namespace LettuceFarm.States
 {
-	class Inventory : State
+	class ShopState : State
 	{
 		private List<Entity> components;
 		private ContentManager contentManager;
 
-		public Inventory(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
+		public ShopState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
 			: base(game, graphicsDevice, contentManager)
 		{
 
 		}
+
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
@@ -33,4 +34,5 @@ namespace LettuceFarm.States
 			throw new NotImplementedException();
 		}
 	}
+		
 }

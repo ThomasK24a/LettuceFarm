@@ -4,9 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using LettuceFarm.Controls;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LettuceFarm.States
 {
@@ -20,6 +17,7 @@ namespace LettuceFarm.States
 		{
 			var buttonTexture = content.Load<Texture2D>("Sprites/Button");
 			var buttonFont = content.Load<SpriteFont>("defaultFont");
+			
 
 			var newGameButton = new Button(buttonTexture, buttonFont)
 			{
@@ -55,7 +53,12 @@ namespace LettuceFarm.States
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
+			var background = content.Load<Texture2D>("MenuBackground");
+
 			spriteBatch.Begin();
+
+
+			spriteBatch.Draw(background, new Rectangle(0,0,800,500),Color.White);
 
 			foreach (var component in components)
 				component.Draw(gameTime, spriteBatch);
@@ -81,7 +84,7 @@ namespace LettuceFarm.States
 
 		private void SettingsButton_Click(object sender, EventArgs e)
 		{
-			//Link to Issac settings window later
+			game.ChangeState(new SettingState(game, graphicsDevice, contentManager));
 		}
 
 		private void NewGameButton_Click(object sender, EventArgs e)

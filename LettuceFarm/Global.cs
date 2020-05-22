@@ -79,7 +79,7 @@ namespace LettuceFarm
 
         protected override void Draw(GameTime gameTime)
         { 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            
 
             // TODO: Add your drawing code here
             //map.Draw();

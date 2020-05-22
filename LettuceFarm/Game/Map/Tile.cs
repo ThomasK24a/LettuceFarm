@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LettuceFarm.GameEntity;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,6 @@ namespace LettuceFarm.Map
 {
     public interface ITile
 	{
-
+		public void plant(Crop crop);
 	}
 }
