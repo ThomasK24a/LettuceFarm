@@ -58,7 +58,7 @@ namespace LettuceFarm.States
 			spriteBatch.Begin();
 
 
-			spriteBatch.Draw(background, new Rectangle(0,0,800,500),Color.White);
+			spriteBatch.Draw(background, new Rectangle(0, 0, 800, 500), Color.White);
 
 			foreach (var component in components)
 				component.Draw(gameTime, spriteBatch);

@@ -1,5 +1,4 @@
-﻿
-using LettuceFarm.States;
+﻿using LettuceFarm.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,7 +12,7 @@ namespace LettuceFarm
         //Texture2D animals;
         //Shop shop;
         //GameMap map;
-        //Inventory inventory;
+        //Inventory inventory
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -49,7 +48,6 @@ namespace LettuceFarm
         {
             // TODO: use this.Content to load your game content here
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             currentState = new MenuState(this, graphics.GraphicsDevice, Content);
 
         }
