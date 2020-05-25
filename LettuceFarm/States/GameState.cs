@@ -13,12 +13,13 @@ namespace LettuceFarm.States
 		private List<Entity> components;
 		private ContentManager contentManager;
 		private List<ChickenSprite> _sprites;
-
+		Texture2D buttonTexture;
+		SpriteFont buttonFont;
 		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
 			: base(game, graphicsDevice, contentManager)
 		{
-			Texture2D buttonTexture = content.Load<Texture2D>("Button");
-			SpriteFont buttonFont = content.Load<SpriteFont>("defaultFont");
+			 buttonTexture = game.Content.Load<Texture2D>("Button");
+			 buttonFont = game.Content.Load<SpriteFont>("defaultFont");
 
 
 			var menuButton = new Button(buttonTexture, buttonFont)
@@ -74,13 +75,17 @@ namespace LettuceFarm.States
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			Texture2D grass = game.Content.Load<Texture2D>("Grass");
-
+			//Texture2D buttonTexture = game.Content.Load<Texture2D>("Button");
+			//SpriteFont buttonFont = game.Content.Load<SpriteFont>("defaultFont");
 			spriteBatch.Begin();
 
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
-			foreach (var sprite in _sprites)
-				sprite.Draw(spriteBatch);
+			spriteBatch.Draw(buttonTexture, new Rectangle(0, 0, 60, 40), Color.White);
+			spriteBatch.Draw(buttonFont, new Rectangle(0, 0, 60, 40), Color.White);
+			//spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
+			//foreach (var sprite in _sprites)
+			//	sprite.Draw(spriteBatch);
 
 			foreach (var component in components)
 				component.Draw(gameTime, spriteBatch);
@@ -98,8 +103,8 @@ namespace LettuceFarm.States
 			foreach (var component in components)
 				component.Update(gameTime);
 
-			foreach (var sprite in _sprites)
-				sprite.Update(gameTime, _sprites);
+			//foreach (var sprite in _sprites)
+			//	sprite.Update(gameTime, _sprites);
 		}
 
 		private void shopButton_Click(object sender, EventArgs e)
