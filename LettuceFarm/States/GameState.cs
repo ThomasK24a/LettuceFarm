@@ -24,7 +24,7 @@ namespace LettuceFarm.States
 
 			var menuButton = new Button(buttonTexture, buttonFont)
 			{
-				Position = new Vector2(0, 500),
+				Position = new Vector2(5, 435),
 				Text = "Menu",
 			};
 
@@ -32,7 +32,7 @@ namespace LettuceFarm.States
 
 			var inventoryButton = new Button(buttonTexture, buttonFont)
 			{
-				Position = new Vector2(400, 500),
+				Position = new Vector2(320, 435),
 				Text = "Inventory",
 			};
 
@@ -40,7 +40,7 @@ namespace LettuceFarm.States
 
 			var shopButton = new Button(buttonTexture, buttonFont)
 			{
-				Position = new Vector2(800, 500),
+				Position = new Vector2(635, 435),
 				Text = "Shop",
 			};
 
@@ -53,23 +53,23 @@ namespace LettuceFarm.States
 				shopButton,
 			};
 
-		//	_sprites = new List<ChickenSprite>()
-		//{
-		//new ChickenSprite(new Dictionary<string, Animation>()
-		//{
-		//	{ "WalkUp", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_up"), 4) },
+			_sprites = new List<ChickenSprite>()
+		{
+		new ChickenSprite(new Dictionary<string, Animation>()
+		{
+			{ "WalkUp", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_up"), 4) },
 
-		//	{ "WalkDown", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_down"), 4) },
+			{ "WalkDown", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_down"), 4) },
 
-		//	{ "WalkLeft", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_left"), 4) },
+			{ "WalkLeft", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_left"), 4) },
 
-		//	{ "WalkRight", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_right"), 4) },
+			{ "WalkRight", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_right"), 4) },
 
-		//})
-		//{
-		//	Position = new Vector2(100, 100),
-		//},
-		//	};
+		})
+		{
+			Position = new Vector2(100, 100),
+		},
+			};
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -81,11 +81,11 @@ namespace LettuceFarm.States
 
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
-			spriteBatch.Draw(buttonTexture, new Rectangle(0, 0, 60, 40), Color.White);
-			spriteBatch.Draw(buttonFont, new Rectangle(0, 0, 60, 40), Color.White);
+			//spriteBatch.Draw(buttonTexture, new Rectangle(0, 0, 60, 40), Color.White);
+			//spriteBatch.Draw(buttonFont, new Rectangle(0, 0, 60, 40), Color.White);
 			//spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
-			//foreach (var sprite in _sprites)
-			//	sprite.Draw(spriteBatch);
+			foreach (var sprite in _sprites)
+				sprite.Draw(spriteBatch);
 
 			foreach (var component in components)
 				component.Draw(gameTime, spriteBatch);
@@ -103,8 +103,8 @@ namespace LettuceFarm.States
 			foreach (var component in components)
 				component.Update(gameTime);
 
-			//foreach (var sprite in _sprites)
-			//	sprite.Update(gameTime, _sprites);
+			foreach (var sprite in _sprites)
+				sprite.Update(gameTime, _sprites);
 		}
 
 		private void shopButton_Click(object sender, EventArgs e)

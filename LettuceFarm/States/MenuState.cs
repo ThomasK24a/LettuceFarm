@@ -11,12 +11,14 @@ namespace LettuceFarm.States
 	{
 		private List<Entity> components;
 		private ContentManager contentManager;
+		Texture2D buttonTexture;
+		SpriteFont buttonFont;
 
 		public MenuState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
 			: base(game, graphicsDevice, contentManager)
 		{
-			Texture2D buttonTexture = content.Load<Texture2D>("Button");
-			SpriteFont buttonFont = content.Load<SpriteFont>("defaultFont");
+			buttonTexture = content.Load<Texture2D>("Button");
+			buttonFont = content.Load<SpriteFont>("defaultFont");
 			
 
 			var newGameButton = new Button(buttonTexture, buttonFont)
