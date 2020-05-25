@@ -15,8 +15,8 @@ namespace LettuceFarm.States
 		public MenuState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
 			: base(game, graphicsDevice, contentManager)
 		{
-			var buttonTexture = content.Load<Texture2D>("Sprites/Button");
-			var buttonFont = content.Load<SpriteFont>("defaultFont");
+			Texture2D buttonTexture = content.Load<Texture2D>("Button");
+			SpriteFont buttonFont = content.Load<SpriteFont>("defaultFont");
 			
 
 			var newGameButton = new Button(buttonTexture, buttonFont)
