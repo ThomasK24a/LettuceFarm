@@ -11,15 +11,14 @@ namespace LettuceFarm.States
 	public class GameState : State
 	{
 		private List<Entity> components;
-		private ContentManager contentManager;
 		private List<ChickenSprite> _sprites;
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
-		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
-			: base(game, graphicsDevice, contentManager)
+		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content)
+			: base(game, graphicsDevice, content)
 		{
-			 buttonTexture = game.Content.Load<Texture2D>("Button");
-			 buttonFont = game.Content.Load<SpriteFont>("defaultFont");
+			 buttonTexture = _content.Load<Texture2D>("Button");
+			 buttonFont = _content.Load<SpriteFont>("defaultFont");
 
 
 			var menuButton = new Button(buttonTexture, buttonFont)
@@ -57,13 +56,13 @@ namespace LettuceFarm.States
 		{
 		new ChickenSprite(new Dictionary<string, Animation>()
 		{
-			{ "WalkUp", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_up"), 4) },
+			{ "WalkUp", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_up"), 4) },
 
-			{ "WalkDown", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_down"), 4) },
+			{ "WalkDown", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_down"), 4) },
 
-			{ "WalkLeft", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_left"), 4) },
+			{ "WalkLeft", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_left"), 4) },
 
-			{ "WalkRight", new Animation(game.Content.Load<Texture2D>("Sprites/chicken_walk_right"), 4) },
+			{ "WalkRight", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_right"), 4) },
 
 		})
 		{
@@ -74,7 +73,7 @@ namespace LettuceFarm.States
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
-			Texture2D grass = game.Content.Load<Texture2D>("Grass");
+			Texture2D grass = _content.Load<Texture2D>("Grass");
 			//Texture2D buttonTexture = game.Content.Load<Texture2D>("Button");
 			//SpriteFont buttonFont = game.Content.Load<SpriteFont>("defaultFont");
 			spriteBatch.Begin();
@@ -109,17 +108,17 @@ namespace LettuceFarm.States
 
 		private void shopButton_Click(object sender, EventArgs e)
 		{
-			game.ChangeState(new ShopState(game, graphicsDevice, contentManager));
+			_global.ChangeState(new ShopState(_global, _graphicsDevice, _content));
 		}
 
 		private void inventoryButton_Click(object sender, EventArgs e)
 		{
-			game.ChangeState(new InventoryState(game, graphicsDevice, contentManager));
+			_global.ChangeState(new InventoryState(_global, _graphicsDevice, _content));
 		}
 
 		private void menuButton_Click(object sender, EventArgs e)
 		{
-			game.ChangeState(new MenuState(game, graphicsDevice, contentManager));
+			_global.ChangeState(new MenuState(_global, _graphicsDevice, _content));
 		}
 	}
 }

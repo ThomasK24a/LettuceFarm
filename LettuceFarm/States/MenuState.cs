@@ -10,16 +10,16 @@ namespace LettuceFarm.States
 	public class MenuState : State
 	{
 		private List<Entity> components;
-		private ContentManager contentManager;
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
+		Texture2D background;
 
-		public MenuState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
-			: base(game, graphicsDevice, contentManager)
+		public MenuState(Global game, GraphicsDevice graphicsDevice, ContentManager content)
+			: base(game, graphicsDevice, content)
 		{
-			buttonTexture = content.Load<Texture2D>("Button");
-			buttonFont = content.Load<SpriteFont>("defaultFont");
-			
+			buttonTexture = _content.Load<Texture2D>("Button");
+			buttonFont = _content.Load<SpriteFont>("defaultFont");
+		    background = _content.Load<Texture2D>("MenuBackground");
 
 			var newGameButton = new Button(buttonTexture, buttonFont)
 			{
@@ -55,7 +55,7 @@ namespace LettuceFarm.States
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
-			var background = content.Load<Texture2D>("MenuBackground");
+			
 
 			spriteBatch.Begin();
 
@@ -81,17 +81,17 @@ namespace LettuceFarm.States
 
 		private void QuitgameButton_Click(object sender, EventArgs e)
 		{
-			game.Exit();
+			_global.Exit();
 		}
 
 		private void SettingsButton_Click(object sender, EventArgs e)
 		{
-			game.ChangeState(new SettingState(game, graphicsDevice, contentManager));
+			_global.ChangeState(new SettingState(_global, _graphicsDevice, _content));
 		}
 
 		private void NewGameButton_Click(object sender, EventArgs e)
 		{
-			game.ChangeState(new GameState(game, graphicsDevice, contentManager));
+			_global.ChangeState(new GameState(_global, _graphicsDevice, _content));
 		}
 	}
 }

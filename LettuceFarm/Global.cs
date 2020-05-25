@@ -1,5 +1,6 @@
 ﻿using LettuceFarm.States;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -13,6 +14,7 @@ namespace LettuceFarm
         //Shop shop;
         //GameMap map;
         //Inventory inventory
+        ContentManager contentManager;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
