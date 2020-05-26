@@ -7,8 +7,6 @@ using Microsoft.Xna.Framework.Input;
 
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework.Media;
-using SharpDX.XAudio2;
 
 namespace LettuceFarm
 {
@@ -22,7 +20,7 @@ namespace LettuceFarm
         private SpriteBatch spriteBatch;
         //Inventory inventory
 
-        Song song;
+
 
         private State currentState;
 
@@ -54,27 +52,8 @@ namespace LettuceFarm
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
             base.Initialize();
-            this.song = Content.Load<Song>("Sound/soundtrack");
-            
-            MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
         }
 
-        public void onSong()
-        {
-            MediaPlayer.Play(song);
-        }
-
-        public void offSong()
-        {
-            MediaPlayer.Stop();
-        }
-        private void MediaPlayer_MediaStateChanged(object sender, EventArgs e)
-        {
-            // 0.0f is silent, 1.0f is full volume
-            MediaPlayer.Volume -= 0.1f;
-            MediaPlayer.Play(song);
-        }
-        
         protected override void LoadContent()
         {
             // TODO: use this.Content to load your game content here
