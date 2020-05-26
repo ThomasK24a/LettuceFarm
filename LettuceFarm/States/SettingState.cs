@@ -22,6 +22,7 @@ namespace LettuceFarm.States
 			buttonFont = _content.Load<SpriteFont>("defaultFont");
 			background = _content.Load<Texture2D>("MenuBackground");
 			this.song = _content.Load<Song>("Sound/soundtrack");
+			MediaPlayer.Play(song);
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{
 				Text = "Back to Menu",
@@ -55,7 +56,6 @@ namespace LettuceFarm.States
 		{
 			// 0.0f is silent, 1.0f is full volume
 			MediaPlayer.Volume -= 0.1f;
-	      // MediaPlayer.Play(song);
 		}
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
