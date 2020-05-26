@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using LettuceFarm.Controls;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Media;
 
 namespace LettuceFarm.States
 {
@@ -14,14 +15,15 @@ namespace LettuceFarm.States
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
 		Texture2D background;
-
+		Song song;
 		public MenuState(Global game, GraphicsDevice graphicsDevice, ContentManager content)
 			: base(game, graphicsDevice, content)
 		{
 			buttonTexture = _content.Load<Texture2D>("Button");
 			buttonFont = _content.Load<SpriteFont>("defaultFont");
 		    background = _content.Load<Texture2D>("MenuBackground");
-
+			this.song = _content.Load<Song>("Sound/soundtrack");
+			MediaPlayer.Play(song);
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{
 				Text = "New Game",
@@ -49,8 +51,14 @@ namespace LettuceFarm.States
 				settingsButton,
 				quitGameButton,
 			};
-		}
 
+			MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
+		}
+		private void MediaPlayer_MediaStateChanged(object sender, EventArgs e)
+		{
+			// 0.0f is silent, 1.0f is full volume
+			MediaPlayer.Volume -= 0.1f;
+		}
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			

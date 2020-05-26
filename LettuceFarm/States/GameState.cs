@@ -22,8 +22,6 @@ namespace LettuceFarm.States
 			this.buttonTexture = content.Load<Texture2D>("Button");
 			buttonFont = content.Load<SpriteFont>("defaultFont");
 
-
-
 			var menuButton = new Button(buttonTexture, buttonFont, new Vector2(5, 435), 1)
 			{
 				Text = "Menu",
