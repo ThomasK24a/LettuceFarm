@@ -12,6 +12,7 @@ namespace LettuceFarm.States
 	{
 		private ContentManager contentManager;
 		private Player playerEntity;
+		private MapTile myMapTile = new MapTile(30, 30, 6, 6);
 
 		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content)
 			: base(game, graphicsDevice, content)
@@ -19,8 +20,9 @@ namespace LettuceFarm.States
 		}
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
+		
 			Texture2D grass = game.Content.Load<Texture2D>("Grass");
-
+			
 			spriteBatch.Begin();
 			
 			/*
@@ -37,6 +39,7 @@ namespace LettuceFarm.States
 			*/
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
+			myMapTile.draw(spriteBatch);
 			spriteBatch.End();
 		}
 
@@ -49,5 +52,6 @@ namespace LettuceFarm.States
 		{
 
 		}
+
 	}
 }
