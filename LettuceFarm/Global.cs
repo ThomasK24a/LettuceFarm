@@ -21,7 +21,6 @@ namespace LettuceFarm
         //Inventory inventory
 
 
-
         private State currentState;
 
         private State nextState;
