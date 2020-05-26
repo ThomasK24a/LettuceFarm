@@ -13,7 +13,7 @@ namespace LettuceFarm.States
 
 		private ContentManager contentManager;
 	//	private Player playerEntity;
-		private MapTile myMapTile = new MapTile(30, 30, 6, 6);
+		private FarmTile myMapTile = new FarmTile(30, 30, 6, 6);
 		private List<Entity> components;
 		private List<ChickenSprite> _sprites;
 		Texture2D buttonTexture;

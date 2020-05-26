@@ -1,5 +1,4 @@
 ﻿using LettuceFarm.GameEntity;
-using LettuceFarm.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,7 +10,7 @@ using MonoGame.Extended;
 
 namespace LettuceFarm
 {
-	class MapTile
+	class FarmTile
 	{
 		private int tileWidth;
 		private int tileHeight;
@@ -19,7 +18,7 @@ namespace LettuceFarm
 		private int height;
 		private Texture2D texture;
 
-		public MapTile(int pTileHeight, int pTileWidth, int pWidth, int pHeight)
+		public FarmTile(int pTileHeight, int pTileWidth, int pWidth, int pHeight)
 		{
 			//hard code tile sizes here
 			tileWidth = pTileWidth;
