@@ -12,12 +12,17 @@ namespace LettuceFarm.States
 	{
 
 		private ContentManager contentManager;
+<<<<<<< HEAD
 	//	private Player playerEntity;
 		private MapTile myMapTile = new MapTile(30, 30, 6, 6);
 		private List<Entity> components;
 		private List<ChickenSprite> _sprites;
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
+=======
+		private Player playerEntity;
+
+>>>>>>> parent of ef66b2d... added the map tiles
 		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content)
 			: base(game, graphicsDevice, content)
 		{
@@ -77,17 +82,22 @@ namespace LettuceFarm.States
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
+<<<<<<< HEAD
 
 		
 			Texture2D grass = _content.Load<Texture2D>("Grass");
 			
 			//Texture2D buttonTexture = game.Content.Load<Texture2D>("Button");
 			//SpriteFont buttonFont = game.Content.Load<SpriteFont>("defaultFont");
+=======
+			Texture2D grass = game.Content.Load<Texture2D>("Grass");
+>>>>>>> parent of ef66b2d... added the map tiles
 
 			spriteBatch.Begin();
 
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
+<<<<<<< HEAD
 
 			myMapTile.draw(spriteBatch);
 			//spriteBatch.Draw(buttonTexture, new Rectangle(0, 0, 60, 40), Color.White);
@@ -99,6 +109,8 @@ namespace LettuceFarm.States
 			foreach (var component in components)
 				component.Draw(gameTime, spriteBatch);
 
+=======
+>>>>>>> parent of ef66b2d... added the map tiles
 			spriteBatch.End();
 		}
 
@@ -130,6 +142,5 @@ namespace LettuceFarm.States
 		{
 			_global.ChangeState(new MenuState(_global, _graphicsDevice, _content));
 		}
-
 	}
 }

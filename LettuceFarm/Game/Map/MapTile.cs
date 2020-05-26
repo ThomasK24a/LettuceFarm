@@ -3,49 +3,37 @@ using LettuceFarm.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
-using MonoGame.Extended;
 
 namespace LettuceFarm
 {
-	class MapTile
+	class MapTile : Entity, ITile
 	{
-		private int tileWidth;
 		private int tileHeight;
-		private int width;
-		private int height;
+		private int tileWidth;
 		private Texture2D texture;
 
-		public MapTile(int pTileHeight, int pTileWidth, int pWidth, int pHeight)
+		public MapTile()
 		{
 			//hard code tile sizes here
-			tileWidth = pTileWidth;
-			tileHeight = pTileHeight;
-			width = pWidth;
-			height = pHeight;
 		}
 
-		public void draw(SpriteBatch spriteBatch)
+		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
-			Vector2 tilePosition = Vector2.Zero;
+			spriteBatch.Begin();
+			//Here a single unit of a Farmtile is drawn
+			spriteBatch.End();
+		}
 
-			//spriteBatch.Begin();
-			for (int x = 0; x < width; x++)
-			{
-				for(int y= 0; y<height; y++)
-				{
-					spriteBatch.FillRectangle(tilePosition, new Size2(tileWidth, tileHeight), Color.Transparent);
-					spriteBatch.FillRectangle(tilePosition + new Vector2(1,1), new Size2(tileWidth -2, tileHeight-2), Color.Black);
-					tilePosition.Y += tileHeight;
+		public void plant(Crop crop)
+		{
+			throw new NotImplementedException();
+		}
 
-				}
-				tilePosition.Y = 0;
-				tilePosition.X += tileWidth;
-			}
-			//spriteBatch.End();
+		public override void Update(GameTime gameTime)
+		{
+			throw new NotImplementedException();
 		}
 	}
 
