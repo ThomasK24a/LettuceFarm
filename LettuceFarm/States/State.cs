@@ -9,15 +9,11 @@ namespace LettuceFarm.States
 {
     public abstract class State
     {
-        #region Fields
+        protected ContentManager _content;
 
-        protected ContentManager content;
+        protected Global _global;
 
-        protected GraphicsDevice graphicsDevice;
-
-        protected Global game;
-
-        #endregion
+        protected GraphicsDevice _graphicsDevice;
 
         #region Methods
 
@@ -27,11 +23,11 @@ namespace LettuceFarm.States
 
         public State(Global game, GraphicsDevice graphicsDevice, ContentManager content)
         {
-            this.game = game;
+            _global = game;
 
-            this.graphicsDevice = graphicsDevice;
+            _graphicsDevice = graphicsDevice;
 
-            this.content = content;
+            _content = content;
         }
 
         public abstract void Update(GameTime gameTime);
