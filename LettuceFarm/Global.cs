@@ -18,6 +18,7 @@ namespace LettuceFarm
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+
         private State currentState;
 
         private State nextState;
