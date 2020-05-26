@@ -22,7 +22,7 @@ namespace LettuceFarm.States
 			buttonFont = _content.Load<SpriteFont>("defaultFont");
 			background = _content.Load<Texture2D>("MenuBackground");
 			this.song = _content.Load<Song>("Sound/soundtrack");
-			MediaPlayer.Play(song);
+			//MediaPlayer.Play(song);
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{
 				Text = "Back to Menu",
@@ -85,13 +85,15 @@ namespace LettuceFarm.States
 
 		private void soundOff_Click(object sender, EventArgs e)
 		{
-			MediaPlayer.Stop();
+			//MediaPlayer.Stop();
+			_global.offSong();
 		}
 
 		private void soundOn_Click(object sender, EventArgs e)
 		{
 			//_global.ChangeState(new SettingState(_global, _graphicsDevice, _content));
-			MediaPlayer.Play(song);
+			//MediaPlayer.Play(song);
+			_global.onSong();
 		}
 
 		private void NewGameButton_Click(object sender, EventArgs e)
