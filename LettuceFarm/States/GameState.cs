@@ -10,37 +10,32 @@ namespace LettuceFarm.States
 {
 	public class GameState : State
 	{
-		private List<Entity> components;
-		private ContentManager contentManager;
 		private List<ChickenSprite> _sprites;
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
 		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
 			: base(game, graphicsDevice, contentManager)
 		{
-			 buttonTexture = game.Content.Load<Texture2D>("Button");
-			 buttonFont = game.Content.Load<SpriteFont>("defaultFont");
+			this.buttonTexture = content.Load<Texture2D>("Button");
+			buttonFont = content.Load<SpriteFont>("defaultFont");
 
 
-			var menuButton = new Button(buttonTexture, buttonFont)
+			var menuButton = new Button(buttonTexture, buttonFont, new Vector2(0, 500), 1)
 			{
-				Position = new Vector2(0, 500),
 				Text = "Menu",
 			};
 
 			menuButton.Click += menuButton_Click;
 
-			var inventoryButton = new Button(buttonTexture, buttonFont)
+			var inventoryButton = new Button(buttonTexture, buttonFont, new Vector2(400, 500), 1)
 			{
-				Position = new Vector2(400, 500),
 				Text = "Inventory",
 			};
 
 			inventoryButton.Click += inventoryButton_Click;
 
-			var shopButton = new Button(buttonTexture, buttonFont)
+			var shopButton = new Button(buttonTexture, buttonFont, new Vector2(800, 500), 1)
 			{
-				Position = new Vector2(800, 500),
 				Text = "Shop",
 			};
 
@@ -82,7 +77,7 @@ namespace LettuceFarm.States
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
 			spriteBatch.Draw(buttonTexture, new Rectangle(0, 0, 60, 40), Color.White);
-			spriteBatch.Draw(buttonFont, new Rectangle(0, 0, 60, 40), Color.White);
+			//spriteBatch.Draw(buttonFont, new Rectangle(0, 0, 60, 40), Color.White);
 			//spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
 			//foreach (var sprite in _sprites)
 			//	sprite.Draw(spriteBatch);
@@ -91,6 +86,7 @@ namespace LettuceFarm.States
 				component.Draw(gameTime, spriteBatch);
 
 			spriteBatch.End();
+			game.ChangeState(new ShopState(game, graphicsDevice, content));
 		}
 
 		public override void PostUpdate(GameTime gameTime)
@@ -109,17 +105,17 @@ namespace LettuceFarm.States
 
 		private void shopButton_Click(object sender, EventArgs e)
 		{
-			game.ChangeState(new ShopState(game, graphicsDevice, contentManager));
+			game.ChangeState(new ShopState(game, graphicsDevice, content));
 		}
 
 		private void inventoryButton_Click(object sender, EventArgs e)
 		{
-			game.ChangeState(new InventoryState(game, graphicsDevice, contentManager));
+			game.ChangeState(new InventoryState(game, graphicsDevice, content));
 		}
 
 		private void menuButton_Click(object sender, EventArgs e)
 		{
-			game.ChangeState(new MenuState(game, graphicsDevice, contentManager));
+			game.ChangeState(new MenuState(game, graphicsDevice, content));
 		}
 	}
 }

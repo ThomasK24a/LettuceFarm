@@ -10,6 +10,7 @@ namespace LettuceFarm.States
     public abstract class State
     {
         #region Fields
+        protected List<Entity> components;
 
         protected ContentManager content;
 
@@ -19,9 +20,16 @@ namespace LettuceFarm.States
 
         #endregion
 
+
         #region Methods
 
-        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            foreach (Entity component in components)
+            {
+                component.Draw(gameTime, spriteBatch);
+            }
+        }
 
         public abstract void PostUpdate(GameTime gameTime);
 
@@ -32,10 +40,17 @@ namespace LettuceFarm.States
             this.graphicsDevice = graphicsDevice;
 
             this.content = content;
+
+            this.components = new List<Entity>();
         }
 
-        public abstract void Update(GameTime gameTime);
-
+        public virtual void Update(GameTime gameTime)
+        {
+            foreach (Entity component in components)
+            {
+                component.Update(gameTime);
+            }
+        }
         #endregion
     }
 }

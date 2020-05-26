@@ -9,6 +9,11 @@ namespace LettuceFarm.Game.Crops
 {
 	class Wheat : Crop
 	{
+		public Wheat(Texture2D texture, Vector2 position) : base(texture, position)
+		{
+
+		}
+
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			throw new NotImplementedException();
@@ -16,7 +21,7 @@ namespace LettuceFarm.Game.Crops
 
 		public override void Update(GameTime gameTime)
 		{
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
 	}
 }

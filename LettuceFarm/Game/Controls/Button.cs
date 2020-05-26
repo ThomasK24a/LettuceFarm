@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +20,6 @@ namespace LettuceFarm.Controls
 
         private MouseState _previousMouse;
 
-        private Texture2D _texture;
 
         #endregion
 
@@ -31,13 +31,11 @@ namespace LettuceFarm.Controls
 
         public Color PenColour { get; set; }
 
-        public Vector2 Position { get; set; }
-
         public Rectangle Rectangle
         {
             get
             {
-                return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
+                return new Rectangle((int) position.X, (int) position.Y, Texture.Width, Texture.Height);
             }
         }
 
@@ -47,11 +45,9 @@ namespace LettuceFarm.Controls
 
         #region Methods
 
-        public Button(Texture2D texture, SpriteFont font)
+        public Button(Texture2D texture, SpriteFont font, Vector2 position, int frameCount) : base(texture, position, frameCount)
         {
-            _texture = texture;
-
-            _font = font;
+           _font = font;
 
             PenColour = Color.Black;
         }
@@ -63,7 +59,7 @@ namespace LettuceFarm.Controls
             if (_isHovering)
                 colour = Color.Gray;
 
-            spriteBatch.Draw(_texture, Rectangle, colour);
+            spriteBatch.Draw(Texture, Rectangle, colour);
 
             if (!string.IsNullOrEmpty(Text))
             {

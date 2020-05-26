@@ -9,9 +9,6 @@ namespace LettuceFarm.States
 {
 	class SettingState : State
 	{
-		private List<Entity> components;
-		private ContentManager contentManager;
-
 		public SettingState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
 			: base(game, graphicsDevice, contentManager)
 		{

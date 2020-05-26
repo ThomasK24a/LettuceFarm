@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LettuceFarm.Game;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,13 +10,11 @@ namespace LettuceFarm.States
 {
 	class InventoryState : State
 	{
-		private List<Entity> components;
-		private ContentManager contentManager;
 
 		public InventoryState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
 			: base(game, graphicsDevice, contentManager)
 		{
-
+			
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

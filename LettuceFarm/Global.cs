@@ -1,9 +1,11 @@
 ﻿using LettuceFarm.States;
+using LettuceFarm.Game;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using System;
+using System.Collections.Generic;
 
 namespace LettuceFarm
 {
@@ -12,13 +14,15 @@ namespace LettuceFarm
         //Texture2D animals;
         //Shop shop;
         //GameMap map;
-        //Inventory inventory
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        //Inventory inventory;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
         private State currentState;
 
         private State nextState;
+
+        public List<IInventoryItem> itemList;
 
         public void ChangeState(State state)
         {
@@ -29,6 +33,8 @@ namespace LettuceFarm
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            itemList = new List<IInventoryItem>();
+            
         }
 
         protected override void Initialize()
@@ -48,6 +54,7 @@ namespace LettuceFarm
         {
             // TODO: use this.Content to load your game content here
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
             currentState = new MenuState(this, graphics.GraphicsDevice, Content);
 
         }
@@ -72,7 +79,6 @@ namespace LettuceFarm
             // TODO: Add your update logic here
             //inventory.CheckTest(this);
 
-            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)

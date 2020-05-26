@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,17 +23,15 @@ namespace LettuceFarm
 
         public Animation(Texture2D texture, int frameCount)
         {
-            Texture = texture;
+            this.Texture = texture;
 
-            FrameCount = frameCount;
+            this.CurrentFrame = 0;
 
-            IsActivateAnimator = true;
+            this.FrameCount = frameCount;
 
-            FrameSpeed = 0.2f;
-        }
-        public Animation()
-        {
+            this.IsActivateAnimator = true;
 
+            this.FrameSpeed = 0.2f;
         }
     }
 }
