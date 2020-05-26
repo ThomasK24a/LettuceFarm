@@ -12,7 +12,7 @@ namespace LettuceFarm.States
 	{
 
 		private ContentManager contentManager;
-		private Player playerEntity;
+	//	private Player playerEntity;
 		private MapTile myMapTile = new MapTile(30, 30, 6, 6);
 		private List<Entity> components;
 		private List<ChickenSprite> _sprites;
@@ -79,9 +79,8 @@ namespace LettuceFarm.States
 		{
 
 		
-			Texture2D grass = game.Content.Load<Texture2D>("Grass");
-			
 			Texture2D grass = _content.Load<Texture2D>("Grass");
+			
 			//Texture2D buttonTexture = game.Content.Load<Texture2D>("Button");
 			//SpriteFont buttonFont = game.Content.Load<SpriteFont>("defaultFont");
 
