@@ -22,8 +22,6 @@ namespace LettuceFarm.States
 			this.buttonTexture = content.Load<Texture2D>("Button");
 			buttonFont = content.Load<SpriteFont>("defaultFont");
 
-
-
 			var menuButton = new Button(buttonTexture, buttonFont, new Vector2(5, 435), 1)
 			{
 				Text = "Menu",
@@ -83,7 +81,6 @@ namespace LettuceFarm.States
 
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
-			spriteBatch.Draw(buttonTexture, new Rectangle(0, 0, 60, 40), Color.White);
 
 			myMapTile.draw(spriteBatch);
 			foreach (var sprite in _sprites)

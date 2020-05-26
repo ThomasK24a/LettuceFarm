@@ -40,6 +40,9 @@ namespace LettuceFarm.Controls
         }
 
         public string Text { get; set; }
+        public Vector2 Size { get; internal set; }
+        public Color BackgroundColor { get; internal set; }
+        public Vector2 Location { get; internal set; }
 
         #endregion
 
