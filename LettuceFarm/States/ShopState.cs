@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using LettuceFarm.Game;
 using System;
 using System.Collections.Generic;
-
+using LettuceFarm.Controls;
 
 namespace LettuceFarm.States
 {
@@ -13,6 +13,7 @@ namespace LettuceFarm.States
 		
 		private List<IInventoryItem> invList;
 		Texture2D placeholderSprite;
+		Button closeButton;
 
 		public ShopState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
 			: base(game, graphicsDevice, contentManager)
@@ -30,6 +31,12 @@ namespace LettuceFarm.States
 					GenerateSlot(new Vector2(j * 250 + 65, i * 210 + 50), invList[i * 3 + j]);
 				}
 			}
+
+			Texture2D closeButtonSprite = _content.Load<Texture2D>("CloseButton");
+			var buttonFont = _content.Load<SpriteFont>("defaultFont");
+			closeButton = new Button(closeButtonSprite, buttonFont, new Vector2(700, 20), 1);
+			closeButton.Click += closeButton_Click;
+			components.Add(closeButton);
 		}
 
 
@@ -41,7 +48,7 @@ namespace LettuceFarm.States
 
 		private void GenerateSlot(Vector2 position, IInventoryItem item)
 		{
-			ShopSlot newSlot = new ShopSlot(content, position, item, 1);
+			ShopSlot newSlot = new ShopSlot(_content, position, item, 1);
 			components.Add(newSlot);
 		}
 
@@ -59,6 +66,11 @@ namespace LettuceFarm.States
 			invList.Add(cowItem);
 			invList.Add(chickenItem);
 
+		}
+
+		private void closeButton_Click(object sender, EventArgs e)
+		{
+			_global.ChangeState(new GameState(_global, _graphicsDevice, _content));
 		}
 	}
 		

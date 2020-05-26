@@ -9,38 +9,40 @@ namespace LettuceFarm.States
 {
     public abstract class State
     {
+
         #region Fields
         protected List<Entity> components;
 
-        protected ContentManager content;
+        protected ContentManager _content;
 
-        protected GraphicsDevice graphicsDevice;
 
-        protected Global game;
+        protected Global _global;
 
+        protected GraphicsDevice _graphicsDevice;
         #endregion
-
 
         #region Methods
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
             foreach (Entity component in components)
             {
                 component.Draw(gameTime, spriteBatch);
             }
+            spriteBatch.End();
         }
 
         public abstract void PostUpdate(GameTime gameTime);
 
         public State(Global game, GraphicsDevice graphicsDevice, ContentManager content)
         {
-            this.game = game;
+            _global = game;
 
-            this.graphicsDevice = graphicsDevice;
+            _graphicsDevice = graphicsDevice;
 
-            this.content = content;
-
+            _content = content;
+        
             this.components = new List<Entity>();
         }
 

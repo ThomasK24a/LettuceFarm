@@ -48,13 +48,10 @@ namespace LettuceFarm.Game
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         { 
-
-            spriteBatch.Begin();
             spriteBatch.Draw(slotTexture, position + new Vector2(0, -25), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             spriteBatch.Draw(Texture, position, null, Color.White, 0f, Vector2.Zero, 0.2f, SpriteEffects.None, 0f);
             //spriteBatch.Draw(buyButton.textures[currentFrame], buyButton.Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             buyButton.Draw(gameTime, spriteBatch);
-            spriteBatch.End();
             
         }
 

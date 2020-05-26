@@ -1,6 +1,7 @@
 ﻿using LettuceFarm.States;
 using LettuceFarm.Game;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -17,6 +18,8 @@ namespace LettuceFarm
         //Inventory inventory;
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+        //Inventory inventory
+
 
         private State currentState;
 
