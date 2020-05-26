@@ -72,7 +72,8 @@ namespace LettuceFarm.States
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-		{		
+		{
+
 			Texture2D grass = _content.Load<Texture2D>("Grass");
 			
 			//Texture2D buttonTexture = game.Content.Load<Texture2D>("Button");	
@@ -83,12 +84,13 @@ namespace LettuceFarm.States
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
 			spriteBatch.Draw(buttonTexture, new Rectangle(0, 0, 60, 40), Color.White);
+
 			myMapTile.draw(spriteBatch);
 			foreach (var sprite in _sprites)
-				sprite.Draw(spriteBatch);
+			sprite.Draw(spriteBatch);
 
 			foreach (var component in components)
-				component.Draw(gameTime, spriteBatch);
+			component.Draw(gameTime, spriteBatch);
 			spriteBatch.End();
 		}
 
@@ -120,5 +122,6 @@ namespace LettuceFarm.States
 		{
 			_global.ChangeState(new MenuState(_global, _graphicsDevice, _content));
 		}
+
 	}
 }
