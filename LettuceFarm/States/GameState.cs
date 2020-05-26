@@ -11,6 +11,7 @@ namespace LettuceFarm.States
 	public class GameState : State
 	{
 
+		private MapTile myMapTile = new MapTile(30, 30, 6, 6);
 		private List<ChickenSprite> _sprites;
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
@@ -72,15 +73,19 @@ namespace LettuceFarm.States
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
+
+		
 			Texture2D grass = _content.Load<Texture2D>("Grass");
+			
 			//Texture2D buttonTexture = game.Content.Load<Texture2D>("Button");
 			//SpriteFont buttonFont = game.Content.Load<SpriteFont>("defaultFont");
+
 			spriteBatch.Begin();
 
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
 			spriteBatch.Draw(buttonTexture, new Rectangle(0, 0, 60, 40), Color.White);
-
+			myMapTile.draw(spriteBatch);
 			foreach (var sprite in _sprites)
 				sprite.Draw(spriteBatch);
 
@@ -118,5 +123,6 @@ namespace LettuceFarm.States
 		{
 			_global.ChangeState(new MenuState(_global, _graphicsDevice, _content));
 		}
+
 	}
 }

@@ -11,12 +11,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Game\Map\FarmTile.cs" />
-    <Compile Remove="Game\Map\MapTile.cs" />
-    <Compile Remove="Game\Map\Tile.cs" />
-  </ItemGroup>
+  
 
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
@@ -28,6 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="MonoGame.Content.Builder" Version="3.7.0.9" />
+    <PackageReference Include="MonoGame.Extended" Version="3.7.0" />
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.7.1.189" />
     <PackageReference Include="MonoGame.Framework.WindowsDX.Core" Version="3.8.0.3" />
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
