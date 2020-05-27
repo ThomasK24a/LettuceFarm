@@ -30,7 +30,7 @@ namespace LettuceFarm.Game
 
             buyButton = new Button(buttonTexture, buttonFont, this.position + new Vector2(15, 140), frameCount)
             {
-                Text = this.item.GetPrice().ToString()
+                Text = this.item.GetPrice().ToString() + " coins"
             };
             
             buyButton.Click += BuyItem;
