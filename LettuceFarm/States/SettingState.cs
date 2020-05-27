@@ -21,8 +21,8 @@ namespace LettuceFarm.States
 			buttonTexture = _content.Load<Texture2D>("Button");
 			buttonFont = _content.Load<SpriteFont>("defaultFont");
 			background = _content.Load<Texture2D>("MenuBackground");
-			this.song = _content.Load<Song>("Sound/soundtrack");
-			MediaPlayer.Play(song);
+			//this.song = _content.Load<Song>("Sound/soundtrack");
+			
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{
 				Text = "Back to Menu",
@@ -50,13 +50,8 @@ namespace LettuceFarm.States
 				soundOnButton,
 				soundOffButton,
 			};
-			MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
 		}
-		private void MediaPlayer_MediaStateChanged(object sender, EventArgs e)
-		{
-			// 0.0f is silent, 1.0f is full volume
-			MediaPlayer.Volume -= 0.1f;
-		}
+
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 
@@ -83,16 +78,19 @@ namespace LettuceFarm.States
 				component.Update(gameTime);
 		}
 
-		private void soundOff_Click(object sender, EventArgs e)
-		{
-			MediaPlayer.Stop();
-		}
-
 		private void soundOn_Click(object sender, EventArgs e)
 		{
 			//_global.ChangeState(new SettingState(_global, _graphicsDevice, _content));
-			MediaPlayer.Play(song);
+			MediaPlayer.IsMuted = false;
+			//MediaPlayer.Play(song);
 		}
+
+		private void soundOff_Click(object sender, EventArgs e)
+		{
+			MediaPlayer.IsMuted = true;
+		}
+
+		
 
 		private void NewGameButton_Click(object sender, EventArgs e)
 		{
