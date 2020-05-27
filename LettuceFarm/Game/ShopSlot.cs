@@ -17,11 +17,12 @@ namespace LettuceFarm.Game
         IInventoryItem item;
         Texture2D slotTexture;
 
-        public ShopSlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount) : base(item.GetTexture(), position, 1)
+
+        public ShopSlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale) : base(item.GetTexture(), position, 1)
         {
             this.position = position;
             this.item = item;
-
+            this.scale = scale;
             Texture2D buttonTexture = content.Load<Texture2D>("Button");
             slotTexture = content.Load<Texture2D>("ItemSlot");
 
@@ -48,9 +49,10 @@ namespace LettuceFarm.Game
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         { 
-            spriteBatch.Draw(slotTexture, position + new Vector2(0, -25), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(slotTexture, position + new Vector2(0, -25), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+
             spriteBatch.Draw(Texture, position, null, Color.White, 0f, Vector2.Zero, 0.2f, SpriteEffects.None, 0f);
-            //spriteBatch.Draw(buyButton.textures[currentFrame], buyButton.Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+      
             buyButton.Draw(gameTime, spriteBatch);
             
         }

@@ -48,7 +48,7 @@ namespace LettuceFarm.States
 
 		private void GenerateSlot(Vector2 position, IInventoryItem item)
 		{
-			ShopSlot newSlot = new ShopSlot(_content, position, item, 1);
+			ShopSlot newSlot = new ShopSlot(_content, position, item, 1, 1f);
 			components.Add(newSlot);
 		}
 

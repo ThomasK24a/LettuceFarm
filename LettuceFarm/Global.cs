@@ -60,6 +60,7 @@ namespace LettuceFarm
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             currentState = new MenuState(this, graphics.GraphicsDevice, Content);
+            //currentState = new InventoryState(this, graphics.GraphicsDevice, Content);
 
         }
 

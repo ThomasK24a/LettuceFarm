@@ -9,6 +9,7 @@ namespace LettuceFarm.GameEntity
 {
 	public abstract class Crop : Entity, ISeed, IInventoryItem
 	{
+		
 		public Crop(Texture2D texture, Vector2 position) : base(texture, position, 1)
 		{
 
@@ -20,11 +21,17 @@ namespace LettuceFarm.GameEntity
 			return 5;
 		}
 
+		public virtual int GetCount()
+		{
+			//TODO: replace for actual amount
+			return 10;
+		}
 
 		public virtual Texture2D GetTexture()
 		{
 			return Texture;
 		}
-		
-	}
+
+        
+    }
 }

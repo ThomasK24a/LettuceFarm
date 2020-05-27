@@ -9,6 +9,10 @@ namespace LettuceFarm.Game
 	{
 		public abstract int GetPrice();
 
+		public abstract int GetCount();
+
 		public abstract Texture2D GetTexture();
+
+		
 	}
 }

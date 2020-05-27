@@ -19,7 +19,10 @@ namespace LettuceFarm
 			//TODO: replace this
 			return 5;
 		}
-
+		public virtual int GetCount()
+		{
+			return 10;
+		}
 
 		public virtual Texture2D GetTexture()
 		{
