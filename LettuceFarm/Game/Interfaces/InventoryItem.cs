@@ -13,6 +13,8 @@ namespace LettuceFarm.Game
 
 		public abstract Texture2D GetTexture();
 
-		
+		public abstract bool BuyItem();
+
+
 	}
 }

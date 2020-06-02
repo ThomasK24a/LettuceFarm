@@ -10,8 +10,6 @@ namespace LettuceFarm.States
 {
 	public class MenuState : State
 	{
-
-		private List<Entity> components;
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
 		Texture2D background;
@@ -23,7 +21,6 @@ namespace LettuceFarm.States
 			buttonFont = _content.Load<SpriteFont>("defaultFont");
 		    background = _content.Load<Texture2D>("MenuBackground");
 			this.song = _content.Load<Song>("Sound/soundtrack");
-			MediaPlayer.IsRepeating = true;
 			MediaPlayer.Play(song);
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{
@@ -53,13 +50,7 @@ namespace LettuceFarm.States
 				quitGameButton,
 			};
 
-			//MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
 		}
-		//private void MediaPlayer_MediaStateChanged(object sender, EventArgs e)
-		//{
-			// 0.0f is silent, 1.0f is full volume
-			//MediaPlayer.Volume -= 0.1f;
-		//}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{

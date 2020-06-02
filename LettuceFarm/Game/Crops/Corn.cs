@@ -25,5 +25,7 @@ namespace LettuceFarm.Game.Crops
 		{
 			//throw new NotImplementedException();
 		}
+
+		
 	}
 }

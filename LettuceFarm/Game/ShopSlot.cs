@@ -16,7 +16,7 @@ namespace LettuceFarm.Game
         Button buyButton;
         IInventoryItem item;
         Texture2D slotTexture;
-
+        Texture2D seedTexture;
 
         public ShopSlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale) : base(item.GetTexture(), position, 1)
         {
@@ -25,12 +25,13 @@ namespace LettuceFarm.Game
             this.scale = scale;
             Texture2D buttonTexture = content.Load<Texture2D>("Button");
             slotTexture = content.Load<Texture2D>("ItemSlot");
+            seedTexture = content.Load<Texture2D>("seeds");
 
             var buttonFont = content.Load<SpriteFont>("defaultFont");
 
-            buyButton = new Button(buttonTexture, buttonFont, this.position + new Vector2(15, 140), frameCount)
+            buyButton = new Button(buttonTexture, buttonFont, this.position + new Vector2(-35, 120), frameCount)
             {
-                Text = this.item.GetPrice().ToString() + " coins"
+                Text = "-" + this.item.GetPrice().ToString() + " coins"
             };
             
             buyButton.Click += BuyItem;
@@ -42,16 +43,17 @@ namespace LettuceFarm.Game
 
         private void BuyItem(object sender, EventArgs e)
         {
-            buyButton.Text = "Bought";
+            item.BuyItem();
         }
 
       
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         { 
-            spriteBatch.Draw(slotTexture, position + new Vector2(0, -25), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-
-            spriteBatch.Draw(Texture, position, null, Color.White, 0f, Vector2.Zero, 0.2f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(slotTexture, position + new Vector2(-10, -11), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(item.GetTexture(), position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+           
+            
       
             buyButton.Draw(gameTime, spriteBatch);
             

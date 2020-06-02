@@ -1,4 +1,5 @@
 ﻿using LettuceFarm.Game;
+using LettuceFarm.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -32,6 +33,20 @@ namespace LettuceFarm.GameEntity
 			return Texture;
 		}
 
-        
-    }
+		public virtual bool BuyItem()
+		{
+			if(99 /*replace with currency in inv*/ > GetPrice())
+            {
+				//currency =- GetPrice();
+				//inventory.addItem(this); (make inventory add this item to it
+				return true;
+            }
+            else
+            {
+				return false;
+			}
+			
+		}
+
+	}
 }

@@ -34,10 +34,10 @@ namespace LettuceFarm.Game
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(slotTexture, position + new Vector2(5, -10), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(slotTexture, position + new Vector2(-10, -11), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             spriteBatch.DrawString(font, "X " + itemCount, position + new Vector2(20, 55), Color.White);
 
-            spriteBatch.Draw(Texture, position, null, Color.White, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Texture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
         
         }
