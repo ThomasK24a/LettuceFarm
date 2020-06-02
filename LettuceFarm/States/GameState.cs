@@ -11,7 +11,7 @@ namespace LettuceFarm.States
 {
 	public class GameState : State
 	{
-		private MapTile myMapTile = new MapTile(30, 30, 6, 6);
+		private MapTile myMapTile = new MapTile(30, 30, 4, 3);
 		private List<ChickenSprite> _sprites;
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
