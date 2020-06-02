@@ -18,7 +18,7 @@ namespace LettuceFarm.States
 		public ShopState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
 			: base(game, graphicsDevice, contentManager)
 		{
-			this.placeholderSprite = game.Content.Load<Texture2D>("Sprites/Lettuce");
+			this.placeholderSprite = game.Content.Load<Texture2D>("Sprites/Lettuce-icon");
 
 			invList = new List<IInventoryItem>();
 			CreateInvList();

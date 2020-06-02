@@ -47,7 +47,7 @@ namespace LettuceFarm
             //map = new GameMap(this, 20, 15);
             //shop = new Shop(this);
             //map.InitializeComponent();
-            //inventory = new Inventory(this);
+       
 			
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
@@ -60,7 +60,7 @@ namespace LettuceFarm
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             currentState = new MenuState(this, graphics.GraphicsDevice, Content);
-            //currentState = new InventoryState(this, graphics.GraphicsDevice, Content);
+          
 
         }
 
@@ -91,7 +91,6 @@ namespace LettuceFarm
             
 
             // TODO: Add your drawing code here
-            //map.Draw();
 
             currentState.Draw(gameTime, spriteBatch); 
 

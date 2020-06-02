@@ -31,21 +31,21 @@ namespace LettuceFarm
 		{
 			Vector2 tilePosition = Vector2.Zero;
 
-			//spriteBatch.Begin();
-			for (int x = 0; x < width; x++)
-			{
-				for(int y= 0; y<height; y++)
-				{
-					spriteBatch.FillRectangle(tilePosition, new Size2(tileWidth, tileHeight), Color.Transparent);
-					spriteBatch.FillRectangle(tilePosition + new Vector2(1,1), new Size2(tileWidth -2, tileHeight-2), Color.Black);
-					tilePosition.Y += tileHeight;
+ 
+            //for (int x = 0; x < width; x++)
+            //{
+            //    for (int y = 0; y < height; y++)
+            //    {
+            //        spriteBatch.FillRectangle(tilePosition, new Size2(tileWidth, tileHeight), Color.Transparent);
+            //        spriteBatch.FillRectangle(tilePosition + new Vector2(1, 1), new Size2(tileWidth - 2, tileHeight - 2), Color.Black);
+            //        tilePosition.Y += tileHeight;
 
-				}
-				tilePosition.Y = 0;
-				tilePosition.X += tileWidth;
-			}
-			//spriteBatch.End();
-		}
+            //    }
+            //    tilePosition.Y = 0;
+            //    tilePosition.X += tileWidth;
+            //}
+
+        }
 	}
 
 }

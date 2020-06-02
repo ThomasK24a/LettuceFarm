@@ -9,6 +9,8 @@ namespace LettuceFarm
 {
 	public abstract class Livestock : Entity, IInventoryItem, IMeat
 	{
+		int count;
+		int price;
 		public Livestock(Texture2D texture, Vector2 position) : base(texture, position, 1)
 		{
 
@@ -16,17 +18,27 @@ namespace LettuceFarm
 
 		public virtual int GetPrice()
 		{
-			//TODO: replace this
-			return 5;
+			
+			return this.price;
 		}
 		public virtual int GetCount()
 		{
-			return 10;
+			return this.count;
 		}
 
 		public virtual Texture2D GetTexture()
 		{
 			return Texture;
 		}
-	}
+
+        public void SetCount()
+        {
+			this.count += 1 ;
+        }
+
+        public void SetPrice(int price)
+        {
+			this.price = price;
+        }
+    }
 }
