@@ -24,6 +24,7 @@ namespace LettuceFarm.States
 
 			MediaPlayer.IsRepeating = true;
 			MediaPlayer.Play(song);
+			MediaPlayer.IsMuted = true;
 
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{
