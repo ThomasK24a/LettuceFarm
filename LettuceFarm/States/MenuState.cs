@@ -89,12 +89,12 @@ namespace LettuceFarm.States
 
 		private void SettingsButton_Click(object sender, EventArgs e)
 		{
-			_global.ChangeState(new SettingState(_global, _graphicsDevice, _content));
+			_global.ChangeState(_global.setting);
 		}
 
 		private void NewGameButton_Click(object sender, EventArgs e)
 		{
-			_global.ChangeState(new GameState(_global, _graphicsDevice, _content));
+			_global.ChangeState(_global.Game);
 		}
 	}
 }
