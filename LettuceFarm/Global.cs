@@ -67,7 +67,7 @@ namespace LettuceFarm
             // TODO: use this.Content to load your game content here
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            currentState = new MenuState(this, graphics.GraphicsDevice, Content);
+            currentState = menu;
             
 
         }
