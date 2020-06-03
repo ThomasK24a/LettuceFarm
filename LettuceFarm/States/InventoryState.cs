@@ -39,13 +39,13 @@ namespace LettuceFarm.States
 			
 		
 			this.lettuceSprite = game.Content.Load<Texture2D>("Sprites/Lettuce-icon");
-			this.lettuceSeedSprite = game.Content.Load<Texture2D>("Sprites/lettuceseed");
+			this.lettuceSeedSprite = game.Content.Load<Texture2D>("seeds_lettuce");
 
 			this.cornSprite = game.Content.Load<Texture2D>("Sprites/Corn");
-			this.cornSeedSprite = game.Content.Load<Texture2D>("Sprites/lettuceseed");
+			this.cornSeedSprite = game.Content.Load<Texture2D>("seeds_corn");
 
 			this.wheatSprite = game.Content.Load<Texture2D>("Sprites/wheat");
-			this.wheatSeedSprite = game.Content.Load<Texture2D>("Sprites/lettuceseed");
+			this.wheatSeedSprite = game.Content.Load<Texture2D>("seeds_wheat");
 
 			this.cowSprite = game.Content.Load<Texture2D>("Sprites/Beef");
 			this.chickenSprite = game.Content.Load<Texture2D>("Sprites/chicken_leg");

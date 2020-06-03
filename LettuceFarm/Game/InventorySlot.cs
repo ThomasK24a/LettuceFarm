@@ -45,7 +45,7 @@ namespace LettuceFarm.Game
 
             var buttonFont = content.Load<SpriteFont>("defaultFont");
 
-          selectButton = new Button(buttonTexture, buttonFont, this.position + new Vector2(-20,100), frameCount)
+          selectButton = new Button(buttonTexture, buttonFont, this.position + new Vector2(-15,100), frameCount)
             {
                 Text = "select"
             };
@@ -64,7 +64,9 @@ namespace LettuceFarm.Game
 
             if (this.isSeed)
             {
-                spriteBatch.DrawString(font, "X " + seeditem.GetCount(), position + new Vector2(20, 55), Color.White);
+                spriteBatch.Draw(slotTexture, position + new Vector2(-15, -10), null, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
+
+                spriteBatch.DrawString(font, "X " + seeditem.GetCount(), position + new Vector2(80, 55), Color.White);
 
                selectButton.Draw(gameTime, spriteBatch);
             }
