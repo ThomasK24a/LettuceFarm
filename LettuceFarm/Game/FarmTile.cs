@@ -1,51 +1,90 @@
-﻿using LettuceFarm.GameEntity;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
-using MonoGame.Extended;
 
-namespace LettuceFarm
+namespace LettuceFarm.Controls
 {
-	class FarmTile
-	{
-		private int tileWidth;
-		private int tileHeight;
-		private int width;
-		private int height;
-		private Texture2D texture;
+    public class FarmTile : Entity
+    {
+        #region Fields
 
-		public FarmTile(int pTileHeight, int pTileWidth, int pWidth, int pHeight)
-		{
-			//hard code tile sizes here
-			tileWidth = pTileWidth;
-			tileHeight = pTileHeight;
-			width = pWidth;
-			height = pHeight;
-		}
+        private MouseState _currentMouse;
 
-		public void draw(SpriteBatch spriteBatch)
-		{
-			Vector2 tilePosition = Vector2.Zero;
+        private bool _isHovering;
 
-			//spriteBatch.Begin();
-			for (int x = 0; x < width; x++)
-			{
-				for(int y= 0; y<height; y++)
-				{
-					spriteBatch.FillRectangle(tilePosition, new Size2(tileWidth, tileHeight), Color.Transparent);
-					spriteBatch.FillRectangle(tilePosition + new Vector2(1,1), new Size2(tileWidth -2, tileHeight-2), Color.Black);
-					tilePosition.Y += tileHeight;
+        private MouseState _previousMouse;
 
-				}
-				tilePosition.Y = 0;
-				tilePosition.X += tileWidth;
-			}
-			//spriteBatch.End();
-		}
-	}
+        private int posX;
 
+        private int posY;
+
+
+        #endregion
+
+        #region Properties
+
+        public event EventHandler Click;
+
+        public bool Clicked { get; private set; }
+
+        public Color PenColour { get; set; }
+
+        public Rectangle Rectangle
+        {
+            get
+            {
+                return new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height);
+            }
+        }
+        public Vector2 Size { get; internal set; }
+        public Color BackgroundColor { get; internal set; }
+        public Vector2 Location { get; internal set; }
+
+        #endregion
+
+        #region Methods
+
+        public FarmTile(Texture2D texture, Vector2 position, int frameCount) : base(texture, position, frameCount)
+        {
+            PenColour = Color.Black;
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            var colour = Color.White;
+
+            if (_isHovering)
+                colour = Color.Gray;
+
+            spriteBatch.Draw(Texture, Rectangle, colour);
+
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            _previousMouse = _currentMouse;
+            _currentMouse = Mouse.GetState();
+
+            var mouseRectangle = new Rectangle(_currentMouse.X, _currentMouse.Y, 1, 1);
+
+            _isHovering = false;
+
+            if (mouseRectangle.Intersects(Rectangle))
+            {
+                _isHovering = true;
+
+                if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed)
+                {
+                    Click?.Invoke(this, new EventArgs());
+                }
+            }
+        }
+
+        #endregion
+    }
 }
+
