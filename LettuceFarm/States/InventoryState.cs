@@ -131,9 +131,6 @@ namespace LettuceFarm.States
 			
 		}
 
-		//public override void Update(GameTime gameTime)
-		//{
-		//	closeButton.Update(gameTime);
-		//}
+	
 	}
 }

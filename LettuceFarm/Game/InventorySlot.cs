@@ -55,6 +55,7 @@ namespace LettuceFarm.Game
         private void SelectButton_Click(object sender, EventArgs e)
         {
             selectButton.Text = "selected";
+            System.Console.WriteLine("selected");
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
