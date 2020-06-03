@@ -41,9 +41,10 @@ namespace LettuceFarm
 			this.price = price;
         }
 
-        public bool BuyItem()
+
+        public void Buy()
         {
-            throw new NotImplementedException();
+			SetCount();
         }
     }
 }

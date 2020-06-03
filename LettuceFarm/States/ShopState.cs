@@ -8,17 +8,19 @@ using LettuceFarm.Controls;
 
 namespace LettuceFarm.States
 {
-	class ShopState : State
+	public class ShopState : State
 	{
 		
 		private List<IInventoryItem> invList;
 		Texture2D placeholderSprite;
 		Button closeButton;
+        private InventoryState inventory;
 
-		public ShopState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager)
+        public ShopState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager, InventoryState inventory)
 			: base(game, graphicsDevice, contentManager)
 		{
 			this.placeholderSprite = game.Content.Load<Texture2D>("lettuce");
+			this.inventory = inventory;
 
 
 			invList = new List<IInventoryItem>();
@@ -60,7 +62,7 @@ namespace LettuceFarm.States
 
 		private void GenerateSlot(Vector2 position, IInventoryItem item)
 		{
-			ShopSlot newSlot = new ShopSlot(_content, position, item, 1, 1f);
+			ShopSlot newSlot = new ShopSlot(_content, position, item, 1, 1f, inventory);
 			components.Add(newSlot);
 		}
 

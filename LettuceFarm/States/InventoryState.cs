@@ -10,11 +10,11 @@ using System.Runtime.CompilerServices;
 
 namespace LettuceFarm.States
 {
-	class InventoryState : State
+	public class InventoryState : State
 	{
 		
 		List<IInventoryItem> Inventory;
-		List<ISeed> seeds;
+		public List<ISeed> seeds;
 
 		Texture2D lettuceSprite;
 		Texture2D lettuceSeedSprite;
@@ -131,9 +131,6 @@ namespace LettuceFarm.States
 			
 		}
 
-		//public override void Update(GameTime gameTime)
-		//{
-		//	closeButton.Update(gameTime);
-		//}
+	
 	}
 }

@@ -23,10 +23,7 @@ namespace LettuceFarm.States
 			background = _content.Load<Texture2D>("MenuBackground");
 			//this.song = _content.Load<Song>("Sound/soundtrack");
 
-			//MediaPlayer.Play(song);
-
-			
-
+			//MediaPlayer.Play(song);	
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{
 				Text = "Back to Menu",
