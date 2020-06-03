@@ -44,5 +44,10 @@ namespace LettuceFarm.GameEntity
         {
 			this.price = price;
         }
+
+        public void Buy()
+        {
+			SetCount();
+        }
     }
 }

@@ -40,5 +40,10 @@ namespace LettuceFarm
         {
 			this.price = price;
         }
+
+        public void Buy()
+        {
+			SetCount();
+        }
     }
 }

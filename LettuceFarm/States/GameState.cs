@@ -138,17 +138,17 @@ namespace LettuceFarm.States
 
 		private void shopButton_Click(object sender, EventArgs e)
 		{
-			_global.ChangeState(new ShopState(_global, _graphicsDevice, _content));
+			_global.ChangeState(_global.shop);
 		}
 
 		private void inventoryButton_Click(object sender, EventArgs e)
 		{
-			_global.ChangeState(new InventoryState(_global, _graphicsDevice, _content));
+			_global.ChangeState(_global.inventory);
 		}
 
 		private void menuButton_Click(object sender, EventArgs e)
 		{
-			_global.ChangeState(new MenuState(_global, _graphicsDevice, _content));
+			_global.ChangeState(_global.menu);
 		}
 
 	}

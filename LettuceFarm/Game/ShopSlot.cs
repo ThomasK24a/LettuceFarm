@@ -8,6 +8,7 @@ using SharpDX.Direct3D9;
 using System.Security.AccessControl;
 using LettuceFarm.Controls;
 using Microsoft.Xna.Framework.Content;
+using LettuceFarm.States;
 
 namespace LettuceFarm.Game
 {
@@ -15,16 +16,19 @@ namespace LettuceFarm.Game
     {
         Button buyButton;
         IInventoryItem item;
+        InventoryState inventory;
         Texture2D slotTexture;
 
 
-        public ShopSlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale) : base(item.GetTexture(), position, 1)
+        public ShopSlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale, InventoryState inv) : base(item.GetTexture(), position, 1)
         {
             this.position = position;
             this.item = item;
             this.scale = scale;
+            this.inventory = inv;
             Texture2D buttonTexture = content.Load<Texture2D>("Button");
             slotTexture = content.Load<Texture2D>("ItemSlot");
+            
 
             var buttonFont = content.Load<SpriteFont>("defaultFont");
 
@@ -43,6 +47,7 @@ namespace LettuceFarm.Game
         private void BuyItem(object sender, EventArgs e)
         {
             buyButton.Text = "Bought";
+            inventory.seeds[0].SetCount();
         }
 
       

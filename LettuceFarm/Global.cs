@@ -18,6 +18,11 @@ namespace LettuceFarm
         //Inventory inventory;
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+        public InventoryState inventory;
+        public ShopState shop;
+        public MenuState menu;
+        public SettingState setting;
+        public GameState Game;
         //Inventory inventory
 
 
@@ -26,7 +31,6 @@ namespace LettuceFarm
 
         private State nextState;
 
-        public List<IInventoryItem> itemList;
 
         public void ChangeState(State state)
         {
@@ -37,7 +41,7 @@ namespace LettuceFarm
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            itemList = new List<IInventoryItem>();
+            
             
         }
 
@@ -47,8 +51,12 @@ namespace LettuceFarm
             //map = new GameMap(this, 20, 15);
             //shop = new Shop(this);
             //map.InitializeComponent();
-       
-			
+            inventory = new InventoryState(this, graphics.GraphicsDevice, Content);
+            shop = new ShopState(this, graphics.GraphicsDevice, Content, inventory);
+            menu = new MenuState(this, graphics.GraphicsDevice, Content);
+            setting = new SettingState(this, graphics.GraphicsDevice, Content);
+            Game = new GameState(this, graphics.GraphicsDevice, Content);
+
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
             base.Initialize();
@@ -60,7 +68,7 @@ namespace LettuceFarm
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             currentState = new MenuState(this, graphics.GraphicsDevice, Content);
-          
+            
 
         }
 
