@@ -20,6 +20,7 @@ namespace LettuceFarm.States
 		{
 			this.placeholderSprite = game.Content.Load<Texture2D>("lettuce");
 
+
 			invList = new List<IInventoryItem>();
 			CreateInvList();
 

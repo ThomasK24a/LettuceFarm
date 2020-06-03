@@ -52,8 +52,6 @@ namespace LettuceFarm.Game
         { 
             spriteBatch.Draw(slotTexture, position + new Vector2(-10, -11), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             spriteBatch.Draw(item.GetTexture(), position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-           
-            
       
             buyButton.Draw(gameTime, spriteBatch);
             

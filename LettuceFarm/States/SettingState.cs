@@ -10,8 +10,8 @@ namespace LettuceFarm.States
 {
 	public class SettingState: State
 	{
-		Song song;
-		private List<Entity> components;
+		//Song song;
+		//private List<Entity> components = new List<Entity>();
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
 		Texture2D background;
@@ -22,7 +22,11 @@ namespace LettuceFarm.States
 			buttonFont = _content.Load<SpriteFont>("defaultFont");
 			background = _content.Load<Texture2D>("MenuBackground");
 			//this.song = _content.Load<Song>("Sound/soundtrack");
+
+			//MediaPlayer.Play(song);
+
 			
+
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{
 				Text = "Back to Menu",
@@ -87,7 +91,12 @@ namespace LettuceFarm.States
 
 		private void soundOff_Click(object sender, EventArgs e)
 		{
+
+			//_global.ChangeState(new SettingState(_global, _graphicsDevice, _content));
+			//MediaPlayer.Play(song);
+
 			MediaPlayer.IsMuted = true;
+
 		}
 
 		

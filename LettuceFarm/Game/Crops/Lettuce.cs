@@ -9,9 +9,9 @@ namespace LettuceFarm.Game.Crops
 {
 	class Lettuce : Crop
 	{
-		public Lettuce(Texture2D texture, Vector2 position) : base(texture, position)
+		public Lettuce(Texture2D texture, Vector2 position) : base(texture, position,50,0)
 		{
-
+			
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

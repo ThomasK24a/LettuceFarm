@@ -15,6 +15,9 @@ namespace LettuceFarm.Game
 
 		public abstract bool BuyItem();
 
+		public abstract void SetCount();
 
+		public abstract void SetPrice(int price);
+		
 	}
 }

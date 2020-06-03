@@ -13,16 +13,30 @@ namespace LettuceFarm.Manager
         int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
         Random myRandom = new Random();
 
-        protected AnimationManager _animationManager;
+        private Animation _animation;
 
-        protected Dictionary<string, Animation> _animations;
+        public float Speed = 1f;
 
-        protected Vector2 _position;
-        protected Texture2D _texture;
+        public Vector2 Velocity;
+
+        private Dictionary<string, Animation> _animations;
+
+        private Vector2 _position;
+        private Texture2D _texture;
 
         #endregion
 
         #region Properties
+        public ChickenSprite(Dictionary<string, Animation> animations)
+        {
+            _animations = animations;
+            _animation = new Animation(_animations.First().Value);
+        }
+
+        public ChickenSprite(Texture2D texture)
+        {
+            _texture = texture;
+        }
 
         public Vector2 Position
         {
@@ -31,14 +45,10 @@ namespace LettuceFarm.Manager
             {
                 _position = value;
 
-                if (_animationManager != null)
-                    _animationManager.Position = _position;
+                if (_animation != null)
+                    _animation.Position = _position;
             }
         }
-
-        public float Speed = 1f;
-
-        public Vector2 Velocity;
 
         #endregion
 
@@ -47,8 +57,8 @@ namespace LettuceFarm.Manager
         {
             if (_texture != null)
                 spriteBatch.Draw(_texture, Position, Color.White);
-            else if (_animationManager != null)
-                _animationManager.Draw(spriteBatch);
+            else if (_animation != null)
+                _animation.Draw(spriteBatch);
             else throw new Exception("Error");
         }
 
@@ -84,35 +94,24 @@ namespace LettuceFarm.Manager
         }
 
 
-        protected virtual void SetAnimations()
+        public virtual void SetAnimations()
         {
             if (Velocity.X > 0)
-                _animationManager.Play(_animations["WalkRight"]);
+                _animation.Play(_animations["WalkRight"]);
             else if (Velocity.X < 0)
-                _animationManager.Play(_animations["WalkLeft"]);
+                _animation.Play(_animations["WalkLeft"]);
             else if (Velocity.Y > 0)
-                _animationManager.Play(_animations["WalkDown"]);
+                _animation.Play(_animations["WalkDown"]);
             else if (Velocity.Y < 0)
-                _animationManager.Play(_animations["WalkUp"]);
-            else _animationManager.Stop();
-        }
-
-        public ChickenSprite(Dictionary<string, Animation> animations)
-        {
-            _animations = animations;
-            _animationManager = new AnimationManager(_animations.First().Value);
-        }
-
-        public ChickenSprite(Texture2D texture)
-        {
-            _texture = texture;
+                _animation.Play(_animations["WalkUp"]);
+            else _animation.Stop();
         }
 
         public virtual void Update(GameTime gameTime, List<ChickenSprite> sprites)
         {
             Move();
             SetAnimations();
-            _animationManager.Update(gameTime);
+            _animation.Update(gameTime);
 
             Position += Velocity;
             Velocity = Vector2.Zero;
