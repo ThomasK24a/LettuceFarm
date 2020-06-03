@@ -9,7 +9,7 @@ namespace LettuceFarm.Game.Livestocks
 {
 	class Cow : Livestock
 	{
-		public Cow(Texture2D texture, Vector2 position) : base(texture, position)
+		public Cow(Texture2D texture, Vector2 position) : base(texture, position,750,0,"cow")
 		{
 
 		}

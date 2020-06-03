@@ -9,7 +9,8 @@ namespace LettuceFarm.Game.Crops
 {
 	class Lettuce : Crop
 	{
-		public Lettuce(Texture2D texture, Vector2 position) : base(texture, position,50,0)
+
+		public Lettuce(Texture2D texture, Vector2 position ) : base(texture, position,50,0,"lettuce")
 		{
 			
 		}

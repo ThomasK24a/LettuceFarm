@@ -9,6 +9,7 @@ using System.Security.AccessControl;
 using LettuceFarm.Controls;
 using Microsoft.Xna.Framework.Content;
 using LettuceFarm.States;
+using System.Runtime.CompilerServices;
 
 namespace LettuceFarm.Game
 {
@@ -47,7 +48,14 @@ namespace LettuceFarm.Game
         private void BuyItem(object sender, EventArgs e)
         {
             buyButton.Text = "Bought";
-            inventory.seeds[0].SetCount();
+            for(int i = 0; i < inventory.seeds.Count; i++)
+            {
+                if(this.item.GetName() == inventory.seeds[i].GetName())
+                {
+                    inventory.seeds[i].SetCount();
+                }
+            }
+            ;
         }
 
       

@@ -11,9 +11,12 @@ namespace LettuceFarm
 	{
 		int count;
 		int price;
-		public Livestock(Texture2D texture, Vector2 position) : base(texture, position, 1)
+		string name;
+		public Livestock(Texture2D texture, Vector2 position, int price, int count, string name) : base(texture, position, 1)
 		{
-
+			this.price = price;
+			this.count = count;
+			this.name = name;
 		}
 
 		public virtual int GetPrice()
@@ -46,5 +49,10 @@ namespace LettuceFarm
         {
 			SetCount();
         }
+
+		public string GetName()
+		{
+			return this.name;
+		}
     }
 }
