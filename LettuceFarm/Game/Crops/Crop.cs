@@ -10,13 +10,16 @@ namespace LettuceFarm.GameEntity
 {
 	public abstract class Crop : Entity, ISeed, IInventoryItem
 	{
+		//string name;
 		int price;
 		int count;
+		string name;
 		
-		public Crop(Texture2D texture, Vector2 position, int price, int count) : base(texture, position, 1)
+		public Crop(Texture2D texture, Vector2 position, int price, int count,string name) : base(texture, position, 1)
 		{
 			this.price = price;
 			this.count = count;
+			this.name = name;
 		}
 
 		public virtual int GetPrice()
@@ -40,8 +43,7 @@ namespace LettuceFarm.GameEntity
 		{
 			if(99 /*replace with currency in inv*/ > GetPrice())
             {
-				//currency =- GetPrice();
-				//inventory.addItem(this); (make inventory add this item to it
+				
 				return true;
             }
             else
@@ -64,7 +66,12 @@ namespace LettuceFarm.GameEntity
 
         public void Buy()
         {
-			SetCount();
+			
+        }
+
+        public string GetName()
+        {
+			return this.name;
         }
     }
 }

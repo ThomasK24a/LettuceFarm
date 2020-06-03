@@ -23,7 +23,7 @@ namespace LettuceFarm.States
 			this.song = _content.Load<Song>("Sound/soundtrack");
 
 			MediaPlayer.IsRepeating = true;
-			MediaPlayer.Play(song);
+			//MediaPlayer.Play(song);
 
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{

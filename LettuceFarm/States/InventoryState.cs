@@ -114,8 +114,7 @@ namespace LettuceFarm.States
 		}
 		private void GenerateSlot(Vector2 position, IInventoryItem  item, int count)
         {
-            InventorySlot newSlot = new InventorySlot(_content, position, item, 1, 0.85f);
-
+			InventorySlot newSlot = new InventorySlot(_content, position, item, 1, 0.85f);
             components.Add(newSlot);
         }
 		private void GenerateSeedSlot(Vector2 position, ISeed item, int count)
