@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 
 namespace LettuceFarm.Game
 {
@@ -20,5 +21,8 @@ namespace LettuceFarm.Game
 		public abstract void Buy();
 
 		public abstract string GetName();
+		public bool IsSelected();
+
+		public void Select(bool select);
 	}
 }

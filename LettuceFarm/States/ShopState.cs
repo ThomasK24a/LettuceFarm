@@ -84,7 +84,7 @@ namespace LettuceFarm.States
 
 		private void closeButton_Click(object sender, EventArgs e)
 		{
-			_global.ChangeState(new GameState(_global, _graphicsDevice, _content));
+			_global.ChangeState(_global.Game);
 		}
 	}
 		

@@ -6,6 +6,7 @@ using LettuceFarm.Controls;
 using System.Collections.Generic;
 using LettuceFarm.Manager;
 using LettuceFarm.GameEntity;
+using LettuceFarm.Game;
 
 namespace LettuceFarm.States
 {
@@ -16,13 +17,17 @@ namespace LettuceFarm.States
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
 		Texture2D farmTileTexture;
-
-		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content)
+		InventoryState inventory;
+		ISeed selectedSeed = null;
+		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory)
 			: base(game, graphicsDevice, content)
 		{
+			this.inventory = inventory;
+			//seed = inventory.selected.GetTexture();
 			this.buttonTexture = content.Load<Texture2D>("Button");
 			buttonFont = content.Load<SpriteFont>("defaultFont");
 			this.farmTileTexture = content.Load<Texture2D>("dirt");
+
 
 			var farmTile01 = new FarmTile(farmTileTexture, new Vector2(10, 10), 1);
 			var farmTile04 = new FarmTile(farmTileTexture, new Vector2(10, 70), 1);
@@ -112,6 +117,11 @@ namespace LettuceFarm.States
 			spriteBatch.Begin();
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
+            if (this.selectedSeed != null)
+            {
+				spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(200, 20), Color.White);
+
+			}
 
 			//myMapTile.draw(spriteBatch);
 			//foreach (var sprite in _sprites)
@@ -131,6 +141,19 @@ namespace LettuceFarm.States
 		{
 			foreach (var component in components)
 				component.Update(gameTime);
+
+            foreach(ISeed seed in inventory.seeds)
+            {
+                if (seed.IsSelected())
+                {
+					this.selectedSeed = seed;
+
+					if (seed.GetName() != selectedSeed.GetName() )
+                    {
+						seed.Select(false);
+                    }
+                }
+            }
 
 			//foreach (var sprite in _sprites)
 			//	sprite.Update(gameTime, _sprites);

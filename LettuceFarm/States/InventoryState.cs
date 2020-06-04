@@ -13,8 +13,10 @@ namespace LettuceFarm.States
 	public class InventoryState : State
 	{
 		
-		List<IInventoryItem> Inventory;
+		public List<IInventoryItem> Inventory;
 		public List<ISeed> seeds;
+
+		public ISeed selected;
 
 		Texture2D lettuceSprite;
 		Texture2D lettuceSeedSprite;
@@ -79,7 +81,7 @@ namespace LettuceFarm.States
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
-			_global.ChangeState(new GameState(_global, _graphicsDevice, _content));
+			_global.ChangeState(_global.Game);
 		}
 
 
@@ -127,6 +129,7 @@ namespace LettuceFarm.States
 
 		public override void PostUpdate(GameTime gameTime)
 		{
+		
 			
 		}
 

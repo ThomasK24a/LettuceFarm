@@ -21,6 +21,7 @@ namespace LettuceFarm.Game
         SpriteFont font;
         bool isSeed;
         Button selectButton;
+        bool selected = false;
 
         public InventorySlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale) : base(item.GetTexture(), position, 1)
         {
@@ -54,8 +55,18 @@ namespace LettuceFarm.Game
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
-            selectButton.Text = "selected";
-            System.Console.WriteLine("selected");
+            if(selectButton.Text == "select")
+            {
+                selectButton.Text = "selected";
+                this.seeditem.Select(true);
+            }
+            else if(selectButton.Text == "selected")
+            {
+                selectButton.Text = "select";
+                this.seeditem.Select(false);
+
+            }
+
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
