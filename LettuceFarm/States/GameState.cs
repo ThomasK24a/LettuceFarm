@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using LettuceFarm.Manager;
 using LettuceFarm.GameEntity;
 using LettuceFarm.Game;
+using Microsoft.Xna.Framework.Input;
 
 namespace LettuceFarm.States
 {
@@ -117,11 +118,7 @@ namespace LettuceFarm.States
 			spriteBatch.Begin();
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
-            if (this.selectedSeed != null)
-            {
-				spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(200, 20), Color.White);
-
-			}
+            
 
 			//myMapTile.draw(spriteBatch);
 			//foreach (var sprite in _sprites)
@@ -129,6 +126,14 @@ namespace LettuceFarm.States
 
 			foreach (var component in components)
 			component.Draw(gameTime, spriteBatch);
+
+			if (this.selectedSeed != null)
+			{
+
+				spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), null, Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
+
+			}
+
 			spriteBatch.End();
 		}
 
@@ -139,7 +144,13 @@ namespace LettuceFarm.States
 
 		public override void Update(GameTime gameTime)
 		{
-			foreach (var component in components)
+			if (Mouse.GetState().RightButton == ButtonState.Pressed && selectedSeed != null)
+            {
+				selectedSeed.Select(false);
+				selectedSeed = null;
+			}
+				
+            foreach (var component in components)
 				component.Update(gameTime);
 
             foreach(ISeed seed in inventory.seeds)

@@ -9,6 +9,7 @@ using System.Security.AccessControl;
 using LettuceFarm.Controls;
 using Microsoft.Xna.Framework.Content;
 using System.Windows.Forms.VisualStyles;
+using LettuceFarm.States;
 
 namespace LettuceFarm.Game
 {
@@ -18,12 +19,13 @@ namespace LettuceFarm.Game
         IInventoryItem item;
         ISeed seeditem;
         Texture2D slotTexture;
+        Texture2D itemCount;
         SpriteFont font;
         bool isSeed;
         Button selectButton;
         bool selected = false;
 
-        public InventorySlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale) : base(item.GetTexture(), position, 1)
+        public InventorySlot(ContentManager content, Vector2 position, IInventoryItem item, float scale) : base(item.GetTexture(), position, 1)
         {
             this.position = position;
             this.item = item;
@@ -32,9 +34,10 @@ namespace LettuceFarm.Game
          
             slotTexture = content.Load<Texture2D>("ItemSlot");
             font = content.Load<SpriteFont>("defaultFont");
+            itemCount = content.Load<Texture2D>("itemCount");
 
         }
-        public InventorySlot(ContentManager content, Vector2 position, ISeed seeditem, int frameCount, float scale) : base(seeditem.GetTexture(), position, 1)
+        public InventorySlot(ContentManager content, Vector2 position, ISeed seeditem, float scale) : base(seeditem.GetTexture(), position, 1)
         {
             this.position = position;
             this.seeditem = seeditem;
@@ -43,10 +46,11 @@ namespace LettuceFarm.Game
             Texture2D buttonTexture = content.Load<Texture2D>("Button");
             slotTexture = content.Load<Texture2D>("ItemSlot");
             font = content.Load<SpriteFont>("defaultFont");
+            itemCount = content.Load<Texture2D>("itemCount");
 
             var buttonFont = content.Load<SpriteFont>("defaultFont");
 
-          selectButton = new Button(buttonTexture, buttonFont, this.position + new Vector2(-15,100), frameCount)
+          selectButton = new Button(buttonTexture, buttonFont, this.position + new Vector2(-30,120), 1)
             {
                 Text = "select"
             };
@@ -55,14 +59,14 @@ namespace LettuceFarm.Game
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
-            if(selectButton.Text == "select")
+            if(!this.seeditem.IsSelected())
             {
-                selectButton.Text = "selected";
+                
                 this.seeditem.Select(true);
             }
-            else if(selectButton.Text == "selected")
+            else
             {
-                selectButton.Text = "select";
+               
                 this.seeditem.Select(false);
 
             }
@@ -71,26 +75,34 @@ namespace LettuceFarm.Game
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(slotTexture, position + new Vector2(-15, -10), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-
             if (this.isSeed)
             {
-                spriteBatch.Draw(slotTexture, position + new Vector2(-15, -10), null, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
-
-                spriteBatch.DrawString(font, "X " + seeditem.GetCount(), position + new Vector2(80, 55), Color.White);
-
-               selectButton.Draw(gameTime, spriteBatch);
+                spriteBatch.Draw(slotTexture, position + new Vector2(-10, -11), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(itemCount, position + new Vector2(19, 80), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(Texture, position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(font, "x " + seeditem.GetCount(), position + new Vector2(33, 90), Color.Black);
+                selectButton.Draw(gameTime, spriteBatch);
+                
             }
             else
             {
-                spriteBatch.DrawString(font, "X " + item.GetCount(), position + new Vector2(20, 55), Color.White);
+                spriteBatch.Draw(slotTexture, position + new Vector2(-10, -11), null, Color.White, 0f, Vector2.Zero, scale * 0.75f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(itemCount, position + new Vector2(4, 50), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(font, "x " + item.GetCount(), position + new Vector2(18, 60), Color.Black);
+                spriteBatch.Draw(Texture, position + new Vector2(15, 5), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             }
 
-            spriteBatch.Draw(Texture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);        
+            
+            
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (seeditem != null && seeditem.IsSelected())
+                selectButton.Text = "selected";
+            else if(seeditem != null)
+                selectButton.Text = "select";
+
             if (this.isSeed)
             {
                 selectButton.Update(gameTime);

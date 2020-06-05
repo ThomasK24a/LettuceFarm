@@ -26,6 +26,7 @@ namespace LettuceFarm.States
 			invList = new List<IInventoryItem>();
 			CreateInvList();
 
+			//i dictates how many rows should be created (number of inventory items divided by 3 rounded up), j draws 3 items every row
 			for (int i = 0; i < (int)Math.Ceiling(((float)invList.Count / 3)); i++)
 			{
 				for(int j = 0; j < 3 ; j++)
@@ -37,7 +38,7 @@ namespace LettuceFarm.States
 
 			Texture2D closeButtonSprite = _content.Load<Texture2D>("CloseButton");
 			var buttonFont = _content.Load<SpriteFont>("defaultFont");
-			closeButton = new Button(closeButtonSprite, buttonFont, new Vector2(700, 20), 1);
+			closeButton = new Button(closeButtonSprite, buttonFont, new Vector2(730, 10), 1);
 			closeButton.Click += closeButton_Click;
 			components.Add(closeButton);
 		}
@@ -53,12 +54,10 @@ namespace LettuceFarm.States
 			spriteBatch.End();
 		}
 
-
         public override void PostUpdate(GameTime gameTime)
 		{
 			//throw new NotImplementedException();
 		}
-
 
 		private void GenerateSlot(Vector2 position, IInventoryItem item)
 		{

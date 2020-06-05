@@ -100,7 +100,7 @@ namespace LettuceFarm.States
 
 		private void NewGameButton_Click(object sender, EventArgs e)
 		{
-			_global.ChangeState(new MenuState(_global, _graphicsDevice, _content));
+			_global.ChangeState(_global.menu);
 		}
 	}
 	}
