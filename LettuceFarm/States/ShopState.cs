@@ -11,17 +11,20 @@ namespace LettuceFarm.States
 	public class ShopState : State
 	{
 		
-		private List<IInventoryItem> invList;
+		public List<IInventoryItem> invList;
 		Texture2D placeholderSprite;
 		Button closeButton;
         private InventoryState inventory;
+		SpriteFont font;
 
-        public ShopState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager, InventoryState inventory)
+
+		public ShopState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager, InventoryState inventory)
 			: base(game, graphicsDevice, contentManager)
 		{
 			this.placeholderSprite = game.Content.Load<Texture2D>("lettuce");
 			this.inventory = inventory;
 
+			font = _content.Load<SpriteFont>("defaultFont");
 
 			invList = new List<IInventoryItem>();
 			CreateInvList();
@@ -46,6 +49,8 @@ namespace LettuceFarm.States
         {
 			spriteBatch.Begin();
 			spriteBatch.Draw(_content.Load<Texture2D>("storeBackground"), new Vector2(25,20), Color.White);
+			spriteBatch.DrawString(font, "Coins " + inventory.Coins, new Vector2(500, 350), Color.White);
+
 			foreach (Entity component in components)
 			{
 				component.Draw(gameTime, spriteBatch);

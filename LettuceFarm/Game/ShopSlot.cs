@@ -10,6 +10,7 @@ using LettuceFarm.Controls;
 using Microsoft.Xna.Framework.Content;
 using LettuceFarm.States;
 using System.Runtime.CompilerServices;
+using Microsoft.Xna.Framework.Input;
 
 namespace LettuceFarm.Game
 {
@@ -23,6 +24,8 @@ namespace LettuceFarm.Game
 
         public ShopSlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale, InventoryState inv) : base(item.GetTexture(), position, 1)
         {
+
+         
             this.position = position;
             this.item = item;
             this.scale = scale;
@@ -40,34 +43,34 @@ namespace LettuceFarm.Game
             
             buyButton.Click += BuyItem;
 
-            //itemBackground = new FilledRectangle(20 + Convert.ToInt32(position.X), 20 + Convert.ToInt32(position.Y), 240, 175);
-            //itemBackground.BackgroundColor = Color.Brown;
-            
+  
         }
 
         private void BuyItem(object sender, EventArgs e)
         {
-            buyButton.Text = "Bought";
-            for(int i = 0; i < inventory.seeds.Count; i++)
+            if (this.item.GetName() == "lettuce" || this.item.GetName() == "wheat" || this.item.GetName() == "corn")
             {
-                if(this.item.GetName() == inventory.seeds[i].GetName())
-                {
-                    inventory.seeds[i].SetCount();
-                    inventory.Coins -= inventory.seeds[i].GetPrice();
-                }
+                for (int i = 0; i < inventory.seeds.Count; i++)
+                    if (this.item.GetName() == inventory.seeds[i].GetName() && inventory.Coins >= inventory.seeds[i].GetPrice())
+                    {
+                        inventory.seeds[i].SetCount();
+                        inventory.Coins -= inventory.seeds[i].GetPrice();
+                    }
             }
-            ;
+            else if(inventory.Coins >= this.item.GetPrice())
+            {
+                this.item.SetCount();
+                inventory.Coins -= this.item.GetPrice();
+            }
+    
         }
 
-      
-
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        { 
+        {
             spriteBatch.Draw(slotTexture, position + new Vector2(-10, -11), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             spriteBatch.Draw(item.GetTexture(), position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-      
-            buyButton.Draw(gameTime, spriteBatch);
-            
+     
+            buyButton.Draw(gameTime, spriteBatch);       
         }
 
         public override void Update(GameTime gameTime)
