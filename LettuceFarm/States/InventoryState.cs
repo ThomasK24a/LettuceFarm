@@ -62,24 +62,27 @@ namespace LettuceFarm.States
 			CreateInventory();
 
 
-            for (int i = 0; i < (int)Math.Ceiling(((float)Inventory.Count / 3)); i++)
+            for (int i = 0; i < (int)Math.Ceiling(((float)Inventory.Count / 5)); i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < 5; j++)
                 {
-                    if (i * 3 + j < Inventory.Count)
 
-                        GenerateSlot(new Vector2(j * 200 + 220, i * 110 + 10), Inventory[i * 3 + j], Inventory[i * 3 + j].GetCount());
+                    if (i * 5 + j < Inventory.Count)
+                        GenerateSlot(new Vector2(j * 100 + 163, i * 100 + 50), Inventory[i * 3 + j]);
+
+
                 }
             }
 
-            for (int i = 0 +1 ; i < seeds.Count + 1; i++)
+            for (int i = 0 ; i < seeds.Count; i++)
             {
-                GenerateSeedSlot(new Vector2(i * 200 + 20, 25 * +10), seeds[i-1], seeds[i-1].GetCount());
+                GenerateSeedSlot(new Vector2(i * 200 + 150, 200), seeds[i]);
             }
 
             SpriteFont buttonFont = _content.Load<SpriteFont>("defaultFont");
 			Texture2D closeButtonSprite = _content.Load<Texture2D>("CloseButton");
-			closeButton = new Button(closeButtonSprite, buttonFont, new Vector2(700, 10), 1);
+			closeButton = new Button(closeButtonSprite, buttonFont, new Vector2(730, 10), 1);
+
             closeButton.Click += CloseButton_Click;
 			components.Add(closeButton);
 			
@@ -93,7 +96,7 @@ namespace LettuceFarm.States
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			spriteBatch.Begin();
-			spriteBatch.Draw(_content.Load<Texture2D>("storeBackground"), new Vector2(60, 0), Color.White);
+			spriteBatch.Draw(_content.Load<Texture2D>("storeBackground"), new Vector2(25, 20), Color.White);
 			spriteBatch.DrawString(font, "Coins " + Coins,  new Vector2(80, 20), Color.White);
 			foreach (Entity component in components)
 			{
@@ -130,14 +133,14 @@ namespace LettuceFarm.States
 
 
 		}
-		private void GenerateSlot(Vector2 position, IInventoryItem  item, int count)
+		private void GenerateSlot(Vector2 position, IInventoryItem  item)
         {
-			InventorySlot newSlot = new InventorySlot(_content, position, item, 1, 0.85f);
+			InventorySlot newSlot = new InventorySlot(_content, position, item, 1f);
             components.Add(newSlot);
         }
-		private void GenerateSeedSlot(Vector2 position, ISeed item, int count)
+		private void GenerateSeedSlot(Vector2 position, ISeed item)
 		{
-			InventorySlot newSlot = new InventorySlot(_content, position, item, 1, 0.85f);
+			InventorySlot newSlot = new InventorySlot(_content, position, item, 1f);
 
 			components.Add(newSlot);
 		}
@@ -154,6 +157,5 @@ namespace LettuceFarm.States
 			
 		}
 
-	
 	}
 }

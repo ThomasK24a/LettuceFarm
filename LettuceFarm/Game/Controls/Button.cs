@@ -88,6 +88,7 @@ namespace LettuceFarm.Controls
 
                 if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed)
                 {
+                    _isHovering = false;
                     Click?.Invoke(this, new EventArgs());
                 }
             }

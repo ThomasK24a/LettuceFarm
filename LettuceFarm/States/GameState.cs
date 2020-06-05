@@ -56,11 +56,16 @@ namespace LettuceFarm.States
 				for (int j = 0; j < 3; j++)
 				{
 					if (i * 3 + j < farmTiles.Count)
-						farmTiles[i * 3 + j].position =  new Vector2(j * 60 , i * 55 + 40 );
+                    {
+						farmTiles[i * 3 + j].position = new Vector2(j * 60, i * 55 + 40);
+						farmTiles[i * 3 + j].Click += farmTile_Click;
+					}
+						
+					
 				}
 			}
 
-		
+			
 
 			var menuButton = new Button(buttonTexture, buttonFont, new Vector2(5, 435), 1)
 			{
@@ -140,6 +145,7 @@ namespace LettuceFarm.States
 			spriteBatch.Begin();
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
+
 			spriteBatch.Draw(slotTexture, new Vector2(195, 15), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 			spriteBatch.DrawString(font, "X " + chickenCount, new Vector2(320, 15), Color.White);
 			spriteBatch.DrawString(font, "X " + cowCount, new Vector2(320, 40), Color.White);
@@ -150,8 +156,17 @@ namespace LettuceFarm.States
 			
 			spriteBatch.Draw(littleCow, new Vector2(280, 30), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
+
 			foreach (var component in components)
 			component.Draw(gameTime, spriteBatch);
+
+			if (this.selectedSeed != null)
+			{
+
+				spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), null, Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
+
+			}
+
 			spriteBatch.End();
 		}
 
@@ -160,14 +175,22 @@ namespace LettuceFarm.States
 			//Implement an update if need arises later
 		}
 		void PrepareSeed()
-        {
+		{
 			foreach (ISeed seeds in inventory.seeds)
+            {
 				if (seeds.IsSelected() == false)
+                {
 					this.selectedSeed = null;
+				}
+					
+			}
+				
 			foreach (ISeed seeds in inventory.seeds)
-				if (seeds.IsSelected() && (seeds.GetCount() > 0) ){
-				this.selectedSeed = seeds;
-
+            {
+				if (seeds.IsSelected() && (seeds.GetCount() > 0))
+				{
+					this.selectedSeed = seeds;
+				}
 			}
 
 		}
@@ -187,17 +210,22 @@ namespace LettuceFarm.States
 				
 
 		}
-		void Componets(GameTime gameTime)
-        {
-			foreach (var component in components)
-				component.Update(gameTime);
-		}
 
 
 	
 		public override void Update(GameTime gameTime)
 		{
-			Componets(gameTime);
+			if (Mouse.GetState().RightButton == ButtonState.Pressed && selectedSeed != null)
+            {
+				selectedSeed.Select(false);
+				selectedSeed = null;
+			}
+			
+			foreach (var component in components)
+            {
+				component.Update(gameTime);
+			}
+
 			PrepareSeed();
 			PrepareLiveStock();
 		}
@@ -217,6 +245,10 @@ namespace LettuceFarm.States
 			_global.ChangeState(_global.menu);
 		}
 
-
+		private void farmTile_Click(object sender, EventArgs e)
+        {
+			if(selectedSeed != null)
+				((FarmTile) sender).addSeed(selectedSeed);
+        }
 	}
 }

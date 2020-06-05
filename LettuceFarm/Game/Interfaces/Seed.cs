@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using LettuceFarm.GameEntity;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,5 +25,6 @@ namespace LettuceFarm.Game
 		public bool IsSelected();
 
 		public void Select(bool select);
+
 	}
 }
