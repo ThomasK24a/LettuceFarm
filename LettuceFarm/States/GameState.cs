@@ -7,40 +7,48 @@ using System.Collections.Generic;
 using LettuceFarm.Manager;
 using LettuceFarm.GameEntity;
 using LettuceFarm.Game;
+using Microsoft.Xna.Framework.Input;
 
 namespace LettuceFarm.States
 {
 	public class GameState : State
 	{
-		//private MapTile myMapTile = new MapTile(30, 30, 6, 6);
-		//private List<ChickenSprite> _sprites;
+
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
 		Texture2D farmTileTexture;
 		InventoryState inventory;
 		ISeed selectedSeed = null;
-		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory)
+		List<FarmTile> farmTiles;
+		MouseState mouseState;
+		Texture2D slotTexture;
+
+		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory, MouseState mouseState)
 			: base(game, graphicsDevice, content)
 		{
+
+
+			this.mouseState = mouseState;
 			this.inventory = inventory;
-			//seed = inventory.selected.GetTexture();
 			this.buttonTexture = content.Load<Texture2D>("Button");
 			buttonFont = content.Load<SpriteFont>("defaultFont");
 			this.farmTileTexture = content.Load<Texture2D>("dirt");
+			farmTiles = new List<FarmTile>();
+			slotTexture = content.Load<Texture2D>("ItemSlot");
 
+			for (int i = 0; i < 9; i++)
+				farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1));
 
-			var farmTile01 = new FarmTile(farmTileTexture, new Vector2(10, 10), 1);
-			var farmTile04 = new FarmTile(farmTileTexture, new Vector2(10, 70), 1);
-			var farmTile05 = new FarmTile(farmTileTexture, new Vector2(10, 130), 1);
-			var farmTile02 = new FarmTile(farmTileTexture, new Vector2(70, 10), 1);
-			var farmTile06 = new FarmTile(farmTileTexture, new Vector2(70, 70), 1);
-			var farmTile07 = new FarmTile(farmTileTexture, new Vector2(70, 130), 1);
-			var farmTile03 = new FarmTile(farmTileTexture, new Vector2(130, 10), 1);
-			var farmTile08 = new FarmTile(farmTileTexture, new Vector2(130, 70), 1);
-			var farmTile09 = new FarmTile(farmTileTexture, new Vector2(130, 130), 1);
+			for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					if (i * 3 + j < farmTiles.Count)
+						farmTiles[i * 3 + j].position =  new Vector2(j * 60 , i * 55 + 40 );
+				}
+			}
 
-			//var farmTile06 = new FarmTile(farmTileTexture, new Vector2(10, 10), 1);
-			//var farmTile07 = new FarmTile(farmTileTexture, new Vector2(10, 10), 1);
+		
 
 			var menuButton = new Button(buttonTexture, buttonFont, new Vector2(5, 435), 1)
 			{
@@ -62,70 +70,68 @@ namespace LettuceFarm.States
 			};
 
 			shopButton.Click += shopButton_Click;
-
+			
 			components = new List<Entity>()
 			{
-				farmTile01,
-				farmTile02,
-				farmTile03,
-				farmTile04,
-				farmTile05,
-				farmTile06,
-				farmTile07,
-				farmTile08,
-				farmTile09,
-				menuButton,
+
+
+
+			farmTiles[0],
+			farmTiles[1],
+			farmTiles[2],
+			farmTiles[3],
+			farmTiles[4],	
+			farmTiles[5],
+			farmTiles[6],	
+			farmTiles[7],
+            farmTiles[8],
+
+			menuButton,
 				inventoryButton,
 				shopButton,
+
 			};
 
-			//_sprites = new List<ChickenSprite>()
-			//{
-			//	new ChickenSprite(new Dictionary<string, Animation>()
-			//	{
-			//		{ 
-			//			"WalkUp", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_up"), 4) 
-			//		},
+            //_sprites = new List<ChickenSprite>()
+            //{
+            //    new ChickenSprite(new Dictionary<string, Animation>()
+            //    {
+            //        {
+            //            "WalkUp", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_up"), 4)
+            //        },
 
-			//		{ 
-			//			"WalkDown", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_down"), 4) 
-			//		},
+            //            {
+            //                "WalkDown", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_down"), 4)
+            //            },
 
-			//		{ 
-			//			"WalkLeft", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_left"), 4) 
-			//		},
+            //            {
+            //                "WalkLeft", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_left"), 4)
+            //            },
 
-			//		{ 
-			//			"WalkRight", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_right"), 4) 
-			//		},
+            //            {
+            //                "WalkRight", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_right"), 4)
+            //            },
 
-			//	})
-			//	{
-			//		Position = new Vector2(100, 100),
-			//	},
-			//};
-		}
+            //        })
+            //        {
+            //            Position = new Vector2(100, 100),
+            //        },
+            //    };
+        }
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			
 			Texture2D grass = _content.Load<Texture2D>("Grass");
 			
-			//Texture2D buttonTexture = game.Content.Load<Texture2D>("Button");	
-			//SpriteFont buttonFont = game.Content.Load<SpriteFont>("defaultFont");
 
 			spriteBatch.Begin();
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
-            if (this.selectedSeed != null)
-            {
-				spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(200, 20), Color.White);
+			spriteBatch.Draw(slotTexture, new Vector2(195, 15), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
-			}
-
-			//myMapTile.draw(spriteBatch);
-			//foreach (var sprite in _sprites)
-			//sprite.Draw(spriteBatch);
+			if (this.selectedSeed != null) 
+				spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(200, 20), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
 			foreach (var component in components)
 			component.Draw(gameTime, spriteBatch);
@@ -136,27 +142,28 @@ namespace LettuceFarm.States
 		{
 			//Implement an update if need arises later
 		}
-
-		public override void Update(GameTime gameTime)
-		{
+		void PrepareSeed()
+        {
+			foreach (ISeed seeds in inventory.seeds)
+				if (seeds.IsSelected() == false)
+					this.selectedSeed = null;
+			foreach (ISeed seeds in inventory.seeds)
+				if (seeds.IsSelected())				
+					this.selectedSeed = seeds;
+				
+		}
+		void Componets(GameTime gameTime)
+        {
 			foreach (var component in components)
 				component.Update(gameTime);
+		}
 
-            foreach(ISeed seed in inventory.seeds)
-            {
-                if (seed.IsSelected())
-                {
-					this.selectedSeed = seed;
 
-					if (seed.GetName() != selectedSeed.GetName() )
-                    {
-						seed.Select(false);
-                    }
-                }
-            }
-
-			//foreach (var sprite in _sprites)
-			//	sprite.Update(gameTime, _sprites);
+	
+		public override void Update(GameTime gameTime)
+		{
+			Componets(gameTime);
+			PrepareSeed();
 		}
 
 		private void shopButton_Click(object sender, EventArgs e)
@@ -173,6 +180,7 @@ namespace LettuceFarm.States
 		{
 			_global.ChangeState(_global.menu);
 		}
+
 
 	}
 }

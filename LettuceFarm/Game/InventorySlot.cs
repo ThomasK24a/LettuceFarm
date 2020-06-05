@@ -21,7 +21,7 @@ namespace LettuceFarm.Game
         SpriteFont font;
         bool isSeed;
         Button selectButton;
-        bool selected = false;
+     
 
         public InventorySlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale) : base(item.GetTexture(), position, 1)
         {

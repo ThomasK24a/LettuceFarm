@@ -63,8 +63,7 @@ namespace LettuceFarm.Controls
             spriteBatch.Draw(Texture, Rectangle, colour);
 
         }
-
-        public override void Update(GameTime gameTime)
+        void Hover()
         {
             _previousMouse = _currentMouse;
             _currentMouse = Mouse.GetState();
@@ -80,8 +79,14 @@ namespace LettuceFarm.Controls
                 if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed)
                 {
                     Click?.Invoke(this, new EventArgs());
+
                 }
             }
+        }
+        public override void Update(GameTime gameTime)
+        {
+            Hover();
+            
         }
 
         #endregion

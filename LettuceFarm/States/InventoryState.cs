@@ -16,7 +16,7 @@ namespace LettuceFarm.States
 		public List<IInventoryItem> Inventory;
 		public List<ISeed> seeds;
 
-		public ISeed selected;
+		public ISeed selected = null;
 
 		Texture2D lettuceSprite;
 		Texture2D lettuceSeedSprite;
@@ -62,7 +62,7 @@ namespace LettuceFarm.States
                 {
                     if (i * 3 + j < Inventory.Count)
 
-                        GenerateSlot(new Vector2(j * 200 + 220, i * 100 + 10), Inventory[i * 3 + j], Inventory[i * 3 + j].GetCount());
+                        GenerateSlot(new Vector2(j * 200 + 220, i * 110 + 10), Inventory[i * 3 + j], Inventory[i * 3 + j].GetCount());
                 }
             }
 
@@ -73,7 +73,7 @@ namespace LettuceFarm.States
 
             SpriteFont buttonFont = _content.Load<SpriteFont>("defaultFont");
 			Texture2D closeButtonSprite = _content.Load<Texture2D>("CloseButton");
-			closeButton = new Button(closeButtonSprite, buttonFont, new Vector2(700, 0), 1);
+			closeButton = new Button(closeButtonSprite, buttonFont, new Vector2(700, 10), 1);
             closeButton.Click += CloseButton_Click;
 			components.Add(closeButton);
 			
@@ -84,8 +84,17 @@ namespace LettuceFarm.States
 			_global.ChangeState(_global.Game);
 		}
 
-
-        void CreateInventory()
+		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+		{
+			spriteBatch.Begin();
+			spriteBatch.Draw(_content.Load<Texture2D>("storeBackground"), new Vector2(60, 0), Color.White);
+			foreach (Entity component in components)
+			{
+				component.Draw(gameTime, spriteBatch);
+			}
+			spriteBatch.End();
+		}
+		void CreateInventory()
         {
 			Game.Crops.Wheat wheatItem = new Game.Crops.Wheat(wheatSprite, new Vector2(-100, -100));
 			Game.Crops.Wheat wheatSeed = new Game.Crops.Wheat(wheatSeedSprite, new Vector2(-100, -100));
