@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LettuceFarm.Game;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SharpDX.Direct3D9;
@@ -63,8 +64,7 @@ namespace LettuceFarm.Controls
             spriteBatch.Draw(Texture, Rectangle, colour);
 
         }
-
-        public override void Update(GameTime gameTime)
+        void Hover()
         {
             _previousMouse = _currentMouse;
             _currentMouse = Mouse.GetState();
@@ -80,8 +80,19 @@ namespace LettuceFarm.Controls
                 if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed)
                 {
                     Click?.Invoke(this, new EventArgs());
+
                 }
             }
+        }
+        public override void Update(GameTime gameTime)
+        {
+            Hover();
+
+        }
+
+        public void addSeed(ISeed seed)
+        {
+            this.Texture = seed.GetTexture();
         }
 
         #endregion

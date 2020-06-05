@@ -53,6 +53,7 @@ namespace LettuceFarm.Game
                 if(this.item.GetName() == inventory.seeds[i].GetName())
                 {
                     inventory.seeds[i].SetCount();
+                    inventory.Coins -= inventory.seeds[i].GetPrice();
                 }
             }
             ;

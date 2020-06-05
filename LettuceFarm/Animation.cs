@@ -14,7 +14,7 @@ namespace LettuceFarm
 
         public int CurrentFrame { get; set; }
 
-        public int FrameCount { get; private set; }
+        public int FrameCount { get; set; }
 
         public int FrameHeight { get { return Texture.Height; } }
 
@@ -24,7 +24,7 @@ namespace LettuceFarm
 
         public bool IsActivateAnimator { get; set; }
 
-        public Texture2D Texture { get; private set; }
+        public Texture2D Texture { get; set; }
 
         public Vector2 Position { get; set; }
 

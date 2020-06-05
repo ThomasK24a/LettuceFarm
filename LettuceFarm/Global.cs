@@ -23,7 +23,8 @@ namespace LettuceFarm
         public MenuState menu;
         public SettingState setting;
         public GameState Game;
-        //Inventory inventory
+        MouseState mouseState;
+  
 
 
 
@@ -51,11 +52,12 @@ namespace LettuceFarm
             //map = new GameMap(this, 20, 15);
             //shop = new Shop(this);
             //map.InitializeComponent();
+            mouseState = Mouse.GetState();
             inventory = new InventoryState(this, graphics.GraphicsDevice, Content);
             shop = new ShopState(this, graphics.GraphicsDevice, Content, inventory);
             menu = new MenuState(this, graphics.GraphicsDevice, Content);
             setting = new SettingState(this, graphics.GraphicsDevice, Content);
-            Game = new GameState(this, graphics.GraphicsDevice, Content, inventory);
+            Game = new GameState(this, graphics.GraphicsDevice, Content, inventory, mouseState);
 
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
@@ -71,12 +73,8 @@ namespace LettuceFarm
             
 
         }
-
-        protected override void Update(GameTime gameTime)
+        void _ChangeState(GameTime gameTime)
         {
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            //    Exit();
-
             if (nextState != null)
             {
                 currentState = nextState;
@@ -89,6 +87,13 @@ namespace LettuceFarm
             currentState.PostUpdate(gameTime);
 
             base.Update(gameTime);
+        }
+        protected override void Update(GameTime gameTime)
+        {
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //    Exit();
+
+            _ChangeState(gameTime);
             // TODO: Add your update logic here
             //inventory.CheckTest(this);
 
