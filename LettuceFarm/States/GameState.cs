@@ -119,7 +119,7 @@ namespace LettuceFarm.States
             //    };
         }
 
-		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			
 			Texture2D grass = _content.Load<Texture2D>("Grass");
@@ -148,9 +148,12 @@ namespace LettuceFarm.States
 				if (seeds.IsSelected() == false)
 					this.selectedSeed = null;
 			foreach (ISeed seeds in inventory.seeds)
-				if (seeds.IsSelected())				
-					this.selectedSeed = seeds;
-				
+				if (seeds.IsSelected() && (seeds.GetCount() > 0) ){
+				this.selectedSeed = seeds;
+
+			}
+
+
 		}
 		void Componets(GameTime gameTime)
         {

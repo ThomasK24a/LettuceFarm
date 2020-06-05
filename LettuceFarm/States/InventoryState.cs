@@ -18,6 +18,8 @@ namespace LettuceFarm.States
 
 		public ISeed selected = null;
 
+		public int Coins;
+
 		Texture2D lettuceSprite;
 		Texture2D lettuceSeedSprite;
 
@@ -29,6 +31,7 @@ namespace LettuceFarm.States
 
 		Texture2D cowSprite;
 		Texture2D chickenSprite;
+		SpriteFont font;
 
 		Button closeButton;
 
@@ -38,8 +41,11 @@ namespace LettuceFarm.States
 		{
 			Inventory = new List<IInventoryItem>();
 			seeds = new List<ISeed>();
-			
-		
+			this.Coins = 500;
+
+            font = _content.Load<SpriteFont>("defaultFont");
+
+
 			this.lettuceSprite = game.Content.Load<Texture2D>("Sprites/Lettuce-icon");
 			this.lettuceSeedSprite = game.Content.Load<Texture2D>("seeds_lettuce");
 
@@ -88,6 +94,7 @@ namespace LettuceFarm.States
 		{
 			spriteBatch.Begin();
 			spriteBatch.Draw(_content.Load<Texture2D>("storeBackground"), new Vector2(60, 0), Color.White);
+			spriteBatch.DrawString(font, "Coins " + Coins,  new Vector2(80, 20), Color.White);
 			foreach (Entity component in components)
 			{
 				component.Draw(gameTime, spriteBatch);
