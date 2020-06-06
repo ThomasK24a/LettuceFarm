@@ -69,8 +69,8 @@ namespace LettuceFarm.States
 
 			for(int i = 0; i<9; i++)
             {
-				//chickenSprites.Add(littleChicken);
-				cowSprites.Add(littleCow);
+				chickenSprites.Add(littleChicken);
+				//cowSprites.Add(littleCow);
             }
 			
 
