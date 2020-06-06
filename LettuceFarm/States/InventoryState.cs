@@ -41,7 +41,7 @@ namespace LettuceFarm.States
 		{
 			Inventory = new List<IInventoryItem>();
 			seeds = new List<ISeed>();
-			this.Coins = 500;
+			this.Coins = 1000;
 
             font = _content.Load<SpriteFont>("defaultFont");
 
