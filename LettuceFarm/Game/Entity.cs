@@ -38,7 +38,10 @@ namespace LettuceFarm
 			spriteBatch.End();
 		}
 
-		public abstract void Update(GameTime gameTime);
+		public virtual void Update(GameTime gameTime)
+        {
+			UpdateAnimation(gameTime);
+        }
 
 	}
 }

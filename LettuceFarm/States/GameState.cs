@@ -21,7 +21,7 @@ namespace LettuceFarm.States
 		Texture2D farmTileTexture;
 		InventoryState inventory;
 		ShopState shop;
-		ISeed selectedSeed = null;
+		SeedItem selectedSeed = null;
 		List<FarmTile> farmTiles;
 		MouseState mouseState;
 		Texture2D slotTexture;
@@ -51,7 +51,7 @@ namespace LettuceFarm.States
 			littleChicken = content.Load<Texture2D>("chicken");
 
 			for (int i = 0; i < 9; i++)
-				farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1));
+				farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content));
 
 			for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
 			{
@@ -200,7 +200,7 @@ namespace LettuceFarm.States
 		}
 		void PrepareSeed()
 		{
-			foreach (ISeed seeds in inventory.seeds)
+			foreach (SeedItem seeds in inventory.seeds)
             {
 				if (seeds.IsSelected() == false)
                 {
@@ -209,7 +209,7 @@ namespace LettuceFarm.States
 					
 			}
 				
-			foreach (ISeed seeds in inventory.seeds)
+			foreach (SeedItem seeds in inventory.seeds)
             {
 				if (seeds.IsSelected() && (seeds.GetCount() > 0))
 				{

@@ -111,7 +111,7 @@ namespace LettuceFarm.Manager
         {
             Move();
             SetAnimations();
-            _animation.Update(gameTime);
+            _animation.UpdateAnimation(gameTime);
 
             Position += Velocity;
             Velocity = Vector2.Zero;

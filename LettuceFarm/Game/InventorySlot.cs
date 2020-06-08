@@ -10,6 +10,7 @@ using LettuceFarm.Controls;
 using Microsoft.Xna.Framework.Content;
 using System.Windows.Forms.VisualStyles;
 using LettuceFarm.States;
+using LettuceFarm.GameEntity;
 
 namespace LettuceFarm.Game
 {
@@ -17,7 +18,7 @@ namespace LettuceFarm.Game
     {
  
         IInventoryItem item;
-        ISeed seeditem;
+        SeedItem seeditem;
         Texture2D slotTexture;
         Texture2D itemCount;
         SpriteFont font;
@@ -37,7 +38,7 @@ namespace LettuceFarm.Game
             itemCount = content.Load<Texture2D>("itemCount");
 
         }
-        public InventorySlot(ContentManager content, Vector2 position, ISeed seeditem, float scale) : base(seeditem.GetTexture(), position, 1)
+        public InventorySlot(ContentManager content, Vector2 position, SeedItem seeditem, float scale) : base(seeditem.GetTexture(), position, 1)
         {
             this.position = position;
             this.seeditem = seeditem;

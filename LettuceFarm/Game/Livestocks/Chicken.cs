@@ -7,9 +7,9 @@ using System.Text;
 
 namespace LettuceFarm.Game.Livestocks
 {
-	class Chicken : Livestock
+	class Chicken : Entity
 	{
-		public Chicken(Texture2D texture, Vector2 position) : base(texture, position,300,0,"chicken")
+		public Chicken(Texture2D texture, Vector2 position) : base(texture, position,1)
 		{
 
 		}

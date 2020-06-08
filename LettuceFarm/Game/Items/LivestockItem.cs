@@ -7,12 +7,12 @@ using System.Text;
 
 namespace LettuceFarm
 {
-	public abstract class Livestock : Entity, IInventoryItem, IMeat
+	public class LivestockItem : Entity, IInventoryItem
 	{
 		int count;
 		int price;
 		string name;
-		public Livestock(Texture2D texture, Vector2 position, int price, int count, string name) : base(texture, position, 1)
+		public LivestockItem(Texture2D texture, Vector2 position, int price, int count, string name) : base(texture, position, 1)
 		{
 			this.price = price;
 			this.count = count;
@@ -54,5 +54,10 @@ namespace LettuceFarm
 		{
 			return this.name;
 		}
+
+        public override void Update(GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

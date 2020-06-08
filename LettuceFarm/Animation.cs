@@ -70,7 +70,7 @@ namespace LettuceFarm
             _animation.CurrentFrame = 0;
         }
 
-        public void Update(GameTime gameTime)
+        public void UpdateAnimation(GameTime gameTime)
         {
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 

@@ -5,6 +5,7 @@ using LettuceFarm.Game;
 using System;
 using System.Collections.Generic;
 using LettuceFarm.Controls;
+using LettuceFarm.GameEntity;
 
 namespace LettuceFarm.States
 {
@@ -72,17 +73,22 @@ namespace LettuceFarm.States
 
 		public void CreateInvList()
 		{
-			Game.Crops.Wheat wheatSeeds = new Game.Crops.Wheat(_content.Load<Texture2D>("seeds_wheat"), new Vector2(-100, -100));
-			Game.Crops.Lettuce lettuceSeeds = new Game.Crops.Lettuce(_content.Load<Texture2D>("seeds_lettuce"), new Vector2(-100, -100));
-			Game.Crops.Corn cornSeeds = new Game.Crops.Corn(_content.Load<Texture2D>("seeds_corn"), new Vector2(-100, -100));
-			invList.Add(wheatSeeds);
-			invList.Add(lettuceSeeds);
-			invList.Add(cornSeeds);
+			SeedItem wheatSeed = new SeedItem(_content.Load<Texture2D>("seeds_wheat"), new Vector2(-100, -100), 100, 0, "wheat");
+			SeedItem lettuceSeed = new SeedItem(_content.Load<Texture2D>("seeds_lettuce"), new Vector2(-100, -100), 50, 0, "lettuce");
+			SeedItem cornSeed = new SeedItem(_content.Load<Texture2D>("seeds_corn"), new Vector2(-100, -100), 5, 0, "corn");
 
-			Game.Livestocks.Cow cowItem = new Game.Livestocks.Cow(_content.Load<Texture2D>("cow"), new Vector2(-100, -100));
-			Game.Livestocks.Chicken chickenItem = new Game.Livestocks.Chicken(_content.Load<Texture2D>("chicken"), new Vector2(-100, -100));
+			invList.Add(wheatSeed);
+			invList.Add(lettuceSeed);
+			invList.Add(cornSeed);
+
+			LivestockItem cowItem = new LivestockItem(_content.Load<Texture2D>("cow"), new Vector2(-100, -100), 750, 0, "cow");
+			LivestockItem chickenItem = new LivestockItem(_content.Load<Texture2D>("chicken"), new Vector2(-100, -100), 300, 0, "chicken");
 			invList.Add(cowItem);
 			invList.Add(chickenItem);
+
+
+
+			
 
 		}
 

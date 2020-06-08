@@ -1,5 +1,8 @@
 ﻿using LettuceFarm.Game;
+using LettuceFarm.Game.Crops;
+using LettuceFarm.GameEntity;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SharpDX.Direct3D9;
@@ -23,6 +26,9 @@ namespace LettuceFarm.Controls
 
         private int posY;
 
+        private Crop plantedSeed;
+
+        private ContentManager content;
 
         #endregion
 
@@ -49,9 +55,10 @@ namespace LettuceFarm.Controls
 
         #region Methods
 
-        public FarmTile(Texture2D texture, Vector2 position, int frameCount) : base(texture, position, frameCount)
+        public FarmTile(Texture2D texture, Vector2 position, int frameCount, ContentManager content) : base(texture, position, frameCount)
         {
             PenColour = Color.Black;
+            this.content = content;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -61,7 +68,11 @@ namespace LettuceFarm.Controls
             if (_isHovering)
                 colour = Color.Gray;
 
+           
             spriteBatch.Draw(Texture, Rectangle, colour);
+
+            if (plantedSeed != null)
+                spriteBatch.Draw(plantedSeed.GetTexture(), Rectangle, colour);
 
         }
         void Hover()
@@ -90,9 +101,22 @@ namespace LettuceFarm.Controls
 
         }
 
-        public void addSeed(ISeed seed)
+        public void addSeed(SeedItem seed)
         {
-            this.Texture = seed.GetTexture();
+            switch (seed.GetName())
+            {
+                case "corn":
+                    plantedSeed = new Corn(content, position);
+                    break;
+                case "lettuce":
+                    plantedSeed = new Lettuce(content, position);
+                    break;
+                case "wheat":
+                    plantedSeed = new Wheat(content, position);
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion
