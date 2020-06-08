@@ -30,7 +30,7 @@ namespace LettuceFarm.States
 		public int chickenCount;
 		public int cowCount;
 		SpriteFont font;
-		float timer = 40f;
+		float timer;
 
 		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory, MouseState mouseState, ShopState shop)
 			: base(game, graphicsDevice, content)
