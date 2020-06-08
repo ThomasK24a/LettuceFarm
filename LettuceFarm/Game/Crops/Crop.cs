@@ -84,5 +84,9 @@ namespace LettuceFarm.GameEntity
 			this.selected = select;
         }
 
+        public void Plant()
+        {
+			this.count -= 1;
+        }
     }
 }

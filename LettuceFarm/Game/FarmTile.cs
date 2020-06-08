@@ -92,7 +92,15 @@ namespace LettuceFarm.Controls
 
         public void addSeed(ISeed seed)
         {
-            this.Texture = seed.GetTexture();
+            if(seed.GetCount() > 0)
+            {
+                if (this.Texture != seed.GetTexture())
+                {
+                    this.Texture = seed.GetTexture();
+                    seed.Plant();
+                }
+            }
+                     
         }
 
         #endregion
