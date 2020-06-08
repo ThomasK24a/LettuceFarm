@@ -26,5 +26,6 @@ namespace LettuceFarm.Game
 
 		public void Select(bool select);
 
+		public void Plant();
 	}
 }

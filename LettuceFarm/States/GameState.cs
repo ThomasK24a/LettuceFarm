@@ -227,21 +227,24 @@ namespace LettuceFarm.States
 
 		}
 
-
-	
-		public override void Update(GameTime gameTime)
+		void MouseMethod()
 		{
 			if (Mouse.GetState().RightButton == ButtonState.Pressed && selectedSeed != null)
-            {
+			{
 				selectedSeed.Select(false);
 				selectedSeed = null;
 			}
+		}
+	
+		public override void Update(GameTime gameTime)
+		{
+			
 			
 			foreach (var component in components)
             {
 				component.Update(gameTime);
 			}
-
+			MouseMethod();
 			PrepareSeed();
 			PrepareLiveStock();
 		}
