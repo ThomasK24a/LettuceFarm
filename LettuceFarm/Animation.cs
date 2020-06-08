@@ -10,8 +10,6 @@ namespace LettuceFarm
     {
         private float _timer;
 
-        private Animation _animation;
-
         public int CurrentFrame { get; set; }
 
         public int FrameCount { get; set; }
@@ -35,54 +33,56 @@ namespace LettuceFarm
             this.CurrentFrame = 0;
 
             this.FrameCount = frameCount;
-
-            this.IsActivateAnimator = true;
+            //If the framecount is higher than 1 it's automatically animated
+            this.IsActivateAnimator = frameCount > 1;
 
             this.FrameSpeed = 0.2f;
+
+            this._timer = 0f;
         }
 
-        public Animation(Animation animation)
+        public void DrawAnimation(SpriteBatch spriteBatch)
         {
-            _animation = animation;
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(_animation.Texture, Position, new Rectangle(_animation.CurrentFrame * _animation.FrameWidth, 0, _animation.FrameWidth, _animation.FrameHeight), Color.White);
+            spriteBatch.Draw(Texture, Position, new Rectangle(CurrentFrame * FrameWidth, 0, FrameWidth, FrameHeight), Color.White);
         }
 
         public void Play(Animation animation)
         {
-            if (_animation == animation)
-                return;
+            this.Texture = animation.Texture;
 
-            _animation = animation;
+            this.CurrentFrame = 0;
 
-            _animation.CurrentFrame = 0;
+            this.FrameCount = animation.FrameCount;
 
-            _timer = 0;
+            this.IsActivateAnimator = animation.IsActivateAnimator;
+
+            this.FrameSpeed = animation.FrameSpeed;
+
+            this._timer = 0f;
         }
 
         public void Stop()
         {
-            _timer = 0f;
-
-            _animation.CurrentFrame = 0;
+            IsActivateAnimator = false;
         }
 
-        public void Update(GameTime gameTime)
+        public void UpdateAnimation(GameTime gameTime)
         {
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (_timer > _animation.FrameSpeed)
+            if (IsActivateAnimator)
             {
-                _timer = 0f;
+                _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                _animation.CurrentFrame++;
+                if (_timer > FrameSpeed)
+                {
+                    _timer = 0f;
 
-                if (_animation.CurrentFrame >= _animation.FrameCount)
-                    _animation.CurrentFrame = 0;
+                    CurrentFrame++;
+
+                    if (CurrentFrame >= FrameCount)
+                        CurrentFrame = 0;
+                }
             }
+            
         }
     }
 }

@@ -1,58 +1,27 @@
 ﻿using LettuceFarm.Game;
+using LettuceFarm.States;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LettuceFarm
+namespace LettuceFarm.Game.Livestocks
 {
-	public abstract class Livestock : Entity, IInventoryItem, IMeat
-	{
-		int count;
-		int price;
-		string name;
-		public Livestock(Texture2D texture, Vector2 position, int price, int count, string name) : base(texture, position, 1)
-		{
-			this.price = price;
-			this.count = count;
-			this.name = name;
-		}
+    public abstract class Livestock : Entity
+    {
+        string name;
 
-		public virtual int GetPrice()
-		{
-			
-			return this.price;
-		}
-		public virtual int GetCount()
-		{
-			return this.count;
-		}
-
-		public virtual Texture2D GetTexture()
-		{
-			return Texture;
-		}
-
-        public void SetCount()
+        public Livestock(Texture2D texture, Vector2 position, string name, int frameCount) : base(texture, position, frameCount)
         {
-			this.count += 1 ;
+            this.name = name;
+
         }
 
-        public void SetPrice(int price)
+        public string GetName()
         {
-			this.price = price;
+            return this.name;
         }
-
-
-        public void Buy()
-        {
-			SetCount();
-        }
-
-		public string GetName()
-		{
-			return this.name;
-		}
     }
 }

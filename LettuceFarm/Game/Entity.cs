@@ -10,7 +10,6 @@ namespace LettuceFarm
 {
 	public abstract class Entity : Animation
 	{
-		public Vector2 position;
 		public Color tintColor;
 		public int spriteWidth;
 		public int spriteHeight;
@@ -19,26 +18,31 @@ namespace LettuceFarm
 
 		public Entity(Texture2D texture, Vector2 position, int frameCount,float scale) : base(texture, frameCount)
 		{
-			this.position = position;
+			this.Position = position;
 			this.tintColor = Color.White;
 			this.scale = scale;
 		}
+
 		public Entity(Texture2D texture, Vector2 position, int frameCount ) : base(texture, frameCount)
 		{
-			this.position = position;
+			this.Position = position;
 			this.tintColor = Color.White;
 			this.scale = 1f;
 		}
 		public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
-			spriteBatch.Begin();
-			
-			spriteBatch.Draw(Texture, position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-			
-			spriteBatch.End();
+			if (IsActivateAnimator)
+            {
+				DrawAnimation(spriteBatch);
+			}else{
+				spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+			}
 		}
 
-		public abstract void Update(GameTime gameTime);
+		public virtual void Update(GameTime gameTime)
+        {
+			UpdateAnimation(gameTime);
+        }
 
 	}
 }

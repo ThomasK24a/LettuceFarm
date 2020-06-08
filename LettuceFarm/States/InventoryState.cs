@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using LettuceFarm.Controls;
 using System.Runtime.CompilerServices;
+using LettuceFarm.GameEntity;
 
 namespace LettuceFarm.States
 {
@@ -14,9 +15,9 @@ namespace LettuceFarm.States
 	{
 		
 		public List<IInventoryItem> Inventory;
-		public List<ISeed> seeds;
+		public List<SeedItem> seeds;
 
-		public ISeed selected = null;
+		public SeedItem selected = null;
 
 		public int Coins;
 
@@ -40,8 +41,10 @@ namespace LettuceFarm.States
 		public InventoryState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager) : base(game, graphicsDevice, contentManager)
 		{
 			Inventory = new List<IInventoryItem>();
+
 			seeds = new List<ISeed>();
 			this.Coins = 10000;
+
 
             font = _content.Load<SpriteFont>("defaultFont");
 
@@ -103,17 +106,17 @@ namespace LettuceFarm.States
 		}
 		void CreateInventory()
         {
-			Game.Crops.Wheat wheatItem = new Game.Crops.Wheat(wheatSprite, new Vector2(-100, -100));
-			Game.Crops.Wheat wheatSeed = new Game.Crops.Wheat(wheatSeedSprite, new Vector2(-100, -100));
+			CropItem wheatItem = new CropItem(wheatSprite, new Vector2(-100, -100), 600, 0, "wheat");
+			SeedItem wheatSeed = new SeedItem(wheatSeedSprite, new Vector2(-100, -100), 100, 0, "wheat");
 
-			Game.Crops.Lettuce lettuceItem = new Game.Crops.Lettuce(lettuceSprite, new Vector2(-100, -100));
-			Game.Crops.Lettuce lettuceSeed = new Game.Crops.Lettuce(lettuceSeedSprite, new Vector2(-100, -100));
+			CropItem lettuceItem = new CropItem(lettuceSprite, new Vector2(-100, -100), 250, 0, "lettuce");
+			SeedItem lettuceSeed = new SeedItem(lettuceSeedSprite, new Vector2(-100, -100), 50, 0, "lettuce");
 
-			Game.Crops.Corn cornItem = new Game.Crops.Corn(cornSprite, new Vector2(-100, -100));
-			Game.Crops.Corn cornSeed = new Game.Crops.Corn(cornSeedSprite, new Vector2(-100, -100));
+			CropItem cornItem = new CropItem(cornSprite, new Vector2(-100, -100), 50, 0, "corn");
+			SeedItem cornSeed = new SeedItem(cornSeedSprite, new Vector2(-100, -100), 5, 0, "corn");
 
-			Game.Livestocks.Cow cowItem = new Game.Livestocks.Cow(cowSprite, new Vector2(-100, -100));
-			Game.Livestocks.Chicken chickenItem = new Game.Livestocks.Chicken(chickenSprite, new Vector2(-100, -100));
+			LivestockItem cowItem = new LivestockItem(cowSprite, new Vector2(-100, -100), 750, 0, "cow");
+			LivestockItem chickenItem = new LivestockItem(chickenSprite, new Vector2(-100, -100), 300, 0, "chicken");
 
             Inventory.Add(wheatItem);
             Inventory.Add(lettuceItem);
@@ -135,7 +138,7 @@ namespace LettuceFarm.States
 			InventorySlot newSlot = new InventorySlot(_content, position, item, 1f);
             components.Add(newSlot);
         }
-		private void GenerateSeedSlot(Vector2 position, ISeed item)
+		private void GenerateSeedSlot(Vector2 position, SeedItem item)
 		{
 			InventorySlot newSlot = new InventorySlot(_content, position, item, 1f);
 

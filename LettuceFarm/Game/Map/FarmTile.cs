@@ -1,5 +1,8 @@
 ﻿using LettuceFarm.Game;
+using LettuceFarm.Game.Crops;
+using LettuceFarm.GameEntity;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SharpDX.Direct3D9;
@@ -25,6 +28,11 @@ namespace LettuceFarm.Controls
 
         private int Price;
 
+        private Crop plantedSeed;
+
+        private ContentManager content;
+
+
         private string Name;
         #endregion
 
@@ -40,7 +48,7 @@ namespace LettuceFarm.Controls
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height);
+                return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
             }
         }
         public Vector2 Size { get; internal set; }
@@ -51,11 +59,15 @@ namespace LettuceFarm.Controls
 
         #region Methods
 
-        public FarmTile(Texture2D texture, Vector2 position, int frameCount) : base(texture, position, frameCount)
+        public FarmTile(Texture2D texture, Vector2 position, int frameCount, ContentManager content) : base(texture, position, frameCount)
         {
             PenColour = Color.Black;
+
             this.Price = 250;
             this.Name = "soil";
+
+            this.content = content;
+
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -65,7 +77,11 @@ namespace LettuceFarm.Controls
             if (_isHovering)
                 colour = Color.Gray;
 
+           
             spriteBatch.Draw(Texture, Rectangle, colour);
+
+            if (plantedSeed != null)
+                plantedSeed.Draw(gameTime, spriteBatch);
 
         }
         void Hover()
@@ -92,19 +108,35 @@ namespace LettuceFarm.Controls
         {
             Hover();
 
+            if (plantedSeed != null)
+            {
+                plantedSeed.Update(gameTime);
+            }
+                
         }
 
-        public void addSeed(ISeed seed)
+        public void addSeed(SeedItem seed)
         {
-            if(seed.GetCount() > 0)
+            if(seed.GetCount() > 0 && plantedSeed == null)
             {
-                if (this.Texture != seed.GetTexture())
+                switch (seed.GetName())
                 {
-                    this.Texture = seed.GetTexture();
-                    seed.Plant();
+                    case "corn":
+                        plantedSeed = new Corn(content, Position);
+                        seed.Plant();
+                        break;
+                    case "lettuce":
+                        plantedSeed = new Lettuce(content, Position);
+                        seed.Plant();
+                        break;
+                    case "wheat":
+                        plantedSeed = new Wheat(content, Position);
+                        seed.Plant();
+                        break;
+                    default:
+                        break;
                 }
             }
-                     
         }
 
         public int GetPrice()

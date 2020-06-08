@@ -26,7 +26,7 @@ namespace LettuceFarm.Game
         {
 
          
-            this.position = position;
+            this.Position = position;
             this.item = item;
             this.scale = scale;
             this.inventory = inv;
@@ -36,7 +36,7 @@ namespace LettuceFarm.Game
 
             var buttonFont = content.Load<SpriteFont>("defaultFont");
 
-            buyButton = new Button(buttonTexture, buttonFont, this.position + new Vector2(-35, 120), frameCount)
+            buyButton = new Button(buttonTexture, buttonFont, this.Position + new Vector2(-35, 120), frameCount)
             {
                 Text = "-" + this.item.GetPrice().ToString() + " coins"
             };
@@ -67,8 +67,8 @@ namespace LettuceFarm.Game
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(slotTexture, position + new Vector2(-10, -11), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(item.GetTexture(), position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(slotTexture, Position + new Vector2(-10, -11), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(item.GetTexture(), Position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
      
             buyButton.Draw(gameTime, spriteBatch);       
         }

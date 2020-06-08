@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using LettuceFarm.Controls;
 using System.Collections.Generic;
-using LettuceFarm.Manager;
 using LettuceFarm.GameEntity;
 using LettuceFarm.Game;
 using Microsoft.Xna.Framework.Input;
@@ -14,15 +13,13 @@ namespace LettuceFarm.States
 {
 	public class GameState : State
 	{
-		List<Texture2D> chickenSprites;
-		List<Texture2D> cowSprites;
 
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
 		Texture2D farmTileTexture;
 		InventoryState inventory;
 		ShopState shop;
-		ISeed selectedSeed = null;
+		SeedItem selectedSeed = null;
 		List<FarmTile> farmTiles;
 		MouseState mouseState;
 		Texture2D slotTexture;
@@ -31,15 +28,19 @@ namespace LettuceFarm.States
 		public int chickenCount;
 		public int cowCount;
 		SpriteFont font;
+		float timer = 40f;
 
 		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory, MouseState mouseState, ShopState shop)
 			: base(game, graphicsDevice, content)
 		{
 			this.chickenCount = 0;
 			this.cowCount = 0;
+			this.timer =  24f;
 			font = _content.Load<SpriteFont>("defaultFont");
+
 			this.chickenSprites = new List<Texture2D>();
 			this.cowSprites = new List<Texture2D>();
+
 			this.mouseState = mouseState;
 			this.inventory = inventory;
 			this.shop = shop;
@@ -53,7 +54,7 @@ namespace LettuceFarm.States
 			littleChicken = content.Load<Texture2D>("chicken");
 
 			for (int i = 0; i < 9; i++)
-				farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1));
+				farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content));
 
 			for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
 			{
@@ -61,7 +62,7 @@ namespace LettuceFarm.States
 				{
 					if (i * 3 + j < farmTiles.Count)
                     {
-						farmTiles[i * 3 + j].position = new Vector2(j * 60, i * 55 + 40);
+						farmTiles[i * 3 + j].Position = new Vector2(j * 60, i * 55 + 40);
 						farmTiles[i * 3 + j].Click += farmTile_Click;
 					}	
 				}
@@ -73,8 +74,7 @@ namespace LettuceFarm.States
 				cowSprites.Add(littleCow);
 
 			}
-		
-			
+				
 
 			var menuButton = new Button(buttonTexture, buttonFont, new Vector2(5, 435), 1)
 			{
@@ -155,6 +155,20 @@ namespace LettuceFarm.States
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
 
+			this.timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+			spriteBatch.DrawString(font, "Timer: " + this.roundTime(), new Vector2(640, 15), Color.White);
+			if (timer <= 12f)
+			{
+				spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), new Color(50, 50, 125));
+				spriteBatch.DrawString(font, "Timer: " + this.roundTime(), new Vector2(640, 15), Color.White);
+			}
+
+			if(timer <= 0f)
+			{
+				spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
+				timerReset();
+			}
+
 			spriteBatch.Draw(slotTexture, new Vector2(195, 15), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 			spriteBatch.DrawString(font, "X " + chickenCount, new Vector2(320, 15), Color.White);
 			spriteBatch.DrawString(font, "X " + cowCount, new Vector2(320, 40), Color.White);
@@ -164,6 +178,7 @@ namespace LettuceFarm.States
 			spriteBatch.Draw(littleChicken, new Vector2(280, 5), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 			
 			spriteBatch.Draw(littleCow, new Vector2(280, 30), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
+
 			var pos = new Vector2(200,150);
 			var _pos = new Vector2(500,150);
 
@@ -218,7 +233,7 @@ namespace LettuceFarm.States
 		
 		void PrepareSeed()
 		{
-			foreach (ISeed seeds in inventory.seeds)
+			foreach (SeedItem seeds in inventory.seeds)
             {
 				if (seeds.IsSelected() == false)
                 {
@@ -227,7 +242,7 @@ namespace LettuceFarm.States
 					
 			}
 				
-			foreach (ISeed seeds in inventory.seeds)
+			foreach (SeedItem seeds in inventory.seeds)
             {
 				if (seeds.IsSelected() && (seeds.GetCount() > 0))
 				{
@@ -249,7 +264,6 @@ namespace LettuceFarm.States
 					this.cowCount = liveStock.GetCount();
 				
 			}
-            
 				
 
 		}
@@ -276,6 +290,19 @@ namespace LettuceFarm.States
 			PrepareLiveStock();
 		}
 
+		//reset time
+		public void timerReset()
+		{
+			this.timer = 24f;
+		}
+
+		//round to two decimal places
+		public float roundTime()
+		{
+			float timeRound = (float)Math.Round(this.timer * 100f) / 100f;
+
+			return timeRound;
+		}
 		private void shopButton_Click(object sender, EventArgs e)
 		{
 			_global.ChangeState(_global.shop);

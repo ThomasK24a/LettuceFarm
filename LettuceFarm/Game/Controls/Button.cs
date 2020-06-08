@@ -35,7 +35,7 @@ namespace LettuceFarm.Controls
         {
             get
             {
-                return new Rectangle((int) position.X, (int) position.Y, Texture.Width, Texture.Height);
+                return new Rectangle((int) Position.X, (int) Position.Y, Texture.Width, Texture.Height);
             }
         }
 
