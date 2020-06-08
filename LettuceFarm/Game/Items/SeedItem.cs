@@ -88,5 +88,14 @@ namespace LettuceFarm.GameEntity
         {
             throw new NotImplementedException();
         }
-    }
+
+		public void Plant()
+		{
+			if(this.count > 0)
+            {
+				this.count -= 1;
+			}
+			
+		}
+	}
 }

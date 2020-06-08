@@ -30,10 +30,5 @@ namespace LettuceFarm.GameEntity
         {
 			return this.name;
         }
-
-        public void Plant()
-        {
-			this.count -= 1;
-        }
     }
 }
