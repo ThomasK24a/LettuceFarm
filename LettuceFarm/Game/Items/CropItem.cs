@@ -54,7 +54,6 @@ namespace LettuceFarm.GameEntity
 			
 		}
 
-	
         public void SetCount()
         {
 			this.count +=1 ;
@@ -84,9 +83,5 @@ namespace LettuceFarm.GameEntity
 			this.selected = select;
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using LettuceFarm.Controls;
 using System.Collections.Generic;
-using LettuceFarm.Manager;
 using LettuceFarm.GameEntity;
 using LettuceFarm.Game;
 using Microsoft.Xna.Framework.Input;
@@ -59,7 +58,7 @@ namespace LettuceFarm.States
 				{
 					if (i * 3 + j < farmTiles.Count)
                     {
-						farmTiles[i * 3 + j].position = new Vector2(j * 60, i * 55 + 40);
+						farmTiles[i * 3 + j].Position = new Vector2(j * 60, i * 55 + 40);
 						farmTiles[i * 3 + j].Click += farmTile_Click;
 					}
 						
@@ -165,16 +164,13 @@ namespace LettuceFarm.States
 			var pos = new Vector2(150,100);
 
             if (this.chickenCount > 0) 
-
-
             {
 				 for(int i = 0; i < this.chickenCount; i++)
 				spriteBatch.Draw(chickenSprites[i], i * pos + new Vector2(80, 50), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
 			}
+
 			if (this.cowCount > 0)
-
-
 			{
 				for (int i = 0; i < this.chickenCount; i++)
 					spriteBatch.Draw(cowSprites[i], i * pos + new Vector2(180, 50), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);

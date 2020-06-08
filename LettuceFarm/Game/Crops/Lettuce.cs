@@ -10,20 +10,9 @@ namespace LettuceFarm.Game.Crops
 {
 	class Lettuce : Crop
 	{
-
 		public Lettuce(ContentManager content, Vector2 position) : base(content.Load<Texture2D>("lettuceCrop"), position, "lettuce", 5)
 		{
-			
-		}
 
-		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override void Update(GameTime gameTime)
-		{
-			//throw new NotImplementedException();
 		}
 	}
 }

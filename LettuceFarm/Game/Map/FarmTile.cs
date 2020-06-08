@@ -44,7 +44,7 @@ namespace LettuceFarm.Controls
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height);
+                return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
             }
         }
         public Vector2 Size { get; internal set; }
@@ -72,7 +72,7 @@ namespace LettuceFarm.Controls
             spriteBatch.Draw(Texture, Rectangle, colour);
 
             if (plantedSeed != null)
-                spriteBatch.Draw(plantedSeed.GetTexture(), Rectangle, colour);
+                plantedSeed.Draw(gameTime, spriteBatch);
 
         }
         void Hover()
@@ -99,6 +99,11 @@ namespace LettuceFarm.Controls
         {
             Hover();
 
+            if (plantedSeed != null)
+            {
+                plantedSeed.Update(gameTime);
+            }
+                
         }
 
         public void addSeed(SeedItem seed)
@@ -108,15 +113,15 @@ namespace LettuceFarm.Controls
                 switch (seed.GetName())
                 {
                     case "corn":
-                        plantedSeed = new Corn(content, position);
+                        plantedSeed = new Corn(content, Position);
                         seed.Plant();
                         break;
                     case "lettuce":
-                        plantedSeed = new Lettuce(content, position);
+                        plantedSeed = new Lettuce(content, Position);
                         seed.Plant();
                         break;
                     case "wheat":
-                        plantedSeed = new Wheat(content, position);
+                        plantedSeed = new Wheat(content, Position);
                         seed.Plant();
                         break;
                     default:
