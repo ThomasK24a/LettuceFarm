@@ -386,6 +386,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/cow_walk_up.png
 
+#begin Sprites/land.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/land.png
+
 #begin Sprites/Lettuce-icon.png
 /importer:TextureImporter
 /processor:TextureProcessor

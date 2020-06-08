@@ -9,7 +9,7 @@ using System.Text;
 
 namespace LettuceFarm.Controls
 {
-    public class FarmTile : Entity
+    public class FarmTile : Entity, IInventoryItem
     {
         #region Fields
 
@@ -23,7 +23,9 @@ namespace LettuceFarm.Controls
 
         private int posY;
 
+        private int Price;
 
+        private string Name;
         #endregion
 
         #region Properties
@@ -52,6 +54,8 @@ namespace LettuceFarm.Controls
         public FarmTile(Texture2D texture, Vector2 position, int frameCount) : base(texture, position, frameCount)
         {
             PenColour = Color.Black;
+            this.Price = 250;
+            this.Name = "soil";
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -101,6 +105,41 @@ namespace LettuceFarm.Controls
                 }
             }
                      
+        }
+
+        public int GetPrice()
+        {
+            return this.Price;
+        }
+
+        public int GetCount()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Texture2D GetTexture()
+        {
+            return this.Texture;
+        }
+
+        public void SetCount()
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void SetPrice(int price)
+        {
+            ///throw new NotImplementedException();
+        }
+
+        public void Buy()
+        {
+            //throw new NotImplementedException();
+        }
+
+        public string GetName()
+        {
+            return this.Name;
         }
 
         #endregion

@@ -38,6 +38,7 @@ namespace LettuceFarm.States
 			this.cowCount = 0;
 			font = _content.Load<SpriteFont>("defaultFont");
 			this.chickenSprites = new List<Texture2D>();
+			this.cowSprites = new List<Texture2D>();
 			this.mouseState = mouseState;
 			this.inventory = inventory;
 			this.shop = shop;
@@ -61,17 +62,17 @@ namespace LettuceFarm.States
                     {
 						farmTiles[i * 3 + j].position = new Vector2(j * 60, i * 55 + 40);
 						farmTiles[i * 3 + j].Click += farmTile_Click;
-					}
-						
-					
+					}	
 				}
 			}
 
 			for(int i = 0; i<9; i++)
             {
 				chickenSprites.Add(littleChicken);
-				//cowSprites.Add(littleCow);
-            }
+				cowSprites.Add(littleCow);
+
+			}
+		
 			
 
 			var menuButton = new Button(buttonTexture, buttonFont, new Vector2(5, 435), 1)
@@ -162,27 +163,42 @@ namespace LettuceFarm.States
 			spriteBatch.Draw(littleChicken, new Vector2(280, 5), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 			
 			spriteBatch.Draw(littleCow, new Vector2(280, 30), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
-			var pos = new Vector2(150,100);
+			var pos = new Vector2(200,150);
+			var _pos = new Vector2(500,150);
 
             if (this.chickenCount > 0) 
-
-
             {
-				 for(int i = 0; i < this.chickenCount; i++)
-				spriteBatch.Draw(chickenSprites[i], i * pos + new Vector2(80, 50), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-
+				for (int i = 0; i < (int)Math.Ceiling(((float)chickenSprites.Count / 3)); i++)
+				{
+					for (int j = 0; j < 3; j++)
+					{
+						if (i * 3 + j < chickenCount)
+						{
+							spriteBatch.Draw(chickenSprites[i * 3 + j], _pos + new Vector2(j * 90, i * 80 + 40), null, Color.White, 0f, Vector2.Zero, .45f, SpriteEffects.None, 0f);
+			
+						}
+					}
+				}
 			}
 			if (this.cowCount > 0)
-
-
 			{
-				for (int i = 0; i < this.chickenCount; i++)
-					spriteBatch.Draw(cowSprites[i], i * pos + new Vector2(180, 50), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+				//for (int i = 0; i < this.cowCount; i++)
+				//	spriteBatch.Draw(cowSprites[i], i * pos + new Vector2(185, 50), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+				for (int i = 0; i < (int)Math.Ceiling(((float)cowSprites.Count / 3)); i++)
+				{
+					for (int j = 0; j < 3; j++)
+					{
+						if (i * 3 + j < cowCount)
+						{
+							spriteBatch.Draw(cowSprites[i * 3 + j], pos + new Vector2(j * 90, i * 80 + 40), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
+						}
+					}
+				}
 			}
 
-			foreach (var component in components)
-			component.Draw(gameTime, spriteBatch);
+			//foreach (var component in components)
+			//component.Draw(gameTime, spriteBatch);
 
 			if (this.selectedSeed != null)
 			{

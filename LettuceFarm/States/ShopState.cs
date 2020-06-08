@@ -75,14 +75,21 @@ namespace LettuceFarm.States
 			Game.Crops.Wheat wheatSeeds = new Game.Crops.Wheat(_content.Load<Texture2D>("seeds_wheat"), new Vector2(-100, -100));
 			Game.Crops.Lettuce lettuceSeeds = new Game.Crops.Lettuce(_content.Load<Texture2D>("seeds_lettuce"), new Vector2(-100, -100));
 			Game.Crops.Corn cornSeeds = new Game.Crops.Corn(_content.Load<Texture2D>("seeds_corn"), new Vector2(-100, -100));
+
 			invList.Add(wheatSeeds);
 			invList.Add(lettuceSeeds);
 			invList.Add(cornSeeds);
 
 			Game.Livestocks.Cow cowItem = new Game.Livestocks.Cow(_content.Load<Texture2D>("cow"), new Vector2(-100, -100));
 			Game.Livestocks.Chicken chickenItem = new Game.Livestocks.Chicken(_content.Load<Texture2D>("chicken"), new Vector2(-100, -100));
+
 			invList.Add(cowItem);
 			invList.Add(chickenItem);
+
+			FarmTile farmTile = new FarmTile(_content.Load<Texture2D>("Sprites/land"), new Vector2(-100,-100),1);
+
+			invList.Add(farmTile);
+			
 
 		}
 

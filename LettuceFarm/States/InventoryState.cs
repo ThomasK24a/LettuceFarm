@@ -41,7 +41,7 @@ namespace LettuceFarm.States
 		{
 			Inventory = new List<IInventoryItem>();
 			seeds = new List<ISeed>();
-			this.Coins = 1000;
+			this.Coins = 10000;
 
             font = _content.Load<SpriteFont>("defaultFont");
 
@@ -66,11 +66,8 @@ namespace LettuceFarm.States
             {
                 for (int j = 0; j < 5; j++)
                 {
-
                     if (i * 5 + j < Inventory.Count)
                         GenerateSlot(new Vector2(j * 100 + 163, i * 100 + 50), Inventory[i * 3 + j]);
-
-
                 }
             }
 
@@ -97,7 +94,7 @@ namespace LettuceFarm.States
 		{
 			spriteBatch.Begin();
 			spriteBatch.Draw(_content.Load<Texture2D>("storeBackground"), new Vector2(25, 20), Color.White);
-			spriteBatch.DrawString(font, "Coins " + Coins,  new Vector2(80, 20), Color.White);
+			spriteBatch.DrawString(font, "Coins " + Coins,  new Vector2(40, 40), Color.White);
 			foreach (Entity component in components)
 			{
 				component.Draw(gameTime, spriteBatch);
