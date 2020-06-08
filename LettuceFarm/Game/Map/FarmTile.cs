@@ -103,19 +103,25 @@ namespace LettuceFarm.Controls
 
         public void addSeed(SeedItem seed)
         {
-            switch (seed.GetName())
+            if(seed.GetCount() > 0 && plantedSeed == null)
             {
-                case "corn":
-                    plantedSeed = new Corn(content, position);
-                    break;
-                case "lettuce":
-                    plantedSeed = new Lettuce(content, position);
-                    break;
-                case "wheat":
-                    plantedSeed = new Wheat(content, position);
-                    break;
-                default:
-                    break;
+                switch (seed.GetName())
+                {
+                    case "corn":
+                        plantedSeed = new Corn(content, position);
+                        seed.Plant();
+                        break;
+                    case "lettuce":
+                        plantedSeed = new Lettuce(content, position);
+                        seed.Plant();
+                        break;
+                    case "wheat":
+                        plantedSeed = new Wheat(content, position);
+                        seed.Plant();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
