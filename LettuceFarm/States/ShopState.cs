@@ -86,9 +86,7 @@ namespace LettuceFarm.States
 
 
 
-			FarmTile farmTile = new FarmTile(_content.Load<Texture2D>("Sprites/land"), new Vector2(-100,-100),1);
-
-			invList.Add(farmTile);
+			
 			
 
 		}

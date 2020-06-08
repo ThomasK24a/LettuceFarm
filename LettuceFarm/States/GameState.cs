@@ -25,6 +25,8 @@ namespace LettuceFarm.States
 		Texture2D slotTexture;
 		Texture2D littleCow;
 		Texture2D littleChicken;
+		List<Texture2D> chickenSprites;
+		List<Texture2D> cowSprites;
 		public int chickenCount;
 		public int cowCount;
 		SpriteFont font;

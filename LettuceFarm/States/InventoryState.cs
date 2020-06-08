@@ -42,7 +42,7 @@ namespace LettuceFarm.States
 		{
 			Inventory = new List<IInventoryItem>();
 
-			seeds = new List<ISeed>();
+			seeds = new List<SeedItem>();
 			this.Coins = 10000;
 
 
