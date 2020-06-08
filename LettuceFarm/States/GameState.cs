@@ -8,6 +8,7 @@ using LettuceFarm.Manager;
 using LettuceFarm.GameEntity;
 using LettuceFarm.Game;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Sprites;
 
 namespace LettuceFarm.States
 {
@@ -197,10 +198,10 @@ namespace LettuceFarm.States
 				}
 			}
 
-			//foreach (var component in components)
-			//component.Draw(gameTime, spriteBatch);
+            foreach (var component in components)
+                component.Draw(gameTime, spriteBatch);
 
-			if (this.selectedSeed != null)
+            if (this.selectedSeed != null)
 			{
 
 				spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), null, Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
@@ -214,6 +215,7 @@ namespace LettuceFarm.States
 		{
 			//Implement an update if need arises later
 		}
+		
 		void PrepareSeed()
 		{
 			foreach (ISeed seeds in inventory.seeds)
