@@ -177,9 +177,6 @@ namespace LettuceFarm.States
 			spriteBatch.Begin();
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
-			spriteBatch.DrawString(font, "Temperature:" + Temp.ToString(), new Vector2(640, 35), Color.White);
-			spriteBatch.DrawString(font, "Humidity:" + Hum.ToString(), new Vector2(640, 55), Color.White);
-			spriteBatch.DrawString(font, "Sunshine:" + Sun.ToString(), new Vector2(640, 75), Color.White);
 
 			this.timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 			spriteBatch.DrawString(font, "Timer: " + this.roundTime(), new Vector2(640, 15), Color.White);
@@ -189,11 +186,17 @@ namespace LettuceFarm.States
 				spriteBatch.DrawString(font, "Timer: " + this.roundTime(), new Vector2(640, 15), Color.White);
 			}
 
-			if(timer <= 0f)
+			if (timer <= 0f)
 			{
 				spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
 				timerReset();
 			}
+
+			spriteBatch.DrawString(font, "Temperature:" + Temp.ToString(), new Vector2(640, 35), Color.White);
+			spriteBatch.DrawString(font, "Humidity:" + Hum.ToString(), new Vector2(640, 55), Color.White);
+			spriteBatch.DrawString(font, "Sunshine:" + Sun.ToString(), new Vector2(640, 75), Color.White);
+
+			
 
 			spriteBatch.Draw(slotTexture, new Vector2(195, 15), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 			spriteBatch.DrawString(font, "X " + chickenCount, new Vector2(320, 15), Color.White);
