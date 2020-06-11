@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using LettuceFarm.Controls;
 using LettuceFarm.GameEntity;
+using LettuceFarm.Game.Items;
 
 namespace LettuceFarm.States
 {
@@ -84,8 +85,9 @@ namespace LettuceFarm.States
 			this.invList.Add(cowItem);
 			this.invList.Add(chickenItem);
 
+			TileItem tileItem = new TileItem(_content.Load<Texture2D>("Sprites/land"), new Vector2(), 10000, 0, "farmslot");
 
-
+			this.invList.Add(tileItem);
 			
 			
 

@@ -22,6 +22,7 @@ namespace LettuceFarm.States
 		private Weather weather;
 		SeedItem selectedSeed = null;
 		List<FarmTile> farmTiles;
+		List<FarmTile> Tiles;
 		MouseState mouseState;
 		Texture2D slotTexture;
 		Texture2D littleCow;
@@ -75,6 +76,8 @@ namespace LettuceFarm.States
 				}
 			}
 
+
+
 			for(int i = 0; i<9; i++)
             {
 				chickenSprites.Add(littleChicken);
@@ -106,51 +109,62 @@ namespace LettuceFarm.States
 			
 			components = new List<Entity>()
 			{
-
-
-
-			farmTiles[0],
-			farmTiles[1],
-			farmTiles[2],
-			farmTiles[3],
-			farmTiles[4],	
-			farmTiles[5],
-			farmTiles[6],	
-			farmTiles[7],
-            farmTiles[8],
-
-			menuButton,
+				farmTiles[0],
+				farmTiles[1],
+				farmTiles[2],
+				farmTiles[3],
+				farmTiles[4],	
+				farmTiles[5],
+				farmTiles[6],	
+				farmTiles[7],
+				farmTiles[8],
+				menuButton,
 				inventoryButton,
 				shopButton,
-
 			};
+		
 
-            //_sprites = new List<ChickenSprite>()
-            //{
-            //    new ChickenSprite(new Dictionary<string, Animation>()
-            //    {
-            //        {
-            //            "WalkUp", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_up"), 4)
-            //        },
+			void BuyLand()
+            {
+				for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					if (i * 3 + j < farmTiles.Count)
+                    {
+						farmTiles[i * 3 + j].Position = new Vector2(j * 60, i * 55 + 40);
+						farmTiles[i * 3 + j].Click += farmTile_Click;
+					}	
+				}
+			}
+            }
 
-            //            {
-            //                "WalkDown", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_down"), 4)
-            //            },
+			//_sprites = new List<ChickenSprite>()
+			//{
+			//    new ChickenSprite(new Dictionary<string, Animation>()
+			//    {
+			//        {
+			//            "WalkUp", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_up"), 4)
+			//        },
 
-            //            {
-            //                "WalkLeft", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_left"), 4)
-            //            },
+			//            {
+			//                "WalkDown", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_down"), 4)
+			//            },
 
-            //            {
-            //                "WalkRight", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_right"), 4)
-            //            },
+			//            {
+			//                "WalkLeft", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_left"), 4)
+			//            },
 
-            //        })
-            //        {
-            //            Position = new Vector2(100, 100),
-            //        },
-            //    };
-        }
+			//            {
+			//                "WalkRight", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_right"), 4)
+			//            },
+
+			//        })
+			//        {
+			//            Position = new Vector2(100, 100),
+			//        },
+			//    };
+		}
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
@@ -291,8 +305,7 @@ namespace LettuceFarm.States
 	
 		public override void Update(GameTime gameTime)
 		{
-			
-			
+
 			foreach (var component in components)
             {
 				component.Update(gameTime);

@@ -12,7 +12,7 @@ using System.Text;
 
 namespace LettuceFarm.Controls
 {
-    public class FarmTile : Entity, IInventoryItem
+    public class FarmTile : Entity
     {
         #region Fields
 
@@ -138,43 +138,7 @@ namespace LettuceFarm.Controls
                 }
             }
         }
-
-        public int GetPrice()
-        {
-            return this.Price;
-        }
-
-        public int GetCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Texture2D GetTexture()
-        {
-            return this.Texture;
-        }
-
-        public void SetCount()
-        {
-            //throw new NotImplementedException();
-        }
-
-        public void SetPrice(int price)
-        {
-            ///throw new NotImplementedException();
-        }
-
-        public void Buy()
-        {
-            //throw new NotImplementedException();
-        }
-
-        public string GetName()
-        {
-            return this.Name;
-        }
-
-        #endregion
+            #endregion
     }
 }
 
