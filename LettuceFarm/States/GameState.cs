@@ -13,12 +13,13 @@ namespace LettuceFarm.States
 {
 	public class GameState : State
 	{
-
+		Texture2D rainTexture;
 		Texture2D buttonTexture;
 		SpriteFont buttonFont;
 		Texture2D farmTileTexture;
 		InventoryState inventory;
 		ShopState shop;
+		private Weather weather;
 		SeedItem selectedSeed = null;
 		List<FarmTile> farmTiles;
 		MouseState mouseState;
@@ -46,6 +47,10 @@ namespace LettuceFarm.States
 			this.mouseState = mouseState;
 			this.inventory = inventory;
 			this.shop = shop;
+
+			this.weather = new Weather();
+
+			this.rainTexture = content.Load<Texture2D>("rain");
 			this.buttonTexture = content.Load<Texture2D>("Button");
 			buttonFont = content.Load<SpriteFont>("defaultFont");
 			this.farmTileTexture = content.Load<Texture2D>("dirt");
@@ -151,11 +156,16 @@ namespace LettuceFarm.States
 		{
 			
 			Texture2D grass = _content.Load<Texture2D>("Grass");
-			
+			int Temp = weather.randomSun();
+			int Hum = weather.randomHumidity();
+			int Sun = weather.randomSun();
 
 			spriteBatch.Begin();
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
+			spriteBatch.DrawString(font, "Temperature:" + Temp.ToString(), new Vector2(640, 35), Color.White);
+			spriteBatch.DrawString(font, "Humidity:" + Hum.ToString(), new Vector2(640, 55), Color.White);
+			spriteBatch.DrawString(font, "Sunshine:" + Sun.ToString(), new Vector2(640, 75), Color.White);
 
 			this.timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 			spriteBatch.DrawString(font, "Timer: " + this.roundTime(), new Vector2(640, 15), Color.White);
