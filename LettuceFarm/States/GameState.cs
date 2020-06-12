@@ -247,39 +247,38 @@ namespace LettuceFarm.States
 			
 			spriteBatch.Draw(littleCow, new Vector2(280, 30), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
-			var pos = new Vector2(200,150);
-			var _pos = new Vector2(500,150);
+			//var pos = new Vector2(200,150);
+			//var _pos = new Vector2(500,150);
 
-            if (this.chickenCount > 0) 
-            {
-				for (int i = 0; i < (int)Math.Ceiling(((float)chickenSprites.Count / 3)); i++)
-				{
-					for (int j = 0; j < 3; j++)
-					{
-						if (i * 3 + j < chickenCount)
-						{
-							spriteBatch.Draw(chickenSprites[i * 3 + j], _pos + new Vector2(j * 90, i * 80 + 40), null, Color.White, 0f, Vector2.Zero, .45f, SpriteEffects.None, 0f);
+   //         if (this.chickenCount > 0) 
+   //         {
+			//	for (int i = 0; i < (int)Math.Ceiling(((float)chickenSprites.Count / 3)); i++)
+			//	{
+			//		for (int j = 0; j < 3; j++)
+			//		{
+			//			if (i * 3 + j < chickenCount)
+			//			{
+			//				spriteBatch.Draw(chickenSprites[i * 3 + j], _pos + new Vector2(j * 90, i * 80 + 40), null, Color.White, 0f, Vector2.Zero, .45f, SpriteEffects.None, 0f);
 			
-						}
-					}
-				}
-			}
-			if (this.cowCount > 0)
-			{
-				//for (int i = 0; i < this.cowCount; i++)
-				//	spriteBatch.Draw(cowSprites[i], i * pos + new Vector2(185, 50), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-				for (int i = 0; i < (int)Math.Ceiling(((float)cowSprites.Count / 3)); i++)
-				{
-					for (int j = 0; j < 3; j++)
-					{
-						if (i * 3 + j < cowCount)
-						{
-							spriteBatch.Draw(cowSprites[i * 3 + j], pos + new Vector2(j * 90, i * 80 + 40), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+			//			}
+			//		}
+			//	}
+			//}
+			//if (this.cowCount > 0)
+			//{
+	
+			//	for (int i = 0; i < (int)Math.Ceiling(((float)cowSprites.Count / 3)); i++)
+			//	{
+			//		for (int j = 0; j < 3; j++)
+			//		{
+			//			if (i * 3 + j < cowCount)
+			//			{
+			//				spriteBatch.Draw(cowSprites[i * 3 + j], pos + new Vector2(j * 90, i * 80 + 40), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
-						}
-					}
-				}
-			}
+			//			}
+			//		}
+			//	}
+			//}
 
             foreach (var component in components)
                 component.Draw(gameTime, spriteBatch);
@@ -320,7 +319,6 @@ namespace LettuceFarm.States
 
             
 		}
-
 		public void AddAnimal(LivestockItem animal)
 
         {
@@ -336,8 +334,6 @@ namespace LettuceFarm.States
 			}
 
 		}
-
-
 		void MouseMethod()
 		{
 			if (Mouse.GetState().RightButton == ButtonState.Pressed && selectedSeed != null)
@@ -346,7 +342,16 @@ namespace LettuceFarm.States
 				selectedSeed = null;
 			}
 		}
-	
+		void PrepareLand()
+        {
+			foreach (IInventoryItem item in shop.invList)
+			{
+				if (item.GetName() == "farmslot" && (item.GetCount() > 1))
+				{
+					BuyLand();
+				}
+			}
+		}
 		public override void Update(GameTime gameTime)
 		{
 
@@ -354,13 +359,7 @@ namespace LettuceFarm.States
             {
 				component.Update(gameTime);
 			}
-			foreach (IInventoryItem item in shop.invList)
-            {
-				if(item.GetName() == "farmslot" && (item.GetCount() > 1))
-                {
-					BuyLand();
-                }
-            }
+			PrepareLand();
 			MouseMethod();
 			PrepareSeed();
 
