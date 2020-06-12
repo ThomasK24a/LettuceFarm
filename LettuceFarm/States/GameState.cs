@@ -28,6 +28,7 @@ namespace LettuceFarm.States
 		Texture2D slotTexture;
 		Texture2D littleCow;
 		Texture2D littleChicken;
+		Texture2D walkingChicken;
 		List<Texture2D> chickenSprites;
 		List<Texture2D> cowSprites;
 		public int chickenCount;
@@ -61,6 +62,7 @@ namespace LettuceFarm.States
 
 			littleCow = content.Load<Texture2D>("cow");
 			littleChicken = content.Load<Texture2D>("chicken");
+			walkingChicken = content.Load<Texture2D>("Sprites/chicken_walk_left");
 
 			for (int i = 0; i < 9; i++)
 				farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content));
@@ -221,7 +223,6 @@ namespace LettuceFarm.States
 						if (i * 3 + j < chickenCount)
 						{
 							spriteBatch.Draw(chickenSprites[i * 3 + j], _pos + new Vector2(j * 90, i * 80 + 40), null, Color.White, 0f, Vector2.Zero, .45f, SpriteEffects.None, 0f);
-			
 						}
 					}
 				}
@@ -282,16 +283,20 @@ namespace LettuceFarm.States
 
 		}
 
+		Vector2 chickenPosition;
 		public void AddAnimal(LivestockItem animal)
         {
+			
 			if(animal.GetName() == "chicken")
             {
-				components.Add(new Chicken(littleChicken, new Vector2(100, 100)));
+				
+				for(int i = 0; i< 3; i++)
+				components.Add(new Chicken(walkingChicken, chickenPosition = new Vector2(i * 200, 200)));
             }
 
 			if (animal.GetName() == "cow")
 			{
-				components.Add(new Cow(littleCow, new Vector2(100, 100)));
+				components.Add(new Cow(littleCow, new Vector2(200, 200)));
 			}
 		}
 
@@ -307,13 +312,55 @@ namespace LettuceFarm.States
 	
 		public override void Update(GameTime gameTime)
 		{
-
 			foreach (var component in components)
             {
 				component.Update(gameTime);
 			}
 			MouseMethod();
 			PrepareSeed();
+
+			int minChangTime = 10;
+			int maxChangeTime = 100;
+			int directionTimer;
+			Random random = new Random();
+			directionTimer = random.Next(minChangTime, maxChangeTime);
+			int nextIndex = random.Next(0, 5);
+
+			directionTimer -= gameTime.ElapsedGameTime.Milliseconds;
+			if (directionTimer <= 0)
+			{
+				switch (nextIndex)
+				{
+					case 1:
+						chickenPosition.X++;
+						break;
+					case 2:
+						chickenPosition.X--;
+						break;
+					case 3:
+						chickenPosition.X++;
+						break;
+					case 4:
+						chickenPosition.X--;
+						break;
+				}
+				switch (nextIndex)
+				{
+					case 1:
+						chickenPosition.Y++;
+						break;
+					case 2:
+						chickenPosition.Y--;
+						break;
+					case 3:
+						chickenPosition.Y--;
+						break;
+					case 4:
+						chickenPosition.Y++;
+						break;
+				}
+			}
+			base.Update(gameTime);
 		}
 
 		//reset time
