@@ -8,6 +8,7 @@ using LettuceFarm.GameEntity;
 using LettuceFarm.Game;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Sprites;
+using LettuceFarm.Game.Livestocks;
 
 namespace LettuceFarm.States
 {
@@ -139,7 +140,22 @@ namespace LettuceFarm.States
 			};
 		
 
-			 
+
+			void BuyLand()
+            {
+				for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
+				{
+					for (int j = 0; j < 3; j++)
+					{
+						if (i * 3 + j < farmTiles.Count)
+						{
+							farmTiles[i * 3 + j].Position = new Vector2(j * 60, i * 55 + 40);
+							farmTiles[i * 3 + j].Click += farmTile_Click;
+						}	
+					}
+				}
+            }
+
 
 			//_sprites = new List<ChickenSprite>()
 			//{
@@ -304,18 +320,23 @@ namespace LettuceFarm.States
 
             
 		}
-		void PrepareLiveStock()
-        {
-			foreach (IInventoryItem liveStock in shop.invList)
-            {
-				if (liveStock.GetName() == "chicken")
-					this.chickenCount = liveStock.GetCount();
 
-				if (liveStock.GetName() == "cow")
-					this.cowCount = liveStock.GetCount();
-				
-			}	
+		public void AddAnimal(LivestockItem animal)
+
+        {
+			if(animal.GetName() == "chicken")
+            {
+
+				components.Add(new Chicken(littleChicken, new Vector2(100, 100)));
+            }
+
+			if (animal.GetName() == "cow")
+			{
+				components.Add(new Cow(littleCow, new Vector2(100, 100)));
+			}
+
 		}
+
 
 		void MouseMethod()
 		{
@@ -342,7 +363,6 @@ namespace LettuceFarm.States
             }
 			MouseMethod();
 			PrepareSeed();
-			PrepareLiveStock();
 
 		}
 
