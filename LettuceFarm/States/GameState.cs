@@ -249,6 +249,7 @@ namespace LettuceFarm.States
 			
 			spriteBatch.Draw(littleCow, new Vector2(280, 30), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
+
 			var pos = new Vector2(200,150);
 			var _pos = new Vector2(500,150);
 
@@ -281,7 +282,7 @@ namespace LettuceFarm.States
 					}
 				}
 			}
-
+			
             foreach (var component in components)
                 component.Draw(gameTime, spriteBatch);
 
@@ -342,8 +343,6 @@ namespace LettuceFarm.States
 			}
 
 		}
-
-
 		void MouseMethod()
 		{
 			if (Mouse.GetState().RightButton == ButtonState.Pressed && selectedSeed != null)
@@ -352,20 +351,23 @@ namespace LettuceFarm.States
 				selectedSeed = null;
 			}
 		}
-	
+		void PrepareLand()
+        {
+			foreach (IInventoryItem item in shop.invList)
+			{
+				if (item.GetName() == "farmslot" && (item.GetCount() > 1))
+				{
+					BuyLand();
+				}
+			}
+		}
 		public override void Update(GameTime gameTime)
 		{
 			foreach (var component in components)
             {
 				component.Update(gameTime);
 			}
-			foreach (IInventoryItem item in shop.invList)
-            {
-				if(item.GetName() == "farmslot" && (item.GetCount() > 1))
-                {
-					BuyLand();
-                }
-            }
+			PrepareLand();
 			MouseMethod();
 			PrepareSeed();
 

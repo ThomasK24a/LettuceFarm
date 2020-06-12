@@ -62,9 +62,14 @@ namespace LettuceFarm.Game
             }else if(this.item.GetName() == "chicken" )
             {
                 shop.addItem(item);
-            }else if(this.item.GetName() == "cow")
+                inventory.Coins -= item.GetPrice();
+
+            }
+            else if(this.item.GetName() == "cow")
             {
                 shop.addItem(item);
+                inventory.Coins -= item.GetPrice();
+
             }
             else if(inventory.Coins >= this.item.GetPrice() && this.item.GetCount() < 9 )
             {
