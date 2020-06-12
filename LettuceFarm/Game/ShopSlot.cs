@@ -19,13 +19,15 @@ namespace LettuceFarm.Game
         Button buyButton;
         IInventoryItem item;
         InventoryState inventory;
+        ShopState shop;
         Texture2D slotTexture;
         Texture2D seedTexture;
+      
 
-        public ShopSlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale, InventoryState inv) : base(item.GetTexture(), position, 1)
+        public ShopSlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale, InventoryState inv, ShopState shop) : base(item.GetTexture(), position, 1)
         {
 
-         
+            this.shop = shop;
             this.Position = position;
             this.item = item;
             this.scale = scale;
@@ -56,6 +58,12 @@ namespace LettuceFarm.Game
                         inventory.seeds[i].SetCount();
                         inventory.Coins -= inventory.seeds[i].GetPrice();
                     }
+            }else if(this.item.GetName() == "chicken" )
+            {
+                shop.addItem(item);
+            }else if(this.item.GetName() == "cow")
+            {
+                shop.addItem(item);
             }
             else if(inventory.Coins >= this.item.GetPrice() && this.item.GetCount() < 9 )
             {

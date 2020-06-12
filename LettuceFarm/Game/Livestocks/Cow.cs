@@ -14,15 +14,5 @@ namespace LettuceFarm.Game.Livestocks
 
 		}
 
-		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-		{
-			throw new NotImplementedException();
-		}
-
-
-		public override void Update(GameTime gameTime)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

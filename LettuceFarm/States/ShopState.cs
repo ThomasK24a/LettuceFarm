@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using LettuceFarm.Controls;
 using LettuceFarm.GameEntity;
 using LettuceFarm.Game.Items;
+using LettuceFarm.Game.Livestocks;
 
 namespace LettuceFarm.States
 {
@@ -65,7 +66,7 @@ namespace LettuceFarm.States
 
 		private void GenerateSlot(Vector2 position, IInventoryItem item)
 		{
-			ShopSlot newSlot = new ShopSlot(_content, position, item, 1, 1f, this.inventory);
+			ShopSlot newSlot = new ShopSlot(_content, position, item, 1, 1f, this.inventory, this);
 			components.Add(newSlot);
 		}
 
@@ -88,15 +89,18 @@ namespace LettuceFarm.States
 			TileItem tileItem = new TileItem(_content.Load<Texture2D>("Sprites/land"), new Vector2(), 10000, 0, "farmslot");
 
 			this.invList.Add(tileItem);
-			
-			
-
 		}
 
 		private void closeButton_Click(object sender, EventArgs e)
 		{
 			_global.ChangeState(_global.Game);
 		}
+
+		public void addItem(IInventoryItem item)
+        {
+			if (item.GetName() == "chicken" || item.GetName() == "cow")
+				_global.Game.AddAnimal((LivestockItem) item);
+        }
 	}
 		
 }
