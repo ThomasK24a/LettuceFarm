@@ -56,13 +56,19 @@ namespace LettuceFarm.States
 			buttonFont = content.Load<SpriteFont>("defaultFont");
 			this.farmTileTexture = content.Load<Texture2D>("dirt");
 			farmTiles = new List<FarmTile>();
+			Tiles = new List<FarmTile>();
 			slotTexture = content.Load<Texture2D>("ItemSlot");
 
 			littleCow = content.Load<Texture2D>("cow");
 			littleChicken = content.Load<Texture2D>("chicken");
 
 			for (int i = 0; i < 9; i++)
+            {
 				farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content));
+
+				Tiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content));
+			}
+				
 
 			for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
 			{
@@ -76,13 +82,12 @@ namespace LettuceFarm.States
 				}
 			}
 
-
+		
 
 			for(int i = 0; i<9; i++)
             {
 				chickenSprites.Add(littleChicken);
 				cowSprites.Add(littleCow);
-
 			}
 				
 
@@ -118,26 +123,23 @@ namespace LettuceFarm.States
 				farmTiles[6],	
 				farmTiles[7],
 				farmTiles[8],
+				Tiles[0],
+				Tiles[1],
+				Tiles[2],
+				Tiles[3],
+				Tiles[4],
+				Tiles[5],
+				Tiles[6],
+				Tiles[7],
+				Tiles[8],
 				menuButton,
 				inventoryButton,
 				shopButton,
+
 			};
 		
 
-			void BuyLand()
-            {
-				for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
-			{
-				for (int j = 0; j < 3; j++)
-				{
-					if (i * 3 + j < farmTiles.Count)
-                    {
-						farmTiles[i * 3 + j].Position = new Vector2(j * 60, i * 55 + 40);
-						farmTiles[i * 3 + j].Click += farmTile_Click;
-					}	
-				}
-			}
-            }
+			 
 
 			//_sprites = new List<ChickenSprite>()
 			//{
@@ -164,6 +166,27 @@ namespace LettuceFarm.States
 			//            Position = new Vector2(100, 100),
 			//        },
 			//    };
+		}
+		public void BuyLand()
+		{
+			for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					if (i * 3 + j < farmTiles.Count)
+					{
+						Tiles[i * 3 + j].Position = farmTiles[i * 3 + j].Position + new Vector2(0, 200);
+                        Tiles[i * 3 + j].Click += GameState_Click;
+
+					}
+				}
+			}
+		}
+
+        private void GameState_Click(object sender, EventArgs e)
+        {
+			if (selectedSeed != null)
+				((FarmTile)sender).addSeed(selectedSeed);
 		}
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -279,22 +302,19 @@ namespace LettuceFarm.States
 				}
 			}
 
+            
 		}
-
 		void PrepareLiveStock()
         {
 			foreach (IInventoryItem liveStock in shop.invList)
             {
 				if (liveStock.GetName() == "chicken")
-			
 					this.chickenCount = liveStock.GetCount();
-				if (liveStock.GetName() == "cow")
 
+				if (liveStock.GetName() == "cow")
 					this.cowCount = liveStock.GetCount();
 				
-			}
-				
-
+			}	
 		}
 
 		void MouseMethod()
@@ -313,9 +333,17 @@ namespace LettuceFarm.States
             {
 				component.Update(gameTime);
 			}
+			foreach (IInventoryItem item in shop.invList)
+            {
+				if(item.GetName() == "farmslot" && (item.GetCount() > 1))
+                {
+					BuyLand();
+                }
+            }
 			MouseMethod();
 			PrepareSeed();
 			PrepareLiveStock();
+
 		}
 
 		//reset time

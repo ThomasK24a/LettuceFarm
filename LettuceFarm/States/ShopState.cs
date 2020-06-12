@@ -16,6 +16,7 @@ namespace LettuceFarm.States
 		public List<IInventoryItem> invList;
 		Button closeButton;
         private InventoryState inventory;
+	
 		SpriteFont font;
 
 
@@ -23,7 +24,7 @@ namespace LettuceFarm.States
 			: base(game, graphicsDevice, contentManager)
 		{
 			this.inventory = inventory;
-
+			
 			this.font = _content.Load<SpriteFont>("defaultFont");
 
 			this.invList = new List<IInventoryItem>();
