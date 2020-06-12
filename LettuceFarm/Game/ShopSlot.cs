@@ -32,6 +32,7 @@ namespace LettuceFarm.Game
             this.item = item;
             this.scale = scale;
             this.inventory = inv;
+         
             Texture2D buttonTexture = content.Load<Texture2D>("Button");
             slotTexture = content.Load<Texture2D>("ItemSlot");
             seedTexture = content.Load<Texture2D>("seeds");
@@ -67,9 +68,9 @@ namespace LettuceFarm.Game
             }
             else if(inventory.Coins >= this.item.GetPrice() && this.item.GetCount() < 9 )
             {
-                if (this.item.GetName() == "farmslot")
+                if (this.item.GetName() == "farmslot" && this.item.GetCount() <= 1 )
                 {
-
+                    this.item.SetCount();
                 }
                 this.item.SetCount();
                 inventory.Coins -= this.item.GetPrice();
