@@ -33,10 +33,7 @@ namespace LettuceFarm.States
 		Texture2D cowSprite;
 		Texture2D chickenSprite;
 		SpriteFont font;
-
 		Button closeButton;
-
-
 
 		public InventoryState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager) : base(game, graphicsDevice, contentManager)
 		{
@@ -44,7 +41,6 @@ namespace LettuceFarm.States
 
 			seeds = new List<SeedItem>();
 			this.Coins = 99999;
-
 
             font = _content.Load<SpriteFont>("defaultFont");
 
@@ -84,8 +80,7 @@ namespace LettuceFarm.States
 			closeButton = new Button(closeButtonSprite, buttonFont, new Vector2(730, 10), 1);
 
             closeButton.Click += CloseButton_Click;
-			components.Add(closeButton);
-			
+			components.Add(closeButton);			
 		}
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -122,22 +117,20 @@ namespace LettuceFarm.States
             Inventory.Add(lettuceItem);
             Inventory.Add(cornItem);
 
-
-
             Inventory.Add(cowItem);
             Inventory.Add(chickenItem);
 
             seeds.Add(wheatSeed);
 			seeds.Add(lettuceSeed);
 			seeds.Add(cornSeed);
-
-
 		}
+
 		private void GenerateSlot(Vector2 position, IInventoryItem  item)
         {
 			InventorySlot newSlot = new InventorySlot(_content, position, item, 1f);
             components.Add(newSlot);
         }
+
 		private void GenerateSeedSlot(Vector2 position, SeedItem item)
 		{
 			InventorySlot newSlot = new InventorySlot(_content, position, item, 1f);
@@ -148,14 +141,11 @@ namespace LettuceFarm.States
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
         }
 
         public override void PostUpdate(GameTime gameTime)
 		{
-		
-			
+					
 		}
-
 	}
 }

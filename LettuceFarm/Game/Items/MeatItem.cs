@@ -20,8 +20,7 @@ namespace LettuceFarm
 		}
 
 		public virtual int GetPrice()
-		{
-			
+		{			
 			return this.price;
 		}
 		public virtual int GetCount()

@@ -10,7 +10,6 @@ namespace LettuceFarm.GameEntity
 {
 	public class CropItem : Entity, IInventoryItem
 	{
-		//string name;
 		int price;
 		int count;
 		string name;
@@ -19,13 +18,11 @@ namespace LettuceFarm.GameEntity
 		{
 			this.price = price;
 			this.count = count;
-			this.name = name;
-			
+			this.name = name;	
 		}
 
 		public virtual int GetPrice()
 		{
-			//TODO: replace this
 			return this.price;
 		}
 
@@ -43,8 +40,7 @@ namespace LettuceFarm.GameEntity
 		public virtual bool BuyItem()
 		{
 			if(99 /*replace with currency in inv*/ > GetPrice())
-            {
-				
+            {				
 				return true;
             }
             else
@@ -73,6 +69,7 @@ namespace LettuceFarm.GameEntity
         {
 			return this.name;
         }
+
 		public bool IsSelected()
         {
 			return this.selected;

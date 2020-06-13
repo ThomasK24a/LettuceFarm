@@ -27,7 +27,6 @@ namespace LettuceFarm.States
 			MediaPlayer.Play(song);
 			MediaPlayer.IsMuted = true;
 
-
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{
 				Text = "New Game",
@@ -55,16 +54,11 @@ namespace LettuceFarm.States
 				settingsButton,
 				quitGameButton,
 			};
-
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
-			
-
 			spriteBatch.Begin();
-
-
 			spriteBatch.Draw(background, new Rectangle(0,0,800,500),Color.White);
 
 			foreach (var component in components)
