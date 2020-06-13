@@ -14,11 +14,13 @@ namespace LettuceFarm.GameEntity
 		int count;
 		string name;
 		bool selected = false;
-		public CropItem(Texture2D texture, Vector2 position, int price, int count,string name) : base(texture, position, 1)
+		int sellingPrice;
+		public CropItem(Texture2D texture, Vector2 position, int price, int count,string name, int sellingPrice) : base(texture, position, 1)
 		{
 			this.price = price;
 			this.count = count;
-			this.name = name;	
+			this.name = name;
+			this.sellingPrice = sellingPrice;
 		}
 
 		public virtual int GetPrice()
@@ -80,5 +82,14 @@ namespace LettuceFarm.GameEntity
 			this.selected = select;
         }
 
+        public void Sell()
+        {
+			this.count -= 1;
+        }
+
+		public int GetSellingPrice()
+        {
+			return this.sellingPrice;
+        }
     }
 }

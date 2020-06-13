@@ -101,13 +101,13 @@ namespace LettuceFarm.States
 		}
 		void CreateInventory()
         {
-			CropItem wheatItem = new CropItem(wheatSprite, new Vector2(-100, -100), 600, 0, "wheat");
+			CropItem wheatItem = new CropItem(wheatSprite, new Vector2(-100, -100), 600, 0, "wheat", 600);
 			SeedItem wheatSeed = new SeedItem(wheatSeedSprite, new Vector2(-100, -100), 100, 0, "wheat");
 
-			CropItem lettuceItem = new CropItem(lettuceSprite, new Vector2(-100, -100), 250, 0, "lettuce");
+			CropItem lettuceItem = new CropItem(lettuceSprite, new Vector2(-100, -100), 250, 0, "lettuce", 250);
 			SeedItem lettuceSeed = new SeedItem(lettuceSeedSprite, new Vector2(-100, -100), 50, 0, "lettuce");
 
-			CropItem cornItem = new CropItem(cornSprite, new Vector2(-100, -100), 50, 0, "corn");
+			CropItem cornItem = new CropItem(cornSprite, new Vector2(-100, -100), 50, 0, "corn", 50);
 			SeedItem cornSeed = new SeedItem(cornSeedSprite, new Vector2(-100, -100), 5, 0, "corn");
 
 			LivestockItem cowItem = new LivestockItem(cowSprite, new Vector2(-100, -100), 750, 0, "cow");

@@ -86,5 +86,14 @@ namespace LettuceFarm.GameEntity
                 this.count -= 1;
             }
         }
+        public void Sell()
+        {
+            this.count -= 1;
+        }
+
+        public int GetSellingPrice()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

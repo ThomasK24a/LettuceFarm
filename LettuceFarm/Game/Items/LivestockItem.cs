@@ -12,6 +12,7 @@ namespace LettuceFarm
 		int count;
 		int price;
 		string name;
+		
 		public LivestockItem(Texture2D texture, Vector2 position, int price, int count, string name) : base(texture, position, 1)
 		{
 			this.price = price;
@@ -53,5 +54,15 @@ namespace LettuceFarm
 		{
 			return this.name;
 		}
-    }
+
+		public void Sell()
+        {
+			this.count -= 1;
+        }
+
+		public int GetSellingPrice()
+		{
+			return 0;
+		}
+	}
 }

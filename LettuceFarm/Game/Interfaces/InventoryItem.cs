@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,5 +21,9 @@ namespace LettuceFarm.Game
 		public abstract void Buy();
 
 		public abstract string GetName();
+
+		public abstract void Sell();
+
+		public abstract int GetSellingPrice();
 	}
 }
