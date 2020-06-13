@@ -32,14 +32,14 @@ namespace LettuceFarm.States
 		public int chickenCount;
 		public int cowCount;
 		SpriteFont font;
-		float timer;
+		Clock clock;
 
 		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory, MouseState mouseState, ShopState shop)
 			: base(game, graphicsDevice, content)
 		{
 			this.chickenCount = 0;
 			this.cowCount = 0;
-			this.timer =  24f;
+			clock  = new Clock(6f);
 			font = _content.Load<SpriteFont>("defaultFont");
 
 			this.chickenSprites = new List<Texture2D>();
@@ -176,27 +176,33 @@ namespace LettuceFarm.States
 
 			spriteBatch.Begin();
 
-			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
+			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), new Color(228, 228, 242));
+			clock.time += (float)gameTime.ElapsedGameTime.TotalSeconds;
+			spriteBatch.DrawString(font, "Time: " + clock.TimeToString(), new Vector2(640, 15), Color.White);
 
-			this.timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-			spriteBatch.DrawString(font, "Timer: " + this.roundTime(), new Vector2(640, 15), Color.White);
-			if (timer <= 12f)
-			{
-				spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), new Color(50, 50, 125));
-				spriteBatch.DrawString(font, "Timer: " + this.roundTime(), new Vector2(640, 15), Color.White);
-			}
-
-			if (timer <= 0f)
+			//day time
+			if (clock.getTime() >= 12f)
 			{
 				spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
-				timerReset();
+				spriteBatch.DrawString(font, "Time: " + clock.TimeToString(), new Vector2(640, 15), Color.White);
+			}
+
+			//night time
+			if (clock.getTime() >= 18f)
+			{
+				spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), new Color(50, 50, 125));
+				spriteBatch.DrawString(font, "Time: " + clock.TimeToString(), new Vector2(640, 15), Color.White);
+			}
+
+			//reset to day time
+			if (clock.getTime() >= 23f)
+			{
+				clock.setTime(6f);
 			}
 
 			spriteBatch.DrawString(font, "Temperature:" + Temp.ToString(), new Vector2(640, 35), Color.White);
 			spriteBatch.DrawString(font, "Humidity:" + Hum.ToString(), new Vector2(640, 55), Color.White);
 			spriteBatch.DrawString(font, "Sunshine:" + Sun.ToString(), new Vector2(640, 75), Color.White);
-
-			
 
 			spriteBatch.Draw(slotTexture, new Vector2(195, 15), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 			spriteBatch.DrawString(font, "X " + chickenCount, new Vector2(320, 15), Color.White);
@@ -318,19 +324,6 @@ namespace LettuceFarm.States
 			PrepareLiveStock();
 		}
 
-		//reset time
-		public void timerReset()
-		{
-			this.timer = 24f;
-		}
-
-		//round to two decimal places
-		public float roundTime()
-		{
-			float timeRound = (float)Math.Round(this.timer * 100f) / 100f;
-
-			return timeRound;
-		}
 		private void shopButton_Click(object sender, EventArgs e)
 		{
 			_global.ChangeState(_global.shop);
