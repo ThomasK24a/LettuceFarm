@@ -1,6 +1,7 @@
 ﻿using LettuceFarm.Game;
 using LettuceFarm.Game.Crops;
 using LettuceFarm.GameEntity;
+using LettuceFarm.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,10 +29,13 @@ namespace LettuceFarm.Controls
 
         private int Price;
 
-        private Crop plantedSeed;
+        public Crop plantedSeed;
 
         private ContentManager content;
 
+        private GameState game;
+
+        private SpriteFont font;
 
         private string Name;
         #endregion
@@ -59,14 +63,15 @@ namespace LettuceFarm.Controls
 
         #region Methods
 
-        public FarmTile(Texture2D texture, Vector2 position, int frameCount, ContentManager content) : base(texture, position, frameCount)
+        public FarmTile(Texture2D texture, Vector2 position, int frameCount, ContentManager content, GameState game) : base(texture, position, frameCount)
         {
             PenColour = Color.Black;
 
             this.Price = 250;
             this.Name = "soil";
-
+            this.font = content.Load<SpriteFont>("defaultFont");
             this.content = content;
+            this.game = game;
 
         }
 
@@ -77,11 +82,15 @@ namespace LettuceFarm.Controls
             if (_isHovering)
                 colour = Color.Gray;
 
-           
+            
             spriteBatch.Draw(Texture, Rectangle, colour);
 
             if (plantedSeed != null)
+            {
                 plantedSeed.Draw(gameTime, spriteBatch);
+                spriteBatch.DrawString(font, plantedSeed.timeTillNextStage.TotalSeconds.ToString(), plantedSeed.Position, Color.White);
+            }
+                
 
         }
         void Hover()
@@ -122,21 +131,39 @@ namespace LettuceFarm.Controls
                 switch (seed.GetName())
                 {
                     case "corn":
-                        plantedSeed = new Corn(content, Position);
+                        plantedSeed = new Corn(content, Position, this);
                         seed.Plant();
                         break;
                     case "lettuce":
-                        plantedSeed = new Lettuce(content, Position);
+                        plantedSeed = new Lettuce(content, Position, this);
                         seed.Plant();
                         break;
                     case "wheat":
-                        plantedSeed = new Wheat(content, Position);
+                        plantedSeed = new Wheat(content, Position, this);
                         seed.Plant();
                         break;
                     default:
                         break;
                 }
             }
+        }
+
+        public void removeCrop()
+        {
+            this.plantedSeed = null;
+        }
+
+        public void harvestCrop()
+        {
+            if(plantedSeed.CurrentFrame == plantedSeed.FrameCount - 1)
+            {
+                if(game.addCropToInventory(plantedSeed))
+                {
+                    this.plantedSeed = null;
+                }
+                
+            }
+            
         }
             #endregion
     }

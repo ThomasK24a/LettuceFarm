@@ -34,7 +34,7 @@ namespace LettuceFarm.States
 		public int chickenCount;
 		public int cowCount;
 		SpriteFont font;
-		Clock clock;
+		public Clock clock;
 
 		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory, MouseState mouseState, ShopState shop)
 			: base(game, graphicsDevice, content)
@@ -67,9 +67,9 @@ namespace LettuceFarm.States
 
 			for (int i = 0; i < 9; i++)
             {
-				farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content));
+				farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content, this));
 
-				Tiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content));
+				Tiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content, this));
 			}
 				
 
@@ -140,23 +140,7 @@ namespace LettuceFarm.States
 				shopButton,
 
 			};
-		
-
-
-			void BuyLand()
-            {
-				for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
-				{
-					for (int j = 0; j < 3; j++)
-					{
-						if (i * 3 + j < farmTiles.Count)
-						{
-							farmTiles[i * 3 + j].Position = new Vector2(j * 60, i * 55 + 40);
-							farmTiles[i * 3 + j].Click += farmTile_Click;
-						}	
-					}
-				}
-            }
+	
 
 
 			//_sprites = new List<ChickenSprite>()
@@ -194,7 +178,7 @@ namespace LettuceFarm.States
 					if (i * 3 + j < farmTiles.Count)
 					{
 						Tiles[i * 3 + j].Position = farmTiles[i * 3 + j].Position + new Vector2(0, 200);
-                        Tiles[i * 3 + j].Click += GameState_Click;
+						Tiles[i * 3 + j].Click += farmTile_Click;
 
 					}
 				}
@@ -218,7 +202,7 @@ namespace LettuceFarm.States
 			spriteBatch.Begin();
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), new Color(228, 228, 242));
-			clock.time += (float)gameTime.ElapsedGameTime.TotalMinutes;
+			
 			spriteBatch.DrawString(font, "Time: " + clock.TimeToString(), new Vector2(640, 15), Color.White);
 
 			//day time
@@ -357,6 +341,21 @@ namespace LettuceFarm.States
 				selectedSeed = null;
 			}
 		}
+
+		public bool addCropToInventory(Crop crop)
+        {
+			for(int i = 0; i < inventory.Inventory.Count; i++)
+            {
+				if(crop.GetName() == inventory.Inventory[i].GetName())
+                {
+					inventory.Inventory[i].SetCount();
+					return true;
+				}
+            }
+
+			return false;
+        }
+
 		void PrepareLand()
         {
 			foreach (IInventoryItem item in shop.invList)
@@ -419,6 +418,9 @@ namespace LettuceFarm.States
 						break;
 				}
 			}
+
+			clock.time += (float)gameTime.ElapsedGameTime.TotalMinutes;
+
 			base.Update(gameTime);
 
 		}
@@ -440,8 +442,14 @@ namespace LettuceFarm.States
 
 		private void farmTile_Click(object sender, EventArgs e)
         {
-			if(selectedSeed != null)
-				((FarmTile) sender).addSeed(selectedSeed);
+			if(selectedSeed != null && ((FarmTile)sender).plantedSeed == null)
+            {
+				((FarmTile)sender).addSeed(selectedSeed);
+			}
+            else if(((FarmTile) sender).plantedSeed != null)
+            {
+				((FarmTile)sender).harvestCrop();
+			}
         }
 	}
 }

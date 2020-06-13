@@ -1,4 +1,5 @@
-﻿using LettuceFarm.GameEntity;
+﻿using LettuceFarm.Controls;
+using LettuceFarm.GameEntity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,7 +11,7 @@ namespace LettuceFarm.Game.Crops
 {
 	class Wheat : Crop
 	{
-		public Wheat(ContentManager content, Vector2 position) : base(content.Load<Texture2D>("lettuceCrop"), position, "wheat", 5)
+		public Wheat(ContentManager content, Vector2 position, FarmTile farmTile) : base(content.Load<Texture2D>("lettuceCrop"), position, "wheat", 5, 50, 70, farmTile)
 		{
 
 		}

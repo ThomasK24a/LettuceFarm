@@ -27,7 +27,6 @@ namespace LettuceFarm.States
 			MediaPlayer.Play(song);
 			MediaPlayer.IsMuted = true;
 
-
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{
 				Text = "New Game",
