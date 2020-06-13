@@ -5,7 +5,6 @@ using System.Text;
 
 namespace LettuceFarm.Game
 {
-
 	public class Weather
 	{
 		int[] temperature;
@@ -42,7 +41,5 @@ namespace LettuceFarm.Game
 			int index = random.Next(0, 7);
 			return value + sunshine[index];
 		}
-
-
 	}
 }

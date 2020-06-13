@@ -27,7 +27,7 @@ namespace LettuceFarm
 
             else
             {
-                return this.roundTime() + " PM";
+                return this.roundTime() + " PM";                
             }
         }
 

@@ -13,6 +13,5 @@ namespace LettuceFarm.Game.Livestocks
 		{
 
 		}
-
 	}
 }

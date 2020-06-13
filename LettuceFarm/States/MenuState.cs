@@ -54,16 +54,11 @@ namespace LettuceFarm.States
 				settingsButton,
 				quitGameButton,
 			};
-
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
-			
-
 			spriteBatch.Begin();
-
-
 			spriteBatch.Draw(background, new Rectangle(0,0,800,500),Color.White);
 
 			foreach (var component in components)

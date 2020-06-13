@@ -68,7 +68,6 @@ namespace LettuceFarm.States
 			for (int i = 0; i < 9; i++)
             {
 				farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content, this));
-
 				Tiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content, this));
 			}
 				
@@ -138,36 +137,8 @@ namespace LettuceFarm.States
 				menuButton,
 				inventoryButton,
 				shopButton,
-
 			};
-	
 
-
-			//_sprites = new List<ChickenSprite>()
-			//{
-			//    new ChickenSprite(new Dictionary<string, Animation>()
-			//    {
-			//        {
-			//            "WalkUp", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_up"), 4)
-			//        },
-
-			//            {
-			//                "WalkDown", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_down"), 4)
-			//            },
-
-			//            {
-			//                "WalkLeft", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_left"), 4)
-			//            },
-
-			//            {
-			//                "WalkRight", new Animation(_content.Load<Texture2D>("Sprites/chicken_walk_right"), 4)
-			//            },
-
-			//        })
-			//        {
-			//            Position = new Vector2(100, 100),
-			//        },
-			//    };
 		}
 		public void BuyLand()
 		{
@@ -179,7 +150,6 @@ namespace LettuceFarm.States
 					{
 						Tiles[i * 3 + j].Position = farmTiles[i * 3 + j].Position + new Vector2(0, 200);
 						Tiles[i * 3 + j].Click += farmTile_Click;
-
 					}
 				}
 			}
@@ -192,8 +162,7 @@ namespace LettuceFarm.States
 		}
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-		{
-			
+		{			
 			Texture2D grass = _content.Load<Texture2D>("Grass");
 			int Temp = weather.randomSun();
 			int Hum = weather.randomHumidity();
@@ -267,7 +236,6 @@ namespace LettuceFarm.States
 						if (i * 3 + j < cowCount)
 						{
 							spriteBatch.Draw(cowSprites[i * 3 + j], pos + new Vector2(j * 90, i * 80 + 40), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-
 						}
 					}
 				}
@@ -278,11 +246,8 @@ namespace LettuceFarm.States
 
             if (this.selectedSeed != null)
 			{
-
 				spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), null, Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
-
 			}
-
 			spriteBatch.End();
 		}
 
@@ -298,8 +263,7 @@ namespace LettuceFarm.States
 				if (seeds.IsSelected() == false)
                 {
 					this.selectedSeed = null;
-				}
-					
+				}					
 			}
 				
 			foreach (SeedItem seeds in inventory.seeds)
@@ -308,9 +272,7 @@ namespace LettuceFarm.States
 				{
 					this.selectedSeed = seeds;
 				}
-			}
-
-            
+			}         
 		}
 
 		Vector2 chickenPosition;
@@ -319,12 +281,9 @@ namespace LettuceFarm.States
         {
 			
 			if(animal.GetName() == "chicken")
-            {
-
-				
+            {			
 				for(int i = 0; i< 3; i++)
 				components.Add(new Chicken(walkingChicken, chickenPosition = new Vector2(i * 200, 200)));
-
             }
 
 			if (animal.GetName() == "cow")
@@ -340,9 +299,9 @@ namespace LettuceFarm.States
 				selectedSeed.Select(false);
 				selectedSeed = null;
 			}
-		}
+        }
 
-		public bool addCropToInventory(Crop crop)
+        public bool addCropToInventory(Crop crop)
         {
 			for(int i = 0; i < inventory.Inventory.Count; i++)
             {
@@ -352,7 +311,6 @@ namespace LettuceFarm.States
 					return true;
 				}
             }
-
 			return false;
         }
 

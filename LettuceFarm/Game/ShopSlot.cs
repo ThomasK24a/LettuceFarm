@@ -21,12 +21,10 @@ namespace LettuceFarm.Game
         InventoryState inventory;
         ShopState shop;
         Texture2D slotTexture;
-        Texture2D seedTexture;
-      
+        Texture2D seedTexture;   
 
         public ShopSlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale, InventoryState inv, ShopState shop) : base(item.GetTexture(), position, 1)
         {
-
             this.shop = shop;
             this.Position = position;
             this.item = item;
@@ -42,11 +40,8 @@ namespace LettuceFarm.Game
             buyButton = new Button(buttonTexture, buttonFont, this.Position + new Vector2(-35, 120), frameCount)
             {
                 Text = "-" + this.item.GetPrice().ToString() + " coins"
-            };
-            
-            buyButton.Click += BuyItem;
-
-  
+            };      
+            buyButton.Click += BuyItem;  
         }
 
         private void BuyItem(object sender, EventArgs e)
@@ -59,17 +54,16 @@ namespace LettuceFarm.Game
                         inventory.seeds[i].SetCount();
                         inventory.Coins -= inventory.seeds[i].GetPrice();
                     }
-            }else if(this.item.GetName() == "chicken" )
+            }
+            else if(this.item.GetName() == "chicken" )
             {
                 shop.addItem(item);
                 inventory.Coins -= item.GetPrice();
-
             }
             else if(this.item.GetName() == "cow")
             {
                 shop.addItem(item);
                 inventory.Coins -= item.GetPrice();
-
             }
             else if(inventory.Coins >= this.item.GetPrice() && this.item.GetCount() < 9 )
             {
@@ -79,9 +73,7 @@ namespace LettuceFarm.Game
                 }
                 this.item.SetCount();
                 inventory.Coins -= this.item.GetPrice();
-
             }
-    
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
