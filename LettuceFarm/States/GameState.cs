@@ -283,13 +283,13 @@ namespace LettuceFarm.States
 
             if (animal.GetName() == "chicken")
             {
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 4; i++)
                     components.Add(new Chicken(walkingChicken, chickenPosition = new Vector2(i * 200, 195)));
             }
 
             if (animal.GetName() == "cow")
             {
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 4; i++)
                     // components.Add(new Cow(littleCow, new Vector2(200, 200)));
                     components.Add(new Cow(walkingCow, chickenPosition = new Vector2(i * 200, 185)));
             }
