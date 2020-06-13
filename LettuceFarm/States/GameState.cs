@@ -218,7 +218,7 @@ namespace LettuceFarm.States
 			spriteBatch.Begin();
 
 			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), new Color(228, 228, 242));
-			clock.time += (float)gameTime.ElapsedGameTime.TotalSeconds;
+			clock.time += (float)gameTime.ElapsedGameTime.TotalMinutes;
 			spriteBatch.DrawString(font, "Time: " + clock.TimeToString(), new Vector2(640, 15), Color.White);
 
 			//day time
