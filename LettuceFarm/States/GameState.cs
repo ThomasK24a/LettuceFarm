@@ -283,16 +283,17 @@ namespace LettuceFarm.States
 
             if (animal.GetName() == "chicken")
             {
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 4; i++)
                     components.Add(new Chicken(walkingChicken, chickenPosition = new Vector2(i * 200, 195)));
             }
 
             if (animal.GetName() == "cow")
             {
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 4; i++)
                     // components.Add(new Cow(littleCow, new Vector2(200, 200)));
                     components.Add(new Cow(walkingCow, chickenPosition = new Vector2(i * 200, 185)));
             }
+
 
         }
         void MouseMethod()
@@ -303,6 +304,7 @@ namespace LettuceFarm.States
                 selectedSeed = null;
             }
         }
+
 
         public bool addCropToInventory(Crop crop)
         {
@@ -317,23 +319,13 @@ namespace LettuceFarm.States
             return false;
         }
 
-        void PrepareLand()
-        {
-            foreach (IInventoryItem item in shop.invList)
-            {
-                if (item.GetName() == "farmslot" && (item.GetCount() > 1))
-                {
-                    BuyLand();
-                }
-            }
-        }
         public override void Update(GameTime gameTime)
         {
             foreach (var component in components)
             {
                 component.Update(gameTime);
             }
-            PrepareLand();
+           
             MouseMethod();
             PrepareSeed();
 

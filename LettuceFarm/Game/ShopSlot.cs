@@ -46,8 +46,9 @@ namespace LettuceFarm.Game
 
         private void BuyItem(object sender, EventArgs e)
         {
-            if (this.item.GetName() == "lettuce" || this.item.GetName() == "wheat" || this.item.GetName() == "corn")
+            if (inventory.Coins >= this.item.GetPrice())
             {
+
                 for (int i = 0; i < inventory.seeds.Count; i++)
                     if (this.item.GetName() == inventory.seeds[i].GetName() && inventory.Coins >= inventory.seeds[i].GetPrice())
                     {
@@ -74,6 +75,7 @@ namespace LettuceFarm.Game
                 this.item.SetCount();
                 inventory.Coins -= this.item.GetPrice();
             }
+
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
