@@ -20,6 +20,7 @@ namespace LettuceFarm
 
 		public MapTile(int pTileHeight, int pTileWidth, int pWidth, int pHeight)
 		{
+			//hard code tile sizes here
 			tileWidth = pTileWidth;
 			tileHeight = pTileHeight;
 			width = pWidth;
@@ -29,6 +30,22 @@ namespace LettuceFarm
 		public void draw(SpriteBatch spriteBatch)
 		{
 			Vector2 tilePosition = Vector2.Zero;
+
+ 
+            //for (int x = 0; x < width; x++)
+            //{
+            //    for (int y = 0; y < height; y++)
+            //    {
+            //        spriteBatch.FillRectangle(tilePosition, new Size2(tileWidth, tileHeight), Color.Transparent);
+            //        spriteBatch.FillRectangle(tilePosition + new Vector2(1, 1), new Size2(tileWidth - 2, tileHeight - 2), Color.Black);
+            //        tilePosition.Y += tileHeight;
+
+            //    }
+            //    tilePosition.Y = 0;
+            //    tilePosition.X += tileWidth;
+            //}
+
         }
 	}
+
 }

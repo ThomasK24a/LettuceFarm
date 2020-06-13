@@ -17,10 +17,12 @@ namespace LettuceFarm.Game.Items
 			this.price = price;
 			this.count = count;
 			this.name = name;
+
 		}
 
 		public virtual int GetPrice()
 		{
+			//TODO: replace this
 			return this.price;
 		}
 
@@ -39,6 +41,7 @@ namespace LettuceFarm.Game.Items
 		{
 			if (99 /*replace with currency in inv*/ > GetPrice())
 			{
+
 				return true;
 			}
 			else

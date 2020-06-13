@@ -8,83 +8,88 @@ using System.Text;
 
 namespace LettuceFarm.GameEntity
 {
-    public class SeedItem : Entity, IInventoryItem
-    {
-        int price;
-        int count;
-        string name;
-        bool selected = false;
-        public SeedItem(Texture2D texture, Vector2 position, int price, int count, string name) : base(texture, position, 1)
-        {
-            this.price = price;
-            this.count = count;
-            this.name = name;
-        }
+	public class SeedItem : Entity, IInventoryItem
+	{
+		//string name;
+		int price;
+		int count;
+		string name;
+		bool selected = false;
+		public SeedItem(Texture2D texture, Vector2 position, int price, int count,string name) : base(texture, position, 1)
+		{
+			this.price = price;
+			this.count = count;
+			this.name = name;
+			
+		}
 
-        public virtual int GetPrice()
-        {
-            return this.price;
-        }
+		public virtual int GetPrice()
+		{
+			//TODO: replace this
+			return this.price;
+		}
 
-        public virtual int GetCount()
-        {
-            //TODO: replace for actual amount
-            return this.count;
-        }
+		public virtual int GetCount()
+		{
+			//TODO: replace for actual amount
+			return this.count;
+		}
 
-        public virtual Texture2D GetTexture()
-        {
-            return Texture;
-        }
+		public virtual Texture2D GetTexture()
+		{
+			return Texture;
+		}
 
-        public virtual bool BuyItem()
-        {
-            if (99 /*replace with currency in inv*/ > GetPrice())
+		public virtual bool BuyItem()
+		{
+			if(99 /*replace with currency in inv*/ > GetPrice())
             {
-                return true;
+				
+				return true;
             }
             else
             {
-                return false;
-            }
-
-        }
+				return false;
+			}
+			
+		}
 
         public void SetCount()
         {
-            this.count += 1;
+			this.count +=1 ;
         }
 
         public void SetPrice(int price)
         {
-            this.price = price;
+			this.price = price;
         }
 
         public void Buy()
         {
-
+			
         }
 
         public string GetName()
         {
-            return this.name;
+			return this.name;
         }
-        public bool IsSelected()
+		public bool IsSelected()
         {
-            return this.selected;
-        }
-
-        public void Select(bool select)
-        {
-            this.selected = select;
+			return this.selected;
         }
 
-        public void Plant()
+		public void Select(bool select)
         {
-            if (this.count > 0)
+			this.selected = select;
+        }
+
+		public void Plant()
+		{
+			if(this.count > 0)
             {
-                this.count -= 1;
-            }
-        }
-    }
+				this.count -= 1;
+			}
+			
+		}
+	}
 }

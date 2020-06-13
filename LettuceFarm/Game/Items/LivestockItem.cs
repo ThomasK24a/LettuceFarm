@@ -20,10 +20,10 @@ namespace LettuceFarm
 		}
 
 		public virtual int GetPrice()
-		{			
+		{
+			
 			return this.price;
 		}
-
 		public virtual int GetCount()
 		{
 			return this.count;
@@ -44,6 +44,7 @@ namespace LettuceFarm
 			this.price = price;
         }
 
+
         public void Buy()
         {
 			SetCount();
@@ -53,5 +54,6 @@ namespace LettuceFarm
 		{
 			return this.name;
 		}
+
     }
 }

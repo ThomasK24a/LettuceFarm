@@ -13,7 +13,8 @@ namespace LettuceFarm
 		public Color tintColor;
 		public int spriteWidth;
 		public int spriteHeight;
-		public float scale;			 
+		public float scale;
+			 
 
 		public Entity(Texture2D texture, Vector2 position, int frameCount,float scale) : base(texture, frameCount)
 		{
@@ -42,5 +43,6 @@ namespace LettuceFarm
         {
 			UpdateAnimation(gameTime);
         }
+
 	}
 }

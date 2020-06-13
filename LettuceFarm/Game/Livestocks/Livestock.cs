@@ -16,6 +16,7 @@ namespace LettuceFarm.Game.Livestocks
         public Livestock(Texture2D texture, Vector2 position, string name, int frameCount) : base(texture, position, frameCount)
         {
             this.name = name;
+
         }
 
         public string GetName()

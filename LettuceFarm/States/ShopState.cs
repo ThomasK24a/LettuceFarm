@@ -12,12 +12,14 @@ using LettuceFarm.Game.Livestocks;
 namespace LettuceFarm.States
 {
 	public class ShopState : State
-	{	
+	{
+		
 		public List<IInventoryItem> invList;
 		Button closeButton;
         private InventoryState inventory;
 	
 		SpriteFont font;
+
 
 		public ShopState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager, InventoryState inventory)
 			: base(game, graphicsDevice, contentManager)

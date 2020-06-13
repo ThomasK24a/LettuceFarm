@@ -15,14 +15,16 @@ using LettuceFarm.GameEntity;
 namespace LettuceFarm.Game
 {
     class InventorySlot: Entity
-    { 
+    {
+ 
         IInventoryItem item;
         SeedItem seeditem;
         Texture2D slotTexture;
         Texture2D itemCount;
         SpriteFont font;
         bool isSeed;
-        Button selectButton;     
+        Button selectButton;
+     
 
         public InventorySlot(ContentManager content, Vector2 position, IInventoryItem item, float scale) : base(item.GetTexture(), position, 1)
         {
@@ -67,6 +69,7 @@ namespace LettuceFarm.Game
             {
                
                 this.seeditem.Select(false);
+
             }
 
         }
@@ -79,7 +82,8 @@ namespace LettuceFarm.Game
                 spriteBatch.Draw(itemCount, Position + new Vector2(19, 80), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                 spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                 spriteBatch.DrawString(font, "x " + seeditem.GetCount(), Position + new Vector2(33, 90), Color.Black);
-                selectButton.Draw(gameTime, spriteBatch);    
+                selectButton.Draw(gameTime, spriteBatch);
+                
             }
             else
             {
@@ -87,7 +91,10 @@ namespace LettuceFarm.Game
                 spriteBatch.Draw(itemCount, Position + new Vector2(4, 50), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                 spriteBatch.DrawString(font, "x " + item.GetCount(), Position + new Vector2(18, 60), Color.Black);
                 spriteBatch.Draw(Texture, Position + new Vector2(15, 5), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-            }           
+            }
+
+            
+            
         }
 
         public override void Update(GameTime gameTime)
@@ -100,6 +107,7 @@ namespace LettuceFarm.Game
             if (this.isSeed)
             {
                 selectButton.Update(gameTime);
+
             }
         }
     }
