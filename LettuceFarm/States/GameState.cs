@@ -332,8 +332,8 @@ namespace LettuceFarm.States
             {
 
 				
-				for(int i = 0; i< 3; i++)
-				components.Add(new Chicken(walkingChicken, chickenPosition = new Vector2(i * 200, 200)));
+				for(int i = 0; i < 3; i++)
+				components.Add(new Chicken(walkingChicken, chickenPosition = new Vector2( i * 105, 50)));
 
             }
 
@@ -351,23 +351,14 @@ namespace LettuceFarm.States
 				selectedSeed = null;
 			}
 		}
-		void PrepareLand()
-        {
-			foreach (IInventoryItem item in shop.invList)
-			{
-				if (item.GetName() == "farmslot" && (item.GetCount() > 1))
-				{
-					BuyLand();
-				}
-			}
-		}
+	
 		public override void Update(GameTime gameTime)
 		{
 			foreach (var component in components)
             {
 				component.Update(gameTime);
 			}
-			PrepareLand();
+		
 			MouseMethod();
 			PrepareSeed();
 
@@ -379,13 +370,13 @@ namespace LettuceFarm.States
 			directionTimer = random.Next(minChangTime, maxChangeTime);
 			int nextIndex = random.Next(0, 5);
 
-			directionTimer -= gameTime.ElapsedGameTime.Milliseconds;
+			directionTimer += gameTime.ElapsedGameTime.Milliseconds;
 			if (directionTimer <= 0)
 			{
 				switch (nextIndex)
 				{
 					case 1:
-						chickenPosition.X++;
+						chickenPosition.X+=5;
 						break;
 					case 2:
 						chickenPosition.X--;
