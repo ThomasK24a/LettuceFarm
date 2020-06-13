@@ -23,5 +23,11 @@ namespace LettuceFarm.Game.Livestocks
         {
             return this.name;
         }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            //spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            DrawAnimation(spriteBatch);
+        }
     }
 }

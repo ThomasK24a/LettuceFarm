@@ -57,7 +57,7 @@ namespace LettuceFarm
             shop = new ShopState(this, graphics.GraphicsDevice, Content, inventory);
             menu = new MenuState(this, graphics.GraphicsDevice, Content);
             setting = new SettingState(this, graphics.GraphicsDevice, Content);
-            Game = new GameState(this, graphics.GraphicsDevice, Content, inventory, mouseState,shop);
+            Game = new GameState(this, graphics.GraphicsDevice, Content, inventory, mouseState, shop);
 
             // TODO: Add your initialization logic here
             IsMouseVisible = true;

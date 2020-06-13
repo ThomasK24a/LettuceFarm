@@ -8,6 +8,7 @@ using LettuceFarm.GameEntity;
 using LettuceFarm.Game;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Sprites;
+using LettuceFarm.Game.Livestocks;
 
 namespace LettuceFarm.States
 {
@@ -27,6 +28,7 @@ namespace LettuceFarm.States
 		Texture2D slotTexture;
 		Texture2D littleCow;
 		Texture2D littleChicken;
+		Texture2D walkingChicken;
 		List<Texture2D> chickenSprites;
 		List<Texture2D> cowSprites;
 		public int chickenCount;
@@ -56,13 +58,20 @@ namespace LettuceFarm.States
 			buttonFont = content.Load<SpriteFont>("defaultFont");
 			this.farmTileTexture = content.Load<Texture2D>("dirt");
 			farmTiles = new List<FarmTile>();
+			Tiles = new List<FarmTile>();
 			slotTexture = content.Load<Texture2D>("ItemSlot");
 
 			littleCow = content.Load<Texture2D>("cow");
 			littleChicken = content.Load<Texture2D>("chicken");
+			walkingChicken = content.Load<Texture2D>("Sprites/chicken_walk_left");
 
 			for (int i = 0; i < 9; i++)
+            {
 				farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content));
+
+				Tiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content));
+			}
+				
 
 			for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
 			{
@@ -76,13 +85,12 @@ namespace LettuceFarm.States
 				}
 			}
 
-
+		
 
 			for(int i = 0; i<9; i++)
             {
 				chickenSprites.Add(littleChicken);
 				cowSprites.Add(littleCow);
-
 			}
 				
 
@@ -118,26 +126,38 @@ namespace LettuceFarm.States
 				farmTiles[6],	
 				farmTiles[7],
 				farmTiles[8],
+				Tiles[0],
+				Tiles[1],
+				Tiles[2],
+				Tiles[3],
+				Tiles[4],
+				Tiles[5],
+				Tiles[6],
+				Tiles[7],
+				Tiles[8],
 				menuButton,
 				inventoryButton,
 				shopButton,
+
 			};
 		
+
 
 			void BuyLand()
             {
 				for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
-			{
-				for (int j = 0; j < 3; j++)
 				{
-					if (i * 3 + j < farmTiles.Count)
-                    {
-						farmTiles[i * 3 + j].Position = new Vector2(j * 60, i * 55 + 40);
-						farmTiles[i * 3 + j].Click += farmTile_Click;
-					}	
+					for (int j = 0; j < 3; j++)
+					{
+						if (i * 3 + j < farmTiles.Count)
+						{
+							farmTiles[i * 3 + j].Position = new Vector2(j * 60, i * 55 + 40);
+							farmTiles[i * 3 + j].Click += farmTile_Click;
+						}	
+					}
 				}
-			}
             }
+
 
 			//_sprites = new List<ChickenSprite>()
 			//{
@@ -164,6 +184,27 @@ namespace LettuceFarm.States
 			//            Position = new Vector2(100, 100),
 			//        },
 			//    };
+		}
+		public void BuyLand()
+		{
+			for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					if (i * 3 + j < farmTiles.Count)
+					{
+						Tiles[i * 3 + j].Position = farmTiles[i * 3 + j].Position + new Vector2(0, 200);
+                        Tiles[i * 3 + j].Click += GameState_Click;
+
+					}
+				}
+			}
+		}
+
+        private void GameState_Click(object sender, EventArgs e)
+        {
+			if (selectedSeed != null)
+				((FarmTile)sender).addSeed(selectedSeed);
 		}
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -214,6 +255,7 @@ namespace LettuceFarm.States
 			
 			spriteBatch.Draw(littleCow, new Vector2(280, 30), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
+
 			var pos = new Vector2(200,150);
 			var _pos = new Vector2(500,150);
 
@@ -226,7 +268,6 @@ namespace LettuceFarm.States
 						if (i * 3 + j < chickenCount)
 						{
 							spriteBatch.Draw(chickenSprites[i * 3 + j], _pos + new Vector2(j * 90, i * 80 + 40), null, Color.White, 0f, Vector2.Zero, .45f, SpriteEffects.None, 0f);
-			
 						}
 					}
 				}
@@ -247,7 +288,7 @@ namespace LettuceFarm.States
 					}
 				}
 			}
-
+			
             foreach (var component in components)
                 component.Draw(gameTime, spriteBatch);
 
@@ -285,24 +326,29 @@ namespace LettuceFarm.States
 				}
 			}
 
+            
 		}
 
-		void PrepareLiveStock()
+		Vector2 chickenPosition;
+		public void AddAnimal(LivestockItem animal)
+
         {
-			foreach (IInventoryItem liveStock in shop.invList)
-            {
-				if (liveStock.GetName() == "chicken")
 			
-					this.chickenCount = liveStock.GetCount();
-				if (liveStock.GetName() == "cow")
+			if(animal.GetName() == "chicken")
+            {
 
-					this.cowCount = liveStock.GetCount();
 				
+				for(int i = 0; i< 3; i++)
+				components.Add(new Chicken(walkingChicken, chickenPosition = new Vector2(i * 200, 200)));
+
+            }
+
+			if (animal.GetName() == "cow")
+			{
+				components.Add(new Cow(littleCow, new Vector2(200, 200)));
 			}
-				
 
 		}
-
 		void MouseMethod()
 		{
 			if (Mouse.GetState().RightButton == ButtonState.Pressed && selectedSeed != null)
@@ -311,17 +357,70 @@ namespace LettuceFarm.States
 				selectedSeed = null;
 			}
 		}
-	
+		void PrepareLand()
+        {
+			foreach (IInventoryItem item in shop.invList)
+			{
+				if (item.GetName() == "farmslot" && (item.GetCount() > 1))
+				{
+					BuyLand();
+				}
+			}
+		}
 		public override void Update(GameTime gameTime)
 		{
-
 			foreach (var component in components)
             {
 				component.Update(gameTime);
 			}
+			PrepareLand();
 			MouseMethod();
 			PrepareSeed();
-			PrepareLiveStock();
+
+
+			int minChangTime = 10;
+			int maxChangeTime = 100;
+			int directionTimer;
+			Random random = new Random();
+			directionTimer = random.Next(minChangTime, maxChangeTime);
+			int nextIndex = random.Next(0, 5);
+
+			directionTimer -= gameTime.ElapsedGameTime.Milliseconds;
+			if (directionTimer <= 0)
+			{
+				switch (nextIndex)
+				{
+					case 1:
+						chickenPosition.X++;
+						break;
+					case 2:
+						chickenPosition.X--;
+						break;
+					case 3:
+						chickenPosition.X++;
+						break;
+					case 4:
+						chickenPosition.X--;
+						break;
+				}
+				switch (nextIndex)
+				{
+					case 1:
+						chickenPosition.Y++;
+						break;
+					case 2:
+						chickenPosition.Y--;
+						break;
+					case 3:
+						chickenPosition.Y--;
+						break;
+					case 4:
+						chickenPosition.Y++;
+						break;
+				}
+			}
+			base.Update(gameTime);
+
 		}
 
 		private void shopButton_Click(object sender, EventArgs e)

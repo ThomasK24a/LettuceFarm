@@ -19,17 +19,20 @@ namespace LettuceFarm.Game
         Button buyButton;
         IInventoryItem item;
         InventoryState inventory;
+        ShopState shop;
         Texture2D slotTexture;
         Texture2D seedTexture;
+      
 
-        public ShopSlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale, InventoryState inv) : base(item.GetTexture(), position, 1)
+        public ShopSlot(ContentManager content, Vector2 position, IInventoryItem item, int frameCount, float scale, InventoryState inv, ShopState shop) : base(item.GetTexture(), position, 1)
         {
 
-         
+            this.shop = shop;
             this.Position = position;
             this.item = item;
             this.scale = scale;
             this.inventory = inv;
+         
             Texture2D buttonTexture = content.Load<Texture2D>("Button");
             slotTexture = content.Load<Texture2D>("ItemSlot");
             seedTexture = content.Load<Texture2D>("seeds");
@@ -56,12 +59,23 @@ namespace LettuceFarm.Game
                         inventory.seeds[i].SetCount();
                         inventory.Coins -= inventory.seeds[i].GetPrice();
                     }
+            }else if(this.item.GetName() == "chicken" )
+            {
+                shop.addItem(item);
+                inventory.Coins -= item.GetPrice();
+
+            }
+            else if(this.item.GetName() == "cow")
+            {
+                shop.addItem(item);
+                inventory.Coins -= item.GetPrice();
+
             }
             else if(inventory.Coins >= this.item.GetPrice() && this.item.GetCount() < 9 )
             {
-                if (this.item.GetName() == "farmslot")
+                if (this.item.GetName() == "farmslot" && this.item.GetCount() <= 1 )
                 {
-
+                    this.item.SetCount();
                 }
                 this.item.SetCount();
                 inventory.Coins -= this.item.GetPrice();
