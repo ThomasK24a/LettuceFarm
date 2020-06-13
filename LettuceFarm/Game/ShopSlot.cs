@@ -64,13 +64,15 @@ namespace LettuceFarm.Game
             {
                 shop.addItem(item);
                 inventory.Coins -= item.GetPrice();
-            }
-            else if(inventory.Coins >= this.item.GetPrice() && this.item.GetCount() < 9 )
+            }else if (this.item.GetName() == "farmslot" && this.item.GetCount() <= 1)
             {
-                if (this.item.GetName() == "farmslot" && this.item.GetCount() <= 1 )
-                {
-                    this.item.SetCount();
-                }
+                shop.PrepareLand(item);
+                inventory.Coins -= this.item.GetPrice();
+
+            }
+            else if (inventory.Coins >= this.item.GetPrice() && this.item.GetCount() < 9)
+            {
+            
                 this.item.SetCount();
                 inventory.Coins -= this.item.GetPrice();
             }

@@ -100,6 +100,16 @@ namespace LettuceFarm.States
 			if (item.GetName() == "chicken" || item.GetName() == "cow")
 				_global.Game.AddAnimal((LivestockItem) item);
         }
+
+		public void PrepareLand(IInventoryItem item)
+		{
+			
+				if (item.GetName() == "farmslot" && (item.GetCount() < 1))
+				{
+					_global.Game.BuyLand();
+				}
+			
+		}
 	}
 		
 }

@@ -227,8 +227,6 @@ namespace LettuceFarm.States
 			}
 			if (this.cowCount > 0)
 			{
-				//for (int i = 0; i < this.cowCount; i++)
-				//	spriteBatch.Draw(cowSprites[i], i * pos + new Vector2(185, 50), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 				for (int i = 0; i < (int)Math.Ceiling(((float)cowSprites.Count / 3)); i++)
 				{
 					for (int j = 0; j < 3; j++)
@@ -314,23 +312,14 @@ namespace LettuceFarm.States
 			return false;
         }
 
-		void PrepareLand()
-        {
-			foreach (IInventoryItem item in shop.invList)
-			{
-				if (item.GetName() == "farmslot" && (item.GetCount() > 1))
-				{
-					BuyLand();
-				}
-			}
-		}
+		
 		public override void Update(GameTime gameTime)
 		{
 			foreach (var component in components)
             {
 				component.Update(gameTime);
 			}
-			PrepareLand();
+			
 			MouseMethod();
 			PrepareSeed();
 
