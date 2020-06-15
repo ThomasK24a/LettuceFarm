@@ -23,12 +23,6 @@ namespace LettuceFarm.Controls
 
         private MouseState _previousMouse;
 
-        private int posX;
-
-        private int posY;
-
-        private int Price;
-
         public Crop plantedSeed;
 
         private ContentManager content;
@@ -36,8 +30,6 @@ namespace LettuceFarm.Controls
         private GameState game;
 
         private SpriteFont font;
-
-        private string Name;
         #endregion
 
         #region Properties
@@ -66,13 +58,9 @@ namespace LettuceFarm.Controls
         public FarmTile(Texture2D texture, Vector2 position, int frameCount, ContentManager content, GameState game) : base(texture, position, frameCount)
         {
             PenColour = Color.Black;
-
-            this.Price = 250;
-            this.Name = "soil";
             this.font = content.Load<SpriteFont>("defaultFont");
             this.content = content;
             this.game = game;
-
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -82,7 +70,6 @@ namespace LettuceFarm.Controls
             if (_isHovering)
                 colour = Color.Gray;
 
-           
             spriteBatch.Draw(Texture, Rectangle, colour);
 
             if (plantedSeed != null)
@@ -91,7 +78,6 @@ namespace LettuceFarm.Controls
                 spriteBatch.DrawString(font, plantedSeed.timeTillNextStage.TotalSeconds.ToString(), plantedSeed.Position, Color.White);
                
             }
-          
 
         }
         void Hover()
@@ -166,7 +152,8 @@ namespace LettuceFarm.Controls
             }
             
         }
-            #endregion
+
+         #endregion
     }
 }
 
