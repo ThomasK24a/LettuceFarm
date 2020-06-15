@@ -23,6 +23,7 @@ namespace LettuceFarm.Game
         SpriteFont font;
         bool isSeed;
         Button selectButton;     
+        Button sellButton;     
 
         public InventorySlot(ContentManager content, Vector2 position, IInventoryItem item, float scale) : base(item.GetTexture(), position, 1)
         {
@@ -30,12 +31,28 @@ namespace LettuceFarm.Game
             this.item = item;
             this.scale = scale;
             this.isSeed = false;
-         
+            Texture2D buttonTexture = content.Load<Texture2D>("itemCount");
             slotTexture = content.Load<Texture2D>("ItemSlot");
             font = content.Load<SpriteFont>("defaultFont");
             itemCount = content.Load<Texture2D>("itemCount");
+            var buttonFont = content.Load<SpriteFont>("defaultFont");
 
+            sellButton = new Button(buttonTexture, buttonFont, this.Position + new Vector2(10, 100), 1)
+            {
+                Text = "sell"
+            };
+            sellButton.Click += SellButton_Click;
         }
+
+        private void SellButton_Click(object sender, EventArgs e)
+        {
+            
+            if(this.item.GetCount() > 0)
+            this.item.Sell();
+            
+            
+        }
+
         public InventorySlot(ContentManager content, Vector2 position, SeedItem seeditem, float scale) : base(seeditem.GetTexture(), position, 1)
         {
             this.Position = position;
@@ -51,7 +68,7 @@ namespace LettuceFarm.Game
 
           selectButton = new Button(buttonTexture, buttonFont, this.Position + new Vector2(-30,120), 1)
             {
-                Text = "select"
+                Text = "select",
             };
             selectButton.Click += SelectButton_Click;
         }
@@ -87,6 +104,7 @@ namespace LettuceFarm.Game
                 spriteBatch.Draw(itemCount, Position + new Vector2(4, 50), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                 spriteBatch.DrawString(font, "x " + item.GetCount(), Position + new Vector2(18, 60), Color.Black);
                 spriteBatch.Draw(Texture, Position + new Vector2(15, 5), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                sellButton.Draw(gameTime, spriteBatch);
             }           
         }
 
@@ -96,11 +114,18 @@ namespace LettuceFarm.Game
                 selectButton.Text = "selected";
             else if(seeditem != null)
                 selectButton.Text = "select";
+           
 
             if (this.isSeed)
             {
                 selectButton.Update(gameTime);
             }
+            else
+            {
+                sellButton.Update(gameTime);
+
+            }
+
         }
     }
 }

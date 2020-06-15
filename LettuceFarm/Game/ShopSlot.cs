@@ -46,34 +46,36 @@ namespace LettuceFarm.Game
 
         private void BuyItem(object sender, EventArgs e)
         {
-            if (this.item.GetName() == "lettuce" || this.item.GetName() == "wheat" || this.item.GetName() == "corn")
+            if (inventory.Coins >= this.item.GetPrice())
             {
-                for (int i = 0; i < inventory.seeds.Count; i++)
-                    if (this.item.GetName() == inventory.seeds[i].GetName() && inventory.Coins >= inventory.seeds[i].GetPrice())
-                    {
-                        inventory.seeds[i].SetCount();
-                        inventory.Coins -= inventory.seeds[i].GetPrice();
-                    }
-            }
-            else if(this.item.GetName() == "chicken" )
-            {
-                shop.addItem(item);
-                inventory.Coins -= item.GetPrice();
-            }
-            else if(this.item.GetName() == "cow")
-            {
-                shop.addItem(item);
-                inventory.Coins -= item.GetPrice();
-            }
-            else if(inventory.Coins >= this.item.GetPrice() && this.item.GetCount() < 9 )
-            {
-                if (this.item.GetName() == "farmslot" && this.item.GetCount() <= 1 )
+                if (this.item.GetName() == "lettuce" || this.item.GetName() == "wheat" || this.item.GetName() == "corn")
                 {
-                    this.item.SetCount();
+                    for (int i = 0; i < inventory.seeds.Count; i++)
+                        if (this.item.GetName() == inventory.seeds[i].GetName() && inventory.Coins >= inventory.seeds[i].GetPrice())
+                        {
+                            inventory.seeds[i].SetCount();
+                            inventory.Coins -= inventory.seeds[i].GetPrice();
+                        }
                 }
-                this.item.SetCount();
-                inventory.Coins -= this.item.GetPrice();
-            }
+                else if (this.item.GetName() == "chicken")
+                {
+                    shop.addItem(item);
+                    inventory.Coins -= item.GetPrice();
+                }
+                else if (this.item.GetName() == "cow")
+                {
+                    shop.addItem(item);
+                    inventory.Coins -= item.GetPrice();
+                }
+                else if (this.item.GetName() == "farmslot" && this.item.GetCount() < 1)
+                {
+                    shop.PrepareLand(item);
+                    this.item.SetCount();
+
+                    inventory.Coins -= this.item.GetPrice();
+
+                }
+            }    
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 
 namespace LettuceFarm.Game.Items
 {
@@ -12,11 +13,13 @@ namespace LettuceFarm.Game.Items
 		int count;
 		string name;
 		bool selected = false;
+	
 		public TileItem(Texture2D texture, Vector2 position, int price, int count, string name) : base(texture, position, 1)
 		{
 			this.price = price;
 			this.count = count;
 			this.name = name;
+			
 		}
 
 		public virtual int GetPrice()
@@ -84,6 +87,15 @@ namespace LettuceFarm.Game.Items
 				this.count -= 1;
 			}
 
+		}
+		public void Sell()
+		{
+			this.count -= 1;
+		}
+
+		public int GetSellingPrice()
+		{
+			return 0;
 		}
 	}
 }
