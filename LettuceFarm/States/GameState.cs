@@ -23,7 +23,7 @@ namespace LettuceFarm.States
         Texture2D farmTileTexture;
         InventoryState inventory;
         ShopState shop;
-        private Weather weather;
+        Weather weather;
         SeedItem selectedSeed = null;
         List<FarmTile> farmTiles;
         List<FarmTile> Tiles;
@@ -40,9 +40,9 @@ namespace LettuceFarm.States
         SpriteFont font;
         Random random = new Random();
 
-        int currTemp;
-        int currHum;
-        int currSun;
+        public int currTemp;
+        public int currHum;
+        public int currSun;
         TimeSpan timeTillNextWeatherUpdate;
 
 
@@ -432,7 +432,7 @@ namespace LettuceFarm.States
 
         private void updateWeather(GameTime gameTime)
         {
-            this.timeTillNextWeatherUpdate =- gameTime.ElapsedGameTime;
+            this.timeTillNextWeatherUpdate = timeTillNextWeatherUpdate - gameTime.ElapsedGameTime;
 
             if (this.timeTillNextWeatherUpdate < TimeSpan.Zero)
             {

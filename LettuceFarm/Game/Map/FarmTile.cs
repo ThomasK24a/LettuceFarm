@@ -118,15 +118,15 @@ namespace LettuceFarm.Controls
                 switch (seed.GetName())
                 {
                     case "corn":
-                        plantedSeed = new Corn(content, Position, this);
+                        plantedSeed = new Corn(content, Position, this, game);
                         seed.Plant();
                         break;
                     case "lettuce":
-                        plantedSeed = new Lettuce(content, Position, this);
+                        plantedSeed = new Lettuce(content, Position, this, game);
                         seed.Plant();
                         break;
                     case "wheat":
-                        plantedSeed = new Wheat(content, Position, this);
+                        plantedSeed = new Wheat(content, Position, this, game);
                         seed.Plant();
                         break;
                     default:
