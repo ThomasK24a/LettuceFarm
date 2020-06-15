@@ -44,10 +44,7 @@ namespace LettuceFarm.GameEntity
 
         public override void Update(GameTime gameTime)
         {
-			if(gameTime.ElapsedGameTime.TotalSeconds > 5)
-            {
-			}
-		
+
 			timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime);
 			if(timeTillNextStage.TotalMilliseconds < 0 && CurrentFrame < FrameCount - 1)
             {

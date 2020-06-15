@@ -40,6 +40,11 @@ namespace LettuceFarm.States
         SpriteFont font;
         Random random = new Random();
 
+        int currTemp;
+        int currHum;
+        int currSun;
+        TimeSpan timeTillNextWeatherUpdate;
+
         public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory, MouseState mouseState, ShopState shop)
             : base(game, graphicsDevice, content)
         {
@@ -69,7 +74,10 @@ namespace LettuceFarm.States
             littleChicken = content.Load<Texture2D>("chicken");
             walkingChicken = content.Load<Texture2D>("Sprites/chicken_walk_left");
 
-            
+            this.currHum = 0;
+            this.currSun = 0;
+            this.currTemp = 0;
+            this.timeTillNextWeatherUpdate = new TimeSpan(0, 0, 10);
 
             for (int i = 0; i < 9; i++)
             {
@@ -170,9 +178,7 @@ namespace LettuceFarm.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Texture2D grass = _content.Load<Texture2D>("Grass");
-            int Temp = weather.randomSun();
-            int Hum = weather.randomHumidity();
-            int Sun = weather.randomSun();
+            
 
             spriteBatch.Begin();
 
@@ -191,9 +197,9 @@ namespace LettuceFarm.States
 
            
 
-            spriteBatch.DrawString(font, "Temperature:" + Temp.ToString(), new Vector2(640, 35), Color.White);
-            spriteBatch.DrawString(font, "Humidity:" + Hum.ToString(), new Vector2(640, 55), Color.White);
-            spriteBatch.DrawString(font, "Sunshine:" + Sun.ToString(), new Vector2(640, 75), Color.White);
+            spriteBatch.DrawString(font, "Temperature:" + currTemp.ToString(), new Vector2(640, 35), Color.White);
+            spriteBatch.DrawString(font, "Humidity:" + currHum.ToString(), new Vector2(640, 55), Color.White);
+            spriteBatch.DrawString(font, "Sunshine:" + currSun.ToString(), new Vector2(640, 75), Color.White);
 
             spriteBatch.Draw(slotTexture, new Vector2(195, 15), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
             spriteBatch.DrawString(font, "X " + chickenCount, new Vector2(320, 15), Color.White);
@@ -331,6 +337,9 @@ namespace LettuceFarm.States
 
         public override void Update(GameTime gameTime)
         {
+            updateWeather(gameTime);
+            
+
             foreach (var component in components)
             {
                 component.Update(gameTime);
@@ -418,6 +427,19 @@ namespace LettuceFarm.States
             else if (((FarmTile)sender).plantedSeed != null)
             {
                 ((FarmTile)sender).harvestCrop();
+            }
+        }
+
+        private void updateWeather(GameTime gameTime)
+        {
+            this.timeTillNextWeatherUpdate =- gameTime.ElapsedGameTime;
+
+            if (this.timeTillNextWeatherUpdate < TimeSpan.Zero)
+            {
+                currTemp = weather.randomSun();
+                currHum = weather.randomHumidity();
+                currSun = weather.randomSun();
+                this.timeTillNextWeatherUpdate = new TimeSpan(0, 0, 10);
             }
         }
     }
