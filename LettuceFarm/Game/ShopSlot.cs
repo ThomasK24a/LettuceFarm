@@ -71,7 +71,7 @@ namespace LettuceFarm.Game
                 {
                     shop.PrepareLand(item);
                     this.item.SetCount();
-
+                    this.buyButton.Text = "sold out!";
                     inventory.Coins -= this.item.GetPrice();
 
                 }

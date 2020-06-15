@@ -18,7 +18,7 @@ namespace LettuceFarm.GameEntity
 		int minGrowTime;
 		int maxGrowTime;
 		FarmTile farmTile;
-
+	
 		public Crop(Texture2D texture, Vector2 position, string name, int frameCount, int minGrowTime, int maxGrowTime, FarmTile farmTile) : base(texture, position, frameCount)
 		{
 			this.farmTile = farmTile;
@@ -47,7 +47,7 @@ namespace LettuceFarm.GameEntity
 			if(gameTime.ElapsedGameTime.TotalSeconds > 5)
             {
 			}
-
+		
 			timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime);
 			if(timeTillNextStage.TotalMilliseconds < 0 && CurrentFrame < FrameCount - 1)
             {
