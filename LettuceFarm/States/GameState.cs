@@ -9,6 +9,9 @@ using LettuceFarm.Game;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Sprites;
 using LettuceFarm.Game.Livestocks;
+using System.Numerics;
+using SharpDX.MediaFoundation;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace LettuceFarm.States
 {
@@ -35,6 +38,7 @@ namespace LettuceFarm.States
         public int chickenCount;
         public int cowCount;
         SpriteFont font;
+        Random random = new Random();
 
         public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory, MouseState mouseState, ShopState shop)
             : base(game, graphicsDevice, content)
@@ -64,6 +68,8 @@ namespace LettuceFarm.States
             walkingCow = content.Load<Texture2D>("Sprites/cow_walk_right");
             littleChicken = content.Load<Texture2D>("chicken");
             walkingChicken = content.Load<Texture2D>("Sprites/chicken_walk_left");
+
+            
 
             for (int i = 0; i < 9; i++)
             {
@@ -276,23 +282,27 @@ namespace LettuceFarm.States
                 }
             }
         }
-
-        Vector2 chickenPosition;
+        
         //  Vector2 cowPosition;
         public void AddAnimal(LivestockItem animal)
-
         {
-
+            int xIndex = 1;
             if (animal.GetName() == "chicken")
             {
-                for (int i = 0; i < 1; i++)
-                    components.Add(new Chicken(walkingChicken, chickenPosition = new Vector2(i * 200, 200)));
+                for ( int i = 1; i < 2; i++)
+                {
+                    components.Add(new Chicken(walkingChicken, new Vector2(xIndex * 100, 200)));
+                    xIndex++;
+                }
             }
 
             if (animal.GetName() == "cow")
             {
-                for (int i = 0; i < 1; i++)
-                    components.Add(new Cow(walkingCow, chickenPosition = new Vector2(i * 200, 200)));
+                for (int i = 1; i < 2; i++)
+                { 
+                    components.Add(new Cow(walkingCow, new Vector2(xIndex++ * 200, 200)));
+                    xIndex++;
+                }
             }
 
         }
@@ -329,49 +339,57 @@ namespace LettuceFarm.States
             MouseMethod();
             PrepareSeed();
 
-
-            int minChangTime = 10;
-            int maxChangeTime = 100;
-            int directionTimer;
-            Random random = new Random();
-            directionTimer = random.Next(minChangTime, maxChangeTime);
-            int nextIndex = random.Next(0, 5);
-
-            directionTimer -= gameTime.ElapsedGameTime.Milliseconds;
-            if (directionTimer <= 0)
+            for (int i = 0; i < components.Count; i++)
             {
-                switch (nextIndex)
+                if(components[i].Texture == walkingChicken)
                 {
-                    case 1:
-                        chickenPosition.X++;
-                        break;
-                    case 2:
-                        chickenPosition.X--;
-                        break;
-                    case 3:
-                        chickenPosition.X++;
-                        break;
-                    case 4:
-                        chickenPosition.X--;
-                        break;
-                }
-                switch (nextIndex)
-                {
-                    case 1:
-                        chickenPosition.Y++;
-                        break;
-                    case 2:
-                        chickenPosition.Y--;
-                        break;
-                    case 3:
-                        chickenPosition.Y--;
-                        break;
-                    case 4:
-                        chickenPosition.Y++;
-                        break;
+                    int minChangTime = 10;
+                    int maxChangeTime = 500;
+                    int directionTimer;
+                    
+                    directionTimer = random.Next(minChangTime, maxChangeTime);
+                    int nextIndex = random.Next(0, 5);
+                    int nextSpeed = random.Next(0, 5);
+                    directionTimer -= gameTime.ElapsedGameTime.Milliseconds;
+
+                    Vector2 Pos = components[i].Position;
+
+                    if (directionTimer <= 0)
+                    {
+                        switch (nextIndex)
+                        {
+                            case 1:
+                                Pos.X += nextSpeed;
+                                break;
+                            case 2:
+                                Pos.X -= nextSpeed;
+                                break;
+                            case 3:
+                                Pos.X += nextSpeed;
+                                break;
+                            case 4:
+                                Pos.X -= nextSpeed;
+                                break;
+                        }
+                        switch (nextIndex)
+                        {
+                            case 1:
+                                Pos.Y += nextSpeed;
+                                break;
+                            case 2:
+                                Pos.Y -= nextSpeed;
+                                break;
+                            case 3:
+                                Pos.Y -= nextSpeed;
+                                break;
+                            case 4:
+                                Pos.Y += nextSpeed;
+                                break;
+                        }
+                        components[i].Position = Pos;
+                    }
                 }
             }
-
             base.Update(gameTime);
 
         }
