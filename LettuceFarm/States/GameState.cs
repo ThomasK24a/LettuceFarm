@@ -34,14 +34,12 @@ namespace LettuceFarm.States
 		public int chickenCount;
 		public int cowCount;
 		SpriteFont font;
-		public Clock clock;
-
+	
 		public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory, MouseState mouseState, ShopState shop)
 			: base(game, graphicsDevice, content)
 		{
 			this.chickenCount = 0;
 			this.cowCount = 0;
-			clock  = new Clock(6f);
 			font = _content.Load<SpriteFont>("defaultFont");
 
 			this.chickenSprites = new List<Texture2D>();
@@ -170,28 +168,16 @@ namespace LettuceFarm.States
 
 			spriteBatch.Begin();
 
-			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), new Color(228, 228, 242));
-			
-			spriteBatch.DrawString(font, "Time: " + clock.TimeToString(), new Vector2(640, 15), Color.White);
+			spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
+			DateTime dateTime = DateTime.Now;
+			string time = dateTime.ToString("h:mm tt");
+			spriteBatch.DrawString(font, "Time: " + time, new Vector2(640, 15), Color.White);
 
-			//day time
-			if (clock.getTime() >= 12f)
+			if (dayAndNight() == true)
 			{
-				spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
-				spriteBatch.DrawString(font, "Time: " + clock.TimeToString(), new Vector2(640, 15), Color.White);
-			}
-
-			//night time
-			if (clock.getTime() >= 18f)
-			{
+				//nightTime
 				spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), new Color(50, 50, 125));
-				spriteBatch.DrawString(font, "Time: " + clock.TimeToString(), new Vector2(640, 15), Color.White);
-			}
-
-			//reset to day time
-			if (clock.getTime() >= 23f)
-			{
-				clock.setTime(6f);
+				spriteBatch.DrawString(font, "Time: " + time, new Vector2(640, 15), Color.White);
 			}
 
 			spriteBatch.DrawString(font, "Temperature:" + Temp.ToString(), new Vector2(640, 35), Color.White);
@@ -314,6 +300,18 @@ namespace LettuceFarm.States
 			return false;
         }
 
+		public bool dayAndNight()
+		{
+			DateTime dateTime = DateTime.Now;
+			TimeSpan endDayTime = new TimeSpan(19, 0, 0);
+			TimeSpan startDayTime = new TimeSpan(06, 0, 0);
+
+			TimeSpan now = dateTime.TimeOfDay;
+			if (endDayTime < startDayTime)
+				return endDayTime <= now && now <= startDayTime;
+
+			return !(startDayTime < now && now < endDayTime);
+		}
 		void PrepareLand()
         {
 			foreach (IInventoryItem item in shop.invList)
@@ -376,9 +374,6 @@ namespace LettuceFarm.States
 						break;
 				}
 			}
-
-			clock.time += (float)gameTime.ElapsedGameTime.TotalMinutes;
-
 			base.Update(gameTime);
 
 		}
