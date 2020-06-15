@@ -50,7 +50,7 @@ namespace LettuceFarm.Controls
         public Vector2 Size { get; internal set; }
         public Color BackgroundColor { get; internal set; }
         public Vector2 Location { get; internal set; }
-
+        public bool ready;
         #endregion
 
         #region Methods
@@ -76,6 +76,7 @@ namespace LettuceFarm.Controls
             {
                 plantedSeed.Draw(gameTime, spriteBatch);
                 spriteBatch.DrawString(font, plantedSeed.timeTillNextStage.TotalSeconds.ToString(), plantedSeed.Position, Color.White);
+               
             }
 
         }

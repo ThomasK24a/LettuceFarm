@@ -23,14 +23,16 @@ namespace LettuceFarm.Game
         SpriteFont font;
         bool isSeed;
         Button selectButton;     
-        Button sellButton;     
-
-        public InventorySlot(ContentManager content, Vector2 position, IInventoryItem item, float scale) : base(item.GetTexture(), position, 1)
+        Button sellButton;
+        InventoryState inventory;
+        public InventorySlot(ContentManager content, Vector2 position, IInventoryItem item, float scale, InventoryState inventory) : base(item.GetTexture(), position, 1)
         {
+           
             this.Position = position;
             this.item = item;
             this.scale = scale;
             this.isSeed = false;
+            this.inventory = inventory;
             Texture2D buttonTexture = content.Load<Texture2D>("itemCount");
             slotTexture = content.Load<Texture2D>("ItemSlot");
             font = content.Load<SpriteFont>("defaultFont");
@@ -49,7 +51,7 @@ namespace LettuceFarm.Game
             
             if(this.item.GetCount() > 0)
             this.item.Sell();
-            
+            this.inventory.Coins += this.item.GetSellingPrice();
             
         }
 
