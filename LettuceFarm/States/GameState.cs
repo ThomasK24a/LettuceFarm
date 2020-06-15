@@ -45,6 +45,7 @@ namespace LettuceFarm.States
         int currSun;
         TimeSpan timeTillNextWeatherUpdate;
 
+
         public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory, MouseState mouseState, ShopState shop)
             : base(game, graphicsDevice, content)
         {
@@ -195,11 +196,10 @@ namespace LettuceFarm.States
 			}
             
 
-           
-
             spriteBatch.DrawString(font, "Temperature:" + currTemp.ToString(), new Vector2(640, 35), Color.White);
             spriteBatch.DrawString(font, "Humidity:" + currHum.ToString(), new Vector2(640, 55), Color.White);
             spriteBatch.DrawString(font, "Sunshine:" + currSun.ToString(), new Vector2(640, 75), Color.White);
+
 
             spriteBatch.Draw(slotTexture, new Vector2(195, 15), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
             spriteBatch.DrawString(font, "X " + chickenCount, new Vector2(320, 15), Color.White);
