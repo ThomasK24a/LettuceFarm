@@ -40,7 +40,6 @@ namespace LettuceFarm.States
         SpriteFont font;
         Random random = new Random();
 
-
         public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory, MouseState mouseState, ShopState shop)
             : base(game, graphicsDevice, content)
         {
@@ -69,6 +68,8 @@ namespace LettuceFarm.States
             walkingCow = content.Load<Texture2D>("Sprites/cow_walk_right");
             littleChicken = content.Load<Texture2D>("chicken");
             walkingChicken = content.Load<Texture2D>("Sprites/chicken_walk_left");
+
+            
 
             for (int i = 0; i < 9; i++)
             {
@@ -188,6 +189,8 @@ namespace LettuceFarm.States
 			}
             
 
+           
+
             spriteBatch.DrawString(font, "Temperature:" + Temp.ToString(), new Vector2(640, 35), Color.White);
             spriteBatch.DrawString(font, "Humidity:" + Hum.ToString(), new Vector2(640, 55), Color.White);
             spriteBatch.DrawString(font, "Sunshine:" + Sun.ToString(), new Vector2(640, 75), Color.White);
@@ -279,19 +282,16 @@ namespace LettuceFarm.States
                 }
             }
         }
-
+        
+        //  Vector2 cowPosition;
         public void AddAnimal(LivestockItem animal)
         {
-            int maxX = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            int maxY = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            int xIndex = random.Next(50, maxX-50);
-            int yIndex = random.Next(50, maxY-50);
-
+            int xIndex = 1;
             if (animal.GetName() == "chicken")
             {
                 for ( int i = 1; i < 2; i++)
                 {
-                    components.Add(new Chicken(walkingChicken, new Vector2(xIndex, yIndex)));
+                    components.Add(new Chicken(walkingChicken, new Vector2(xIndex * 100, 200)));
                     xIndex++;
                 }
             }
@@ -300,7 +300,7 @@ namespace LettuceFarm.States
             {
                 for (int i = 1; i < 2; i++)
                 { 
-                    components.Add(new Cow(walkingCow, new Vector2(xIndex, yIndex)));
+                    components.Add(new Cow(walkingCow, new Vector2(xIndex++ * 200, 200)));
                     xIndex++;
                 }
             }
@@ -352,9 +352,6 @@ namespace LettuceFarm.States
                     int nextSpeed = random.Next(0, 5);
                     directionTimer -= gameTime.ElapsedGameTime.Milliseconds;
 
-                    int maxX = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-                    int maxY = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-
                     Vector2 Pos = components[i].Position;
 
                     if (directionTimer <= 0)
@@ -389,28 +386,6 @@ namespace LettuceFarm.States
                                 Pos.Y += nextSpeed;
                                 break;
                         }
-                        // Check for bounce.
-                        if (Pos.X > maxX)
-                        {
-                            Pos.X = -2;
-                        }
-
-                        else if (Pos.X < 50)
-                        {
-                            Pos.X = +2;
-                        }
-
-                        if (Pos.Y > maxY)
-                        {
-                            Pos.Y = -2;
-                        }
-
-                        else if (Pos.Y < 50)
-                        {
-                            Pos.Y = +2;
-                        }
-                        base.Update(gameTime);
-
                         components[i].Position = Pos;
                     }
                 }
