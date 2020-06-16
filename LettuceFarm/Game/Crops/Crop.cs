@@ -18,8 +18,13 @@ namespace LettuceFarm.GameEntity
 		int minGrowTime;
 		int maxGrowTime;
 		FarmTile farmTile;
+		GameState game;
+		int minTemp;
+		int maxTemp;
+		int minHum;
+		int maxHum;
 	
-		public Crop(Texture2D texture, Vector2 position, string name, int frameCount, int minGrowTime, int maxGrowTime, FarmTile farmTile) : base(texture, position, frameCount)
+		public Crop(Texture2D texture, Vector2 position, string name, int frameCount, int minGrowTime, int maxGrowTime, FarmTile farmTile, GameState game, int minTemp, int maxTemp, int minHum, int maxHum) : base(texture, position, frameCount)
 		{
 			this.farmTile = farmTile;
 			this.minGrowTime = minGrowTime;
@@ -28,6 +33,11 @@ namespace LettuceFarm.GameEntity
 			this.name = name;
 			int secondsTillNextStage = random.Next(minGrowTime, maxGrowTime);
 			this.timeTillNextStage = TimeSpan.FromSeconds(secondsTillNextStage);
+			this.game = game;
+			this.minTemp = minTemp;
+			this.maxTemp = maxTemp;
+			this.minHum = minHum;
+			this.maxHum = maxHum;
 		}
 
         public string GetName()
@@ -44,8 +54,16 @@ namespace LettuceFarm.GameEntity
 
         public override void Update(GameTime gameTime)
         {
+			if(game.currHum > minHum && game.currHum < maxHum && game.currTemp > minTemp && game.currTemp < maxTemp)
+            {
+				timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime * game.currSun/10);
+            }
+            else
+            {
+				timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime * game.currSun / 100);
+			}
+				
 
-			timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime);
 			if(timeTillNextStage.TotalMilliseconds < 0 && CurrentFrame < FrameCount - 1)
             {
 				CurrentFrame++;
