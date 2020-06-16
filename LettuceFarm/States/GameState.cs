@@ -212,36 +212,6 @@ namespace LettuceFarm.States
             spriteBatch.Draw(littleCow, new Vector2(280, 30), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
 
-            var pos = new Vector2(200, 150);
-            var _pos = new Vector2(500, 150);
-
-            if (this.chickenCount > 0)
-            {
-                for (int i = 0; i < (int)Math.Ceiling(((float)chickenSprites.Count / 3)); i++)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if (i * 3 + j < chickenCount)
-                        {
-                            spriteBatch.Draw(chickenSprites[i * 3 + j], _pos + new Vector2(j * 90, i * 80 + 40), null, Color.White, 0f, Vector2.Zero, .45f, SpriteEffects.None, 0f);
-                        }
-                    }
-                }
-            }
-            if (this.cowCount > 0)
-            {
-                for (int i = 0; i < (int)Math.Ceiling(((float)cowSprites.Count / 3)); i++)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if (i * 3 + j < cowCount)
-                        {
-                            spriteBatch.Draw(cowSprites[i * 3 + j], pos + new Vector2(j * 90, i * 80 + 40), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-                        }
-                    }
-                }
-            }
-
             foreach (var component in components)
                 component.Draw(gameTime, spriteBatch);
 
@@ -292,26 +262,33 @@ namespace LettuceFarm.States
         //  Vector2 cowPosition;
         public void AddAnimal(LivestockItem animal)
         {
-            int xIndex = 1;
+            int i = 1;
             if (animal.GetName() == "chicken")
             {
-                for ( int i = 1; i < 2; i++)
-                {
-                    components.Add(new Chicken(walkingChicken, new Vector2(xIndex * 100, 200)));
-                    xIndex++;
-                }
+                 
+                    Chicken chick = new Chicken(walkingChicken, new Vector2(i * 10 + 100, 200));
+                    components.Add(chick);
+                    chick.Click += Livestock_Click;
+                    i++;
+                    chickenCount++;
+                
             }
 
             if (animal.GetName() == "cow")
             {
-                for (int i = 1; i < 2; i++)
-                { 
-                    components.Add(new Cow(walkingCow, new Vector2(xIndex++ * 200, 200)));
-                    xIndex++;
-                }
+
+                    Cow cow = new Cow(walkingCow, new Vector2( i * 10 + 200, 200));
+                    components.Add(cow);
+                    cow.Click += Livestock_Click;
+                    i++;
+                    cowCount += 1;
+
             }
 
         }
+
+        
+
         void MouseMethod()
         {
             if (Mouse.GetState().RightButton == ButtonState.Pressed && selectedSeed != null)
@@ -334,6 +311,7 @@ namespace LettuceFarm.States
             return false;
         }
 
+        //TODO: add Method for Addint meat ot inventory
 
         public override void Update(GameTime gameTime)
         {
@@ -427,6 +405,18 @@ namespace LettuceFarm.States
             else if (((FarmTile)sender).plantedSeed != null)
             {
                 ((FarmTile)sender).harvestCrop();
+            }
+        }
+        private void Livestock_Click(object sender, EventArgs e)
+        {
+            if (((Livestock)sender).GetName() == "cow")
+            {
+                this.cowCount-=1;
+
+               
+            }else if(((Livestock)sender).GetName() == "chicken")
+            {
+                this.chickenCount -= 1;
             }
         }
 

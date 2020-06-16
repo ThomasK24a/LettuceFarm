@@ -51,6 +51,8 @@ namespace LettuceFarm.Controls
         public Color BackgroundColor { get; internal set; }
         public Vector2 Location { get; internal set; }
         public bool ready;
+
+
         #endregion
 
         #region Methods
