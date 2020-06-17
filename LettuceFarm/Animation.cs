@@ -82,7 +82,6 @@ namespace LettuceFarm
                         CurrentFrame = 0;
                 }
             }
-
         }
     }
 }

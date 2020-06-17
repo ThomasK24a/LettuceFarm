@@ -20,6 +20,7 @@ namespace LettuceFarm.States
         Texture2D rainTexture;
         Texture2D buttonTexture;
         SpriteFont buttonFont;
+        Texture2D farm2;
         Texture2D farmTileTexture;
         InventoryState inventory;
         ShopState shop;
@@ -33,6 +34,7 @@ namespace LettuceFarm.States
         Texture2D walkingCow;
         Texture2D littleChicken;
         Texture2D walkingChicken;
+
         List<Texture2D> chickenSprites;
         List<Texture2D> cowSprites;
         public int chickenCount;
@@ -66,6 +68,7 @@ namespace LettuceFarm.States
             this.buttonTexture = content.Load<Texture2D>("Button");
             buttonFont = content.Load<SpriteFont>("defaultFont");
             this.farmTileTexture = content.Load<Texture2D>("dirt");
+            farm2 = content.Load<Texture2D>("Sprites/dirt2");
             farmTiles = new List<FarmTile>();
             Tiles = new List<FarmTile>();
             slotTexture = content.Load<Texture2D>("ItemSlot");
@@ -79,7 +82,8 @@ namespace LettuceFarm.States
             this.currSun = 0;
             this.currTemp = 0;
             this.timeTillNextWeatherUpdate = new TimeSpan(0, 0, 10);
-
+            
+            var farmTile01 = new FarmTile(farm2, new Vector2(400, 100), 1, content, this);//fencetile
             for (int i = 0; i < 9; i++)
             {
                 farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content, this));
@@ -131,6 +135,7 @@ namespace LettuceFarm.States
 
             components = new List<Entity>()
             {
+                farmTile01,//fencetile
                 farmTiles[0],
                 farmTiles[1],
                 farmTiles[2],
@@ -179,22 +184,22 @@ namespace LettuceFarm.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Texture2D grass = _content.Load<Texture2D>("Grass");
-            
+
 
             spriteBatch.Begin();
 
             spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
-			DateTime dateTime = DateTime.Now;
-			string time = dateTime.ToString("h:mm tt");
-			spriteBatch.DrawString(font, "Time: " + time, new Vector2(640, 15), Color.White);
+            DateTime dateTime = DateTime.Now;
+            string time = dateTime.ToString("h:mm tt");
+            spriteBatch.DrawString(font, "Time: " + time, new Vector2(640, 15), Color.White);
 
-			if (dayAndNight() == true)
-			{
-				//nightTime
-				spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), new Color(50, 50, 125));
-				spriteBatch.DrawString(font, "Time: " + time, new Vector2(640, 15), Color.White);
-			}
-            
+            if (dayAndNight() == true)
+            {
+                //nightTime
+                spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), new Color(50, 50, 125));
+                spriteBatch.DrawString(font, "Time: " + time, new Vector2(640, 15), Color.White);
+            }
+
 
             spriteBatch.DrawString(font, "Temperature:" + currTemp.ToString(), new Vector2(640, 35), Color.White);
             spriteBatch.DrawString(font, "Humidity:" + currHum.ToString(), new Vector2(640, 55), Color.White);
@@ -228,18 +233,18 @@ namespace LettuceFarm.States
         }
 
         public bool dayAndNight()
-		{
-			DateTime dateTime = DateTime.Now;
-			TimeSpan endDayTime = new TimeSpan(19, 0, 0);
-			TimeSpan startDayTime = new TimeSpan(06, 0, 0);
+        {
+            DateTime dateTime = DateTime.Now;
+            TimeSpan endDayTime = new TimeSpan(19, 0, 0);
+            TimeSpan startDayTime = new TimeSpan(06, 0, 0);
 
-			TimeSpan now = dateTime.TimeOfDay;
-			if (endDayTime < startDayTime)
-				return endDayTime <= now && now <= startDayTime;
+            TimeSpan now = dateTime.TimeOfDay;
+            if (endDayTime < startDayTime)
+                return endDayTime <= now && now <= startDayTime;
 
-			return !(startDayTime < now && now < endDayTime);
-		}
-        
+            return !(startDayTime < now && now < endDayTime);
+        }
+
         void PrepareSeed()
         {
             foreach (SeedItem seeds in inventory.seeds)
@@ -258,36 +263,32 @@ namespace LettuceFarm.States
                 }
             }
         }
-        
+
         //  Vector2 cowPosition;
         public void AddAnimal(LivestockItem animal)
         {
             int i = 1;
             if (animal.GetName() == "chicken")
             {
-                 
-                    Chicken chick = new Chicken(walkingChicken, new Vector2(i * 10 + 100, 200));
-                    components.Add(chick);
-                    chick.Click += Livestock_Click;
-                    i++;
-                    chickenCount++;
-                
+                Chicken chick = new Chicken(walkingChicken, new Vector2(i * 10 + 100, 200));
+                components.Add(chick);
+                chick.Click += Livestock_Click;
+                i++;
+                chickenCount++;
             }
 
             if (animal.GetName() == "cow")
             {
 
-                    Cow cow = new Cow(walkingCow, new Vector2( i * 10 + 200, 200));
-                    components.Add(cow);
-                    cow.Click += Livestock_Click;
-                    i++;
-                    cowCount += 1;
-
+                Cow cow = new Cow(walkingCow, new Vector2(i * 10 + 200, 200));
+                components.Add(cow);
+                cow.Click += Livestock_Click;
+                i++;
+                cowCount += 1;
             }
-
         }
 
-        
+
 
         void MouseMethod()
         {
@@ -316,7 +317,7 @@ namespace LettuceFarm.States
         public override void Update(GameTime gameTime)
         {
             updateWeather(gameTime);
-            
+
 
             foreach (var component in components)
             {
@@ -328,12 +329,12 @@ namespace LettuceFarm.States
 
             for (int i = 0; i < components.Count; i++)
             {
-                if(components[i].Texture == walkingChicken)
+                if (components[i].Texture == walkingChicken)
                 {
                     int minChangTime = 10;
                     int maxChangeTime = 500;
                     int directionTimer;
-                    
+
                     directionTimer = random.Next(minChangTime, maxChangeTime);
                     int nextIndex = random.Next(0, 5);
                     int nextSpeed = random.Next(0, 5);
@@ -378,7 +379,6 @@ namespace LettuceFarm.States
                 }
             }
             base.Update(gameTime);
-
         }
 
         private void shopButton_Click(object sender, EventArgs e)
@@ -411,10 +411,11 @@ namespace LettuceFarm.States
         {
             if (((Livestock)sender).GetName() == "cow")
             {
-                this.cowCount-=1;
+                this.cowCount -= 1;
 
-               
-            }else if(((Livestock)sender).GetName() == "chicken")
+
+            }
+            else if (((Livestock)sender).GetName() == "chicken")
             {
                 this.chickenCount -= 1;
             }

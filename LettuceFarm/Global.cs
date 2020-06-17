@@ -57,11 +57,11 @@ namespace LettuceFarm
                 currentState = nextState;
                 nextState = null;
             }
-
             currentState.Update(gameTime);
             currentState.PostUpdate(gameTime);
             base.Update(gameTime);
         }
+
         protected override void Update(GameTime gameTime)
         {
             _ChangeState(gameTime);
