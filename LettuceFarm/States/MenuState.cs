@@ -29,7 +29,7 @@ namespace LettuceFarm.States
 
 			var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
 			{
-				Text = "Play Game",
+				Text = "New Game",
 			};
 
 			newGameButton.Click += NewGameButton_Click;
