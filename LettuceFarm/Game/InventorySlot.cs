@@ -1,33 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
-using System.IO;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
-using System.Security.AccessControl;
 using LettuceFarm.Controls;
 using Microsoft.Xna.Framework.Content;
-using System.Windows.Forms.VisualStyles;
 using LettuceFarm.States;
 using LettuceFarm.GameEntity;
 
 namespace LettuceFarm.Game
 {
-    class InventorySlot: Entity
-    { 
+    class InventorySlot : Entity
+    {
         IInventoryItem item;
         SeedItem seeditem;
         Texture2D slotTexture;
         Texture2D itemCount;
         SpriteFont font;
         bool isSeed;
-        Button selectButton;     
+        Button selectButton;
         Button sellButton;
         InventoryState inventory;
         public InventorySlot(ContentManager content, Vector2 position, IInventoryItem item, float scale, InventoryState inventory) : base(item.GetTexture(), position, 1)
         {
-           
             this.Position = position;
             this.item = item;
             this.scale = scale;
@@ -48,8 +41,7 @@ namespace LettuceFarm.Game
 
         private void SellButton_Click(object sender, EventArgs e)
         {
-            
-            if(this.item.GetCount() > 0)
+            if (this.item.GetCount() > 0)
             {
                 this.item.Sell();
                 this.inventory.Coins += this.item.GetSellingPrice();
@@ -69,7 +61,7 @@ namespace LettuceFarm.Game
 
             var buttonFont = content.Load<SpriteFont>("defaultFont");
 
-          selectButton = new Button(buttonTexture, buttonFont, this.Position + new Vector2(-30,120), 1)
+            selectButton = new Button(buttonTexture, buttonFont, this.Position + new Vector2(-30, 120), 1)
             {
                 Text = "select",
             };
@@ -78,14 +70,12 @@ namespace LettuceFarm.Game
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
-            if(!this.seeditem.IsSelected())
+            if (!this.seeditem.IsSelected())
             {
-                
                 this.seeditem.Select(true);
             }
             else
             {
-               
                 this.seeditem.Select(false);
             }
 
@@ -99,7 +89,7 @@ namespace LettuceFarm.Game
                 spriteBatch.Draw(itemCount, Position + new Vector2(19, 80), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                 spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                 spriteBatch.DrawString(font, "x " + seeditem.GetCount(), Position + new Vector2(33, 90), Color.Black);
-                selectButton.Draw(gameTime, spriteBatch);    
+                selectButton.Draw(gameTime, spriteBatch);
             }
             else
             {
@@ -108,16 +98,16 @@ namespace LettuceFarm.Game
                 spriteBatch.DrawString(font, "x " + item.GetCount(), Position + new Vector2(18, 60), Color.Black);
                 spriteBatch.Draw(Texture, Position + new Vector2(15, 5), null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                 sellButton.Draw(gameTime, spriteBatch);
-            }           
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
             if (seeditem != null && seeditem.IsSelected())
                 selectButton.Text = "selected";
-            else if(seeditem != null)
+            else if (seeditem != null)
                 selectButton.Text = "select";
-           
+
 
             if (this.isSeed)
             {
@@ -126,9 +116,7 @@ namespace LettuceFarm.Game
             else
             {
                 sellButton.Update(gameTime);
-
             }
-
         }
     }
 }

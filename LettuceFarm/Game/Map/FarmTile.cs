@@ -1,15 +1,12 @@
-﻿using LettuceFarm.Game;
-using LettuceFarm.Game.Crops;
+﻿using LettuceFarm.Game.Crops;
 using LettuceFarm.GameEntity;
 using LettuceFarm.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.Direct3D9;
 using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace LettuceFarm.Controls
 {
@@ -78,7 +75,7 @@ namespace LettuceFarm.Controls
             {
                 plantedSeed.Draw(gameTime, spriteBatch);
                 spriteBatch.DrawString(font, plantedSeed.timeTillNextStage.TotalSeconds.ToString(), plantedSeed.Position, Color.White);
-               
+
             }
 
         }
@@ -110,12 +107,12 @@ namespace LettuceFarm.Controls
             {
                 plantedSeed.Update(gameTime);
             }
-                
+
         }
 
         public void addSeed(SeedItem seed)
         {
-            if(seed.GetCount() > 0 && plantedSeed == null)
+            if (seed.GetCount() > 0 && plantedSeed == null)
             {
                 switch (seed.GetName())
                 {
@@ -144,18 +141,18 @@ namespace LettuceFarm.Controls
 
         public void harvestCrop()
         {
-            if(plantedSeed.CurrentFrame == plantedSeed.FrameCount - 1)
+            if (plantedSeed.CurrentFrame == plantedSeed.FrameCount - 1)
             {
-                if(game.addCropToInventory(plantedSeed))
+                if (game.addCropToInventory(plantedSeed))
                 {
                     this.plantedSeed = null;
                 }
-                
+
             }
-            
+
         }
 
-         #endregion
+        #endregion
     }
 }
 

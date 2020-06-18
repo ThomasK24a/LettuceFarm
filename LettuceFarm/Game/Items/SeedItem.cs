@@ -1,10 +1,7 @@
 ﻿using LettuceFarm.Game;
-using LettuceFarm.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LettuceFarm.GameEntity
 {
@@ -14,6 +11,7 @@ namespace LettuceFarm.GameEntity
         int count;
         string name;
         bool selected = false;
+
         public SeedItem(Texture2D texture, Vector2 position, int price, int count, string name) : base(texture, position, 1)
         {
             this.price = price;
@@ -28,7 +26,6 @@ namespace LettuceFarm.GameEntity
 
         public virtual int GetCount()
         {
-            //TODO: replace for actual amount
             return this.count;
         }
 
@@ -39,7 +36,7 @@ namespace LettuceFarm.GameEntity
 
         public virtual bool BuyItem()
         {
-            if (99 /*replace with currency in inv*/ > GetPrice())
+            if (99 > GetPrice())
             {
                 return true;
             }
@@ -47,7 +44,6 @@ namespace LettuceFarm.GameEntity
             {
                 return false;
             }
-
         }
 
         public void SetCount()
@@ -69,6 +65,7 @@ namespace LettuceFarm.GameEntity
         {
             return this.name;
         }
+
         public bool IsSelected()
         {
             return this.selected;
@@ -86,6 +83,7 @@ namespace LettuceFarm.GameEntity
                 this.count -= 1;
             }
         }
+
         public void Sell()
         {
             this.count -= 1;

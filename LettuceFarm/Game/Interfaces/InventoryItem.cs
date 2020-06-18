@@ -1,29 +1,25 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json.Bson;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LettuceFarm.Game
 {
-	public interface IInventoryItem
-	{
-		public abstract int GetPrice();
+    public interface IInventoryItem
+    {
+        public abstract int GetPrice();
 
-		public abstract int GetCount();
+        public abstract int GetCount();
 
-		public abstract Texture2D GetTexture();
+        public abstract Texture2D GetTexture();
 
-		public abstract void SetCount();
+        public abstract void SetCount();
 
-		public abstract void SetPrice(int price);
+        public abstract void SetPrice(int price);
 
-		public abstract void Buy();
+        public abstract void Buy();
 
-		public abstract string GetName();
+        public abstract string GetName();
 
-		public abstract void Sell();
+        public abstract void Sell();
 
-		public abstract int GetSellingPrice();
-	}
+        public abstract int GetSellingPrice();
+    }
 }
