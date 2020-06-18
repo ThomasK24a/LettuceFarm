@@ -445,6 +445,13 @@ namespace LettuceFarm.States
             if (((Livestock)sender).GetName() == "cow")
             {
                 this.cowCount -= 1;
+                for (int i = 0; i < inventory.Inventory.Count; i++)
+                {
+                    if ("cow" == inventory.Inventory[i].GetName())
+                    {
+                        inventory.Inventory[i].SetCount();
+                    }
+                }
                 ((Entity)sender).flaggedForDeletion = true;
 
 
@@ -452,6 +459,13 @@ namespace LettuceFarm.States
             else if (((Livestock)sender).GetName() == "chicken")
             {
                 this.chickenCount -= 1;
+                for (int i = 0; i < inventory.Inventory.Count; i++)
+                {
+                    if ("chicken" == inventory.Inventory[i].GetName())
+                    {
+                        inventory.Inventory[i].SetCount();
+                    }
+                }
                 ((Entity)sender).flaggedForDeletion = true;
             }
         }
