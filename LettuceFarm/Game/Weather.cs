@@ -11,12 +11,14 @@ namespace LettuceFarm.Game
 		int[] humidity;
 		int[] sunshine;
 		int value;
+        bool rain;
 
 		public Weather()
 		{
 			temperature = new int[] { 20, 25, 30, 35, 40, 50, 55};
 			humidity = new int[] { 20, 25, 30, 35, 40, 50, 55 };
 			sunshine = new int[] { 20, 25, 30, 35, 40, 50, 55 };
+			rain = false;
 			value = 0;
 		}
 

@@ -50,9 +50,10 @@ namespace LettuceFarm.Game
         {
             
             if(this.item.GetCount() > 0)
-            this.item.Sell();
-            this.inventory.Coins += this.item.GetSellingPrice();
-            
+            {
+                this.item.Sell();
+                this.inventory.Coins += this.item.GetSellingPrice();
+            }
         }
 
         public InventorySlot(ContentManager content, Vector2 position, SeedItem seeditem, float scale) : base(seeditem.GetTexture(), position, 1)

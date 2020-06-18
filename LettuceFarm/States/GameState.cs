@@ -34,6 +34,7 @@ namespace LettuceFarm.States
         Texture2D walkingCow;
         Texture2D littleChicken;
         Texture2D walkingChicken;
+        Texture deadChicken;
 
         List<Texture2D> chickenSprites;
         List<Texture2D> cowSprites;
@@ -73,10 +74,12 @@ namespace LettuceFarm.States
             Tiles = new List<FarmTile>();
             slotTexture = content.Load<Texture2D>("ItemSlot");
 
+            //animal sprites
             littleCow = content.Load<Texture2D>("cow");
             walkingCow = content.Load<Texture2D>("Sprites/cow_walk_right");
             littleChicken = content.Load<Texture2D>("chicken");
             walkingChicken = content.Load<Texture2D>("Sprites/chicken_walk_left");
+            deadChicken = content.Load<Texture2D>("Sprites/deadChicken");
 
             this.currHum = 0;
             this.currSun = 0;
@@ -263,7 +266,7 @@ namespace LettuceFarm.States
             }
         }
 
-        //  Vector2 cowPosition;
+        //add animals to game when you buy them
         public void AddAnimal(LivestockItem animal)
         {
             int i = 1;
@@ -331,6 +334,7 @@ namespace LettuceFarm.States
             MouseMethod();
             PrepareSeed();
 
+            //animal's movement
             for (int i = 0; i < components.Count; i++)
             {
                 if (components[i].Texture == walkingChicken || components[i].Texture == walkingCow)
@@ -429,6 +433,7 @@ namespace LettuceFarm.States
             _global.ChangeState(_global.menu);
         }
 
+        //event clicker for crops
         private void farmTile_Click(object sender, EventArgs e)
         {
             if (selectedSeed != null && ((FarmTile)sender).plantedSeed == null)
@@ -440,6 +445,8 @@ namespace LettuceFarm.States
                 ((FarmTile)sender).harvestCrop();
             }
         }
+
+        //event clicker for harvesting animals
         private void Livestock_Click(object sender, EventArgs e)
         {
             if (((Livestock)sender).GetName() == "cow")
@@ -466,6 +473,7 @@ namespace LettuceFarm.States
                         inventory.Inventory[i].SetCount();
                     }
                 }
+                ((Entity)sender).Texture = (Texture2D)deadChicken;
                 ((Entity)sender).flaggedForDeletion = true;
             }
         }
