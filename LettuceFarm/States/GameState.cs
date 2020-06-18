@@ -82,7 +82,7 @@ namespace LettuceFarm.States
             this.currSun = 0;
             this.currTemp = 0;
             this.timeTillNextWeatherUpdate = new TimeSpan(0, 0, 10);
-            
+
             var farmTile01 = new FarmTile(farm2, new Vector2(400, 100), 1, content, this);//fencetile
             for (int i = 0; i < 9; i++)
             {
@@ -342,9 +342,9 @@ namespace LettuceFarm.States
 
                     int maxX = 540;
                     int minX = 262;
-                        
+
                     int maxY = 265;
-                    int minY =  65;
+                    int minY = 65;
 
                     Vector2 Pos = components[i].Position;
 
@@ -441,17 +441,22 @@ namespace LettuceFarm.States
             if (((Livestock)sender).GetName() == "cow")
             {
                 this.cowCount -= 1;
-                //components.Remove((Livestock)sender);
+                for (int i = 0; i < components.Count; i++)
+                {
+                    if (components[i].Texture == walkingChicken || components[i].Texture == walkingCow)
+                    {
 
+                    }
+                    else if (((Livestock)sender).GetName() == "chicken")
+                    {
+                        this.chickenCount -= 1;
+                    }
+                }
 
-            }
-            else if (((Livestock)sender).GetName() == "chicken")
-            {
-                this.chickenCount -= 1;
+                
             }
         }
-
-        private void updateWeather(GameTime gameTime)
+        void updateWeather(GameTime gameTime)
         {
             this.timeTillNextWeatherUpdate = timeTillNextWeatherUpdate - gameTime.ElapsedGameTime;
 

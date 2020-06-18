@@ -50,8 +50,11 @@ namespace LettuceFarm.Game
         {
             
             if(this.item.GetCount() > 0)
-            this.item.Sell();
-            this.inventory.Coins += this.item.GetSellingPrice();
+            {
+                this.item.Sell();
+                this.inventory.Coins += this.item.GetSellingPrice();
+            }
+
             
         }
 
