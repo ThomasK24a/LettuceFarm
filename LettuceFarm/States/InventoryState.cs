@@ -138,10 +138,6 @@ namespace LettuceFarm.States
 			components.Add(newSlot);
 		}
 
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
 
         public override void PostUpdate(GameTime gameTime)
 		{

@@ -104,7 +104,6 @@ namespace LettuceFarm.States
             }
 
 
-
             for (int i = 0; i < 9; i++)
             {
                 chickenSprites.Add(littleChicken);
@@ -319,9 +318,14 @@ namespace LettuceFarm.States
             updateWeather(gameTime);
 
 
-            foreach (var component in components)
+            for(int i = 0; i < components.Count; i++)
             {
-                component.Update(gameTime);
+                components[i].Update(gameTime);
+                if (components[i].flaggedForDeletion)
+                {
+                    components.RemoveAt(i);
+                }
+                
             }
 
             MouseMethod();
@@ -441,13 +445,14 @@ namespace LettuceFarm.States
             if (((Livestock)sender).GetName() == "cow")
             {
                 this.cowCount -= 1;
-                //components.Remove((Livestock)sender);
+                ((Entity)sender).flaggedForDeletion = true;
 
 
             }
             else if (((Livestock)sender).GetName() == "chicken")
             {
                 this.chickenCount -= 1;
+                ((Entity)sender).flaggedForDeletion = true;
             }
         }
 

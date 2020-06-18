@@ -67,12 +67,6 @@ namespace LettuceFarm.States
 			//Implement an update if need arises later
 		}
 
-		public override void Update(GameTime gameTime)
-		{
-			foreach (var component in components)
-				component.Update(gameTime);
-		}
-
 		private void soundOn_Click(object sender, EventArgs e)
 		{
 			MediaPlayer.IsMuted = false;

@@ -13,13 +13,15 @@ namespace LettuceFarm
 		public Color tintColor;
 		public int spriteWidth;
 		public int spriteHeight;
-		public float scale;			 
+		public float scale;
+		public bool flaggedForDeletion;
 
 		public Entity(Texture2D texture, Vector2 position, int frameCount,float scale) : base(texture, frameCount)
 		{
 			this.Position = position;
 			this.tintColor = Color.White;
 			this.scale = scale;
+			this.flaggedForDeletion = false;
 		}
 
 		public Entity(Texture2D texture, Vector2 position, int frameCount ) : base(texture, frameCount)

@@ -26,9 +26,13 @@ namespace LettuceFarm.States
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            foreach (Entity component in components)
+            for (int i = 0; i < components.Count; i++)
             {
-                component.Draw(gameTime, spriteBatch);
+                if (components[i].flaggedForDeletion)
+                {
+                    components.RemoveAt(i);
+                }
+                components[i].Update(gameTime);
             }
             spriteBatch.End();
         }
