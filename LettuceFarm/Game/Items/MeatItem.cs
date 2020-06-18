@@ -7,7 +7,7 @@ using System.Text;
 
 namespace LettuceFarm
 {
-	public abstract class MeatItem : Entity, IInventoryItem
+	public class MeatItem : Entity, IInventoryItem
 	{
 		int count;
 		int price;

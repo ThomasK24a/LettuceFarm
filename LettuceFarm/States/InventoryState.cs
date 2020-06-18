@@ -110,8 +110,8 @@ namespace LettuceFarm.States
 			CropItem cornItem = new CropItem(cornSprite, new Vector2(-100, -100), 50, 0, "corn", 50);
 			SeedItem cornSeed = new SeedItem(cornSeedSprite, new Vector2(-100, -100), 5, 0, "corn");
 
-			LivestockItem cowItem = new LivestockItem(cowSprite, new Vector2(-100, -100), 750, 0, "cow");
-			LivestockItem chickenItem = new LivestockItem(chickenSprite, new Vector2(-100, -100), 300, 0, "chicken");
+			MeatItem cowItem = new MeatItem(cowSprite, new Vector2(-100, -100), 750, 0, "cow", 1150);
+			MeatItem chickenItem = new MeatItem(chickenSprite, new Vector2(-100, -100), 300, 0, "chicken", 650);
 
             Inventory.Add(wheatItem);
             Inventory.Add(lettuceItem);
@@ -138,10 +138,6 @@ namespace LettuceFarm.States
 			components.Add(newSlot);
 		}
 
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
 
         public override void PostUpdate(GameTime gameTime)
 		{
