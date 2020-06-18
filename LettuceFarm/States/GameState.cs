@@ -270,7 +270,7 @@ namespace LettuceFarm.States
             int i = 1;
             if (animal.GetName() == "chicken")
             {
-                Chicken chick = new Chicken(walkingChicken, new Vector2(i * 10 + 100, 200));
+                Chicken chick = new Chicken(walkingChicken, new Vector2(500, 220));
                 components.Add(chick);
                 chick.Click += Livestock_Click;
                 i++;
@@ -280,7 +280,7 @@ namespace LettuceFarm.States
             if (animal.GetName() == "cow")
             {
 
-                Cow cow = new Cow(walkingCow, new Vector2(i * 10 + 200, 200));
+                Cow cow = new Cow(walkingCow, new Vector2(420, 200));
                 components.Add(cow);
                 cow.Click += Livestock_Click;
                 i++;
@@ -329,7 +329,7 @@ namespace LettuceFarm.States
 
             for (int i = 0; i < components.Count; i++)
             {
-                if (components[i].Texture == walkingChicken)
+                if (components[i].Texture == walkingChicken || components[i].Texture == walkingCow)
                 {
                     int minChangTime = 10;
                     int maxChangeTime = 500;
@@ -337,8 +337,14 @@ namespace LettuceFarm.States
 
                     directionTimer = random.Next(minChangTime, maxChangeTime);
                     int nextIndex = random.Next(0, 5);
-                    int nextSpeed = random.Next(0, 5);
+                    int nextSpeed = random.Next(0, 6);
                     directionTimer -= gameTime.ElapsedGameTime.Milliseconds;
+
+                    int maxX = 540;
+                    int minX = 262;
+                        
+                    int maxY = 265;
+                    int minY =  65;
 
                     Vector2 Pos = components[i].Position;
 
@@ -376,7 +382,30 @@ namespace LettuceFarm.States
                         }
                         components[i].Position = Pos;
                     }
+
+                    // Check for bounds
+                    if (Pos.X > maxX)
+                    {
+                        Pos.X = -2;
+                    }
+
+                    else if (Pos.X < minX)
+                    {
+                        Pos.X = +2;
+                    }
+
+                    if (Pos.Y > maxY)
+                    {
+                        Pos.Y = -2;
+                    }
+
+                    else if (Pos.Y < minY)
+                    {
+                        Pos.Y = +2;
+                    }
                 }
+
+                base.Update(gameTime);
             }
             base.Update(gameTime);
         }
@@ -412,6 +441,7 @@ namespace LettuceFarm.States
             if (((Livestock)sender).GetName() == "cow")
             {
                 this.cowCount -= 1;
+                //components.Remove((Livestock)sender);
 
 
             }
