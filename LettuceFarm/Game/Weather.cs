@@ -9,7 +9,6 @@ namespace LettuceFarm.Game
 		int[] humidity;
 		int[] sunshine;
 		int value;
-		bool rain;
 
 		public Weather()
 		{
@@ -47,12 +46,10 @@ namespace LettuceFarm.Game
 			int index = random.Next(0, 2);
 			if(index == 1)
             {
-				rain = true;
 				return true;
             }
 			else
             {
-				rain = false;
 				return false;
             }
 		}

@@ -178,6 +178,7 @@ namespace LettuceFarm.States
                 shopButton,
             };
         }
+
         public void BuyLand()
         {
             for (int i = 0; i < (int)Math.Ceiling(((float)farmTiles.Count / 3)); i++)
@@ -217,11 +218,9 @@ namespace LettuceFarm.States
                 spriteBatch.DrawString(font, "Time: " + time, new Vector2(640, 15), Color.White);
             }
 
-
             spriteBatch.DrawString(font, "Temperature:" + currTemp.ToString(), new Vector2(640, 35), Color.White);
             spriteBatch.DrawString(font, "Humidity:" + currHum.ToString(), new Vector2(640, 55), Color.White);
             spriteBatch.DrawString(font, "Sunshine:" + currSun.ToString(), new Vector2(640, 75), Color.White);
-
 
             spriteBatch.Draw(slotTexture, new Vector2(195, 15), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
             spriteBatch.DrawString(font, "X " + chickenCount, new Vector2(320, 15), Color.White);
@@ -231,7 +230,6 @@ namespace LettuceFarm.States
                 spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(200, 20), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
             spriteBatch.Draw(littleChicken, new Vector2(280, 5), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
-
             spriteBatch.Draw(littleCow, new Vector2(280, 30), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
             if(currRain == true)
