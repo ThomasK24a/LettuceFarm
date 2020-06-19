@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using LettuceFarm.Controls;
 using LettuceFarm.GameEntity;
 using LettuceFarm.Game.Items;
-using LettuceFarm.Game.Livestocks;
 
 namespace LettuceFarm.States
 {
@@ -23,9 +22,7 @@ namespace LettuceFarm.States
             : base(game, graphicsDevice, contentManager)
         {
             this.inventory = inventory;
-
             this.font = _content.Load<SpriteFont>("defaultFont");
-
             this.invList = new List<IInventoryItem>();
             CreateInvList();
 
@@ -38,7 +35,6 @@ namespace LettuceFarm.States
                         GenerateSlot(new Vector2(j * 250 + 105, i * 210 + 50), this.invList[i * 3 + j]);
                 }
             }
-
             Texture2D closeButtonSprite = _content.Load<Texture2D>("CloseButton");
             this.closeButton = new Button(closeButtonSprite, this.font, new Vector2(730, 10), 1);
             this.closeButton.Click += closeButton_Click;
@@ -108,5 +104,4 @@ namespace LettuceFarm.States
             }
         }
     }
-
 }

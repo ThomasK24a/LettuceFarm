@@ -7,10 +7,7 @@ using System.Collections.Generic;
 using LettuceFarm.GameEntity;
 using LettuceFarm.Game;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended.Sprites;
 using LettuceFarm.Game.Livestocks;
-using System.Numerics;
-using SharpDX.MediaFoundation;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using SharpDX.Mathematics.Interop;
 using Microsoft.Xna.Framework.Media;
@@ -180,7 +177,6 @@ namespace LettuceFarm.States
                 inventoryButton,
                 shopButton,
             };
-
         }
         public void BuyLand()
         {
@@ -206,7 +202,6 @@ namespace LettuceFarm.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Texture2D grass = _content.Load<Texture2D>("Grass");
-
 
             spriteBatch.Begin();
 
@@ -264,8 +259,8 @@ namespace LettuceFarm.States
             DateTime dateTime = DateTime.Now;
             TimeSpan endDayTime = new TimeSpan(19, 0, 0);
             TimeSpan startDayTime = new TimeSpan(06, 0, 0);
-
             TimeSpan now = dateTime.TimeOfDay;
+
             if (endDayTime < startDayTime)
                 return endDayTime <= now && now <= startDayTime;
 
@@ -366,13 +361,13 @@ namespace LettuceFarm.States
                     directionTimer = random.Next(minChangTime, maxChangeTime);
                     int nextIndex = random.Next(0, 5);
                     int nextSpeed = random.Next(0, 6);
-                    directionTimer -= gameTime.ElapsedGameTime.Milliseconds;
 
+                    directionTimer -= gameTime.ElapsedGameTime.Milliseconds;
                     int maxX = 540;
                     int minX = 262;
-                        
+
                     int maxY = 265;
-                    int minY =  65;
+                    int minY = 65;
 
                     Vector2 Pos = components[i].Position;
 
@@ -416,7 +411,6 @@ namespace LettuceFarm.States
                     {
                         Pos.X = -2;
                     }
-
                     else if (Pos.X < minX)
                     {
                         Pos.X = +2;
@@ -426,13 +420,11 @@ namespace LettuceFarm.States
                     {
                         Pos.Y = -2;
                     }
-
                     else if (Pos.Y < minY)
                     {
                         Pos.Y = +2;
                     }
                 }
-
                 base.Update(gameTime);
             }
             base.Update(gameTime);
@@ -480,8 +472,6 @@ namespace LettuceFarm.States
                     }
                 }
                 ((Entity)sender).flaggedForDeletion = true;
-
-
             }
             else if (((Livestock)sender).GetName() == "chicken")
             {
