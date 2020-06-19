@@ -12,6 +12,9 @@ using LettuceFarm.Game.Livestocks;
 using System.Numerics;
 using SharpDX.MediaFoundation;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
+using SharpDX.Mathematics.Interop;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace LettuceFarm.States
 {
@@ -34,7 +37,8 @@ namespace LettuceFarm.States
         Texture2D walkingCow;
         Texture2D littleChicken;
         Texture2D walkingChicken;
-        Texture deadChicken;
+        Texture2D deadChicken;
+        SoundEffect rainSfx;
 
         List<Texture2D> chickenSprites;
         List<Texture2D> cowSprites;
@@ -46,8 +50,10 @@ namespace LettuceFarm.States
         public int currTemp;
         public int currHum;
         public int currSun;
+        public bool currRain;
+        
         TimeSpan timeTillNextWeatherUpdate;
-
+        TimeSpan timeTillNextRain;
 
         public GameState(Global game, GraphicsDevice graphicsDevice, ContentManager content, InventoryState inventory, MouseState mouseState, ShopState shop)
             : base(game, graphicsDevice, content)
@@ -84,9 +90,23 @@ namespace LettuceFarm.States
             this.currHum = 0;
             this.currSun = 0;
             this.currTemp = 0;
+            this.currRain = true;
             this.timeTillNextWeatherUpdate = new TimeSpan(0, 0, 10);
-            
+            this.timeTillNextRain = new TimeSpan(0, 2, 0);
+
+            this.rainSfx = content.Load<SoundEffect>("Sound/rain");
+            SoundEffectInstance rainSound = rainSfx.CreateInstance();
+            if (currRain == true)
+            {
+                rainSound.Play();
+            }
+            else
+            {
+                rainSound.Stop();
+            }
+
             var farmTile01 = new FarmTile(farm2, new Vector2(400, 100), 1, content, this);//fencetile
+
             for (int i = 0; i < 9; i++)
             {
                 farmTiles.Add(new FarmTile(farmTileTexture, new Vector2(-100, -100), 1, content, this));
@@ -137,7 +157,7 @@ namespace LettuceFarm.States
 
             components = new List<Entity>()
             {
-                farmTile01,//fencetile
+                farmTile01,//fenceTile
                 farmTiles[0],
                 farmTiles[1],
                 farmTiles[2],
@@ -211,6 +231,7 @@ namespace LettuceFarm.States
             spriteBatch.Draw(slotTexture, new Vector2(195, 15), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
             spriteBatch.DrawString(font, "X " + chickenCount, new Vector2(320, 15), Color.White);
             spriteBatch.DrawString(font, "X " + cowCount, new Vector2(320, 40), Color.White);
+
             if (this.selectedSeed != null)
                 spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(200, 20), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
@@ -218,7 +239,11 @@ namespace LettuceFarm.States
 
             spriteBatch.Draw(littleCow, new Vector2(280, 30), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
-
+            if(currRain == true)
+            {
+                spriteBatch.Draw(rainTexture, new Rectangle(0, 0, 800, 500), Color.White*0.7f);
+            }
+            
             foreach (var component in components)
                 component.Draw(gameTime, spriteBatch);
 
@@ -290,8 +315,6 @@ namespace LettuceFarm.States
             }
         }
 
-
-
         void MouseMethod()
         {
             if (Mouse.GetState().RightButton == ButtonState.Pressed && selectedSeed != null)
@@ -314,21 +337,18 @@ namespace LettuceFarm.States
             return false;
         }
 
-        //TODO: add Method for Addint meat ot inventory
-
         public override void Update(GameTime gameTime)
         {
             updateWeather(gameTime);
+            makeItRain(gameTime);
 
-
-            for(int i = 0; i < components.Count; i++)
+            for (int i = 0; i < components.Count; i++)
             {
                 components[i].Update(gameTime);
                 if (components[i].flaggedForDeletion)
                 {
                     components.RemoveAt(i);
                 }
-                
             }
 
             MouseMethod();
@@ -473,7 +493,7 @@ namespace LettuceFarm.States
                         inventory.Inventory[i].SetCount();
                     }
                 }
-                ((Entity)sender).Texture = (Texture2D)deadChicken;
+                ((Entity)sender).Texture = deadChicken;
                 ((Entity)sender).flaggedForDeletion = true;
             }
         }
@@ -488,6 +508,17 @@ namespace LettuceFarm.States
                 currHum = weather.randomHumidity();
                 currSun = weather.randomSun();
                 this.timeTillNextWeatherUpdate = new TimeSpan(0, 0, 10);
+            }
+        }
+
+        private void makeItRain(GameTime gameTime)
+        {
+            this.timeTillNextRain = timeTillNextRain - gameTime.ElapsedGameTime;
+
+            if (this.timeTillNextRain < TimeSpan.Zero)
+            {
+                currRain = weather.randomRain();
+                this.timeTillNextRain = new TimeSpan(0, 1, 0);
             }
         }
     }

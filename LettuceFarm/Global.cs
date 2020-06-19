@@ -42,6 +42,8 @@ namespace LettuceFarm
             setting = new SettingState(this, graphics.GraphicsDevice, Content);
             Game = new GameState(this, graphics.GraphicsDevice, Content, inventory, mouseState, shop);
             IsMouseVisible = true;
+            IsFixedTimeStep = true;
+            TargetElapsedTime = TimeSpan.FromSeconds(1d / 60d);
             base.Initialize();
         }
 

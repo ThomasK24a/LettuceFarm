@@ -11,14 +11,13 @@ namespace LettuceFarm.Game
 		int[] humidity;
 		int[] sunshine;
 		int value;
-        bool rain;
+		bool rain;
 
 		public Weather()
 		{
 			temperature = new int[] { 20, 25, 30, 35, 40, 50, 55};
 			humidity = new int[] { 20, 25, 30, 35, 40, 50, 55 };
 			sunshine = new int[] { 20, 25, 30, 35, 40, 50, 55 };
-			rain = false;
 			value = 0;
 		}
 
@@ -42,6 +41,22 @@ namespace LettuceFarm.Game
 			Random random = new Random();
 			int index = random.Next(0, 7);
 			return value + sunshine[index];
+		}
+
+		public bool randomRain()
+        {
+			Random random = new Random();
+			int index = random.Next(0, 2);
+			if(index == 1)
+            {
+				rain = true;
+				return true;
+            }
+			else
+            {
+				rain = false;
+				return false;
+            }
 		}
 	}
 }

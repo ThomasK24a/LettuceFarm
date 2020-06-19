@@ -542,3 +542,9 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/deadChicken.png
 
+#begin Sound/rain.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/rain.wav
+

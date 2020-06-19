@@ -9,6 +9,7 @@ namespace LettuceFarm
         {
             using (var game = new Global())
                 game.Run();
+
         }
     }
 }
