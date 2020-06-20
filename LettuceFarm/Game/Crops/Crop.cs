@@ -50,11 +50,11 @@ namespace LettuceFarm.GameEntity
         {
             if (game.currHum > minHum && game.currHum < maxHum && game.currTemp > minTemp && game.currTemp < maxTemp)
             {
-                timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime * game.currSun / 10);
+                timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime * game.currSun / 100);
             }
             else
             {
-                timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime * game.currSun / 100);
+                timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime * game.currSun / 1000);
             }
 
             if (timeTillNextStage.TotalMilliseconds < 0 && CurrentFrame < FrameCount - 1)

@@ -48,7 +48,8 @@ namespace LettuceFarm.States
         public int currHum;
         public int currSun;
         public bool currRain;
-        
+        SoundEffectInstance rainSound;
+
         TimeSpan timeTillNextWeatherUpdate;
         TimeSpan timeTillNextRain;
 
@@ -92,7 +93,8 @@ namespace LettuceFarm.States
             this.timeTillNextRain = new TimeSpan(0, 2, 0);
 
             this.rainSfx = content.Load<SoundEffect>("Sound/rain");
-            SoundEffectInstance rainSound = rainSfx.CreateInstance();
+            this.rainSound = rainSfx.CreateInstance();
+            this.rainSound.IsLooped = true;
             if (currRain == true)
             {
                 rainSound.Play();
@@ -203,13 +205,13 @@ namespace LettuceFarm.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Texture2D grass = _content.Load<Texture2D>("Grass");
+            
 
             spriteBatch.Begin();
 
             spriteBatch.Draw(grass, new Rectangle(0, 0, 800, 500), Color.White);
             DateTime dateTime = DateTime.Now;
             string time = dateTime.ToString("h:mm tt");
-            spriteBatch.DrawString(font, "Time: " + time, new Vector2(640, 15), Color.White);
 
             if (dayAndNight() == true)
             {
@@ -218,19 +220,10 @@ namespace LettuceFarm.States
                 spriteBatch.DrawString(font, "Time: " + time, new Vector2(640, 15), Color.White);
             }
 
-            spriteBatch.DrawString(font, "Temperature:" + currTemp.ToString(), new Vector2(640, 35), Color.White);
-            spriteBatch.DrawString(font, "Humidity:" + currHum.ToString(), new Vector2(640, 55), Color.White);
-            spriteBatch.DrawString(font, "Sunshine:" + currSun.ToString(), new Vector2(640, 75), Color.White);
-
-            spriteBatch.Draw(slotTexture, new Vector2(195, 15), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(font, "X " + chickenCount, new Vector2(320, 15), Color.White);
-            spriteBatch.DrawString(font, "X " + cowCount, new Vector2(320, 40), Color.White);
 
             if (this.selectedSeed != null)
                 spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(200, 20), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
-            spriteBatch.Draw(littleChicken, new Vector2(280, 5), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
-            spriteBatch.Draw(littleCow, new Vector2(280, 30), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
             if(currRain == true)
             {
@@ -239,6 +232,19 @@ namespace LettuceFarm.States
             
             foreach (var component in components)
                 component.Draw(gameTime, spriteBatch);
+
+            spriteBatch.DrawString(font, "Time: " + time, new Vector2(640, 15), Color.White);
+
+            spriteBatch.DrawString(font, "Temperature:" + currTemp.ToString(), new Vector2(640, 35), Color.White);
+            spriteBatch.DrawString(font, "Humidity:" + currHum.ToString(), new Vector2(640, 55), Color.White);
+            spriteBatch.DrawString(font, "Sunshine:" + currSun.ToString(), new Vector2(640, 75), Color.White);
+
+            spriteBatch.Draw(littleChicken, new Vector2(280, 5), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(littleCow, new Vector2(280, 30), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
+
+            spriteBatch.Draw(slotTexture, new Vector2(195, 15), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, "X " + chickenCount, new Vector2(320, 15), Color.White);
+            spriteBatch.DrawString(font, "X " + cowCount, new Vector2(320, 40), Color.White);
 
             if (this.selectedSeed != null)
             {
@@ -334,6 +340,15 @@ namespace LettuceFarm.States
         {
             updateWeather(gameTime);
             makeItRain(gameTime);
+
+            if (currRain)
+            {
+                rainSound.Resume();
+            }
+            else
+            {
+                rainSound.Pause();
+            }
 
             for (int i = 0; i < components.Count; i++)
             {
