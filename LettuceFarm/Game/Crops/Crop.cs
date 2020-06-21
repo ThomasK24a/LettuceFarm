@@ -48,13 +48,13 @@ namespace LettuceFarm.GameEntity
 
         public override void Update(GameTime gameTime)
         {
-            if (game.currHum > minHum && game.currHum < maxHum && game.currTemp > minTemp && game.currTemp < maxTemp)
+            if (game.currHum >= minHum && game.currHum <= maxHum && game.currTemp >= minTemp && game.currTemp <= maxTemp)
             {
-                timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime * game.currSun / 100);
+                timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime * game.currSun / 10);
             }
             else
             {
-                timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime * game.currSun / 1000);
+                timeTillNextStage = timeTillNextStage.Subtract(gameTime.ElapsedGameTime * game.currSun / 30);
             }
 
             if (timeTillNextStage.TotalMilliseconds < 0 && CurrentFrame < FrameCount - 1)

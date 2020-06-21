@@ -12,8 +12,8 @@ namespace LettuceFarm.Game
 
 		public Weather()
 		{
-			temperature = new int[] { 20, 25, 30, 35, 40, 50, 55};
-			humidity = new int[] { 20, 25, 30, 35, 40, 50, 55 };
+			temperature = new int[] { 5, 10, 15, 20, 25, 30, 35};
+			humidity = new int[] { 20, 30, 40, 50, 60, 70, 80 };
 			sunshine = new int[] { 20, 25, 30, 35, 40, 50, 55 };
 			value = 0;
 		}

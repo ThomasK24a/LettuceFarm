@@ -440,7 +440,6 @@ namespace LettuceFarm.States
                         Pos.Y = +2;
                     }
                 }
-                base.Update(gameTime);
             }
             base.Update(gameTime);
         }
@@ -512,7 +511,7 @@ namespace LettuceFarm.States
 
             if (this.timeTillNextWeatherUpdate < TimeSpan.Zero)
             {
-                currTemp = weather.randomSun();
+                currTemp = weather.randomTemp();
                 currHum = weather.randomHumidity();
                 currSun = weather.randomSun();
                 this.timeTillNextWeatherUpdate = new TimeSpan(0, 0, 10);

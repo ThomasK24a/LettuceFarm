@@ -88,7 +88,7 @@ namespace LettuceFarm.States
             SeedItem wheatSeed = new SeedItem(wheatSeedSprite, new Vector2(-100, -100), 100, 0, "wheat");
             CropItem lettuceItem = new CropItem(lettuceSprite, new Vector2(-100, -100), 250, 0, "lettuce", 250);
             SeedItem lettuceSeed = new SeedItem(lettuceSeedSprite, new Vector2(-100, -100), 50, 0, "lettuce");
-            CropItem cornItem = new CropItem(cornSprite, new Vector2(-100, -100), 50, 0, "corn", 50);
+            CropItem cornItem = new CropItem(cornSprite, new Vector2(-100, -100), 75, 0, "corn", 50);
             SeedItem cornSeed = new SeedItem(cornSeedSprite, new Vector2(-100, -100), 5, 0, "corn");
             MeatItem cowItem = new MeatItem(cowSprite, new Vector2(-100, -100), 750, 0, "cow", 1150);
             MeatItem chickenItem = new MeatItem(chickenSprite, new Vector2(-100, -100), 300, 0, "chicken", 650);
