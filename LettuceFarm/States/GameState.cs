@@ -87,9 +87,9 @@ namespace LettuceFarm.States
             this.buttonSfx = content.Load<SoundEffect>("Sound/selectionClick");
             this.buttonSound = buttonSfx.CreateInstance();
 
-            this.currHum = 0;
-            this.currSun = 0;
-            this.currTemp = 0;
+            this.currHum = 40;
+            this.currSun = 30;
+            this.currTemp = 15;
             this.currRain = true;
             this.timeTillNextWeatherUpdate = new TimeSpan(0, 0, 10);
             this.timeTillNextRain = new TimeSpan(0, 2, 0);
