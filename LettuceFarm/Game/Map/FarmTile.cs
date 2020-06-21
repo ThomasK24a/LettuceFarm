@@ -74,7 +74,7 @@ namespace LettuceFarm.Controls
             if (plantedSeed != null)
             {
                 plantedSeed.Draw(gameTime, spriteBatch);
-                spriteBatch.DrawString(font, plantedSeed.timeTillNextStage.TotalSeconds.ToString(), plantedSeed.Position, Color.White);
+                spriteBatch.DrawString(font, ((int) plantedSeed.timeTillNextStage.TotalSeconds).ToString(), plantedSeed.Position, Color.White);
 
             }
 
