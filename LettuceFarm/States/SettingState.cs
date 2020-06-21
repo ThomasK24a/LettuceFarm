@@ -5,6 +5,7 @@ using System;
 using LettuceFarm.Controls;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace LettuceFarm.States
 {
@@ -13,20 +14,22 @@ namespace LettuceFarm.States
         Texture2D buttonTexture;
         SpriteFont buttonFont;
         Texture2D background;
-
+        SoundEffect buttonSfx;
+        SoundEffectInstance buttonSound;
         public SettingState(Global game, GraphicsDevice graphicsDevice, ContentManager content)
             : base(game, graphicsDevice, content)
         {
             buttonTexture = _content.Load<Texture2D>("Button");
             buttonFont = _content.Load<SpriteFont>("defaultFont");
             background = _content.Load<Texture2D>("MenuBackground");
-
+            this.buttonSfx = content.Load<SoundEffect>("Sound/selectionClick");
+            this.buttonSound = buttonSfx.CreateInstance();
             var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)
             {
                 Text = "Back to Menu",
             };
 
-            newGameButton.Click += NewGameButton_Click;
+            newGameButton.Click += BackToMenuButton_Click;
 
             var soundOnButton = new Button(buttonTexture, buttonFont, new Vector2(300, 250), 1)
             {
@@ -68,16 +71,19 @@ namespace LettuceFarm.States
 
         private void soundOn_Click(object sender, EventArgs e)
         {
+            this.buttonSound.Play();
             MediaPlayer.IsMuted = false;
         }
 
         private void soundOff_Click(object sender, EventArgs e)
         {
+            this.buttonSound.Play();
             MediaPlayer.IsMuted = true;
         }
 
-        private void NewGameButton_Click(object sender, EventArgs e)
+        private void BackToMenuButton_Click(object sender, EventArgs e)
         {
+            this.buttonSound.Play();
             _global.ChangeState(_global.menu);
         }
     }

@@ -5,6 +5,7 @@ using System;
 using LettuceFarm.Controls;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace LettuceFarm.States
 {
@@ -14,6 +15,8 @@ namespace LettuceFarm.States
         SpriteFont buttonFont;
         Texture2D background;
         Song song;
+        SoundEffect buttonSfx;
+        SoundEffectInstance buttonSound;
         public MenuState(Global game, GraphicsDevice graphicsDevice, ContentManager content)
             : base(game, graphicsDevice, content)
         {
@@ -21,6 +24,8 @@ namespace LettuceFarm.States
             buttonFont = _content.Load<SpriteFont>("defaultFont");
             background = _content.Load<Texture2D>("MenuBackground");
             this.song = _content.Load<Song>("Sound/soundtrack");
+            this.buttonSfx = content.Load<SoundEffect>("Sound/selectionClick");
+            this.buttonSound = buttonSfx.CreateInstance();
 
             MediaPlayer.IsRepeating = true;
 
@@ -74,16 +79,19 @@ namespace LettuceFarm.States
 
         private void QuitgameButton_Click(object sender, EventArgs e)
         {
+            this.buttonSound.Play();
             _global.Exit();
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)
         {
+            this.buttonSound.Play();
             _global.ChangeState(_global.setting);
         }
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
+            this.buttonSound.Play();
             _global.ChangeState(_global.Game);
         }
     }

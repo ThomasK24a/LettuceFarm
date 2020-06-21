@@ -35,8 +35,7 @@ namespace LettuceFarm.States
         Texture2D littleChicken;
         Texture2D walkingChicken;
         Texture2D deadChicken;
-        SoundEffect rainSfx;
-
+        SoundEffect rainSfx, buttonSfx;
         List<Texture2D> chickenSprites;
         List<Texture2D> cowSprites;
         public int chickenCount;
@@ -48,7 +47,7 @@ namespace LettuceFarm.States
         public int currHum;
         public int currSun;
         public bool currRain;
-        SoundEffectInstance rainSound;
+        SoundEffectInstance rainSound, buttonSound;
 
         TimeSpan timeTillNextWeatherUpdate;
         TimeSpan timeTillNextRain;
@@ -84,6 +83,9 @@ namespace LettuceFarm.States
             littleChicken = content.Load<Texture2D>("chicken");
             walkingChicken = content.Load<Texture2D>("Sprites/chicken_walk_left");
             deadChicken = content.Load<Texture2D>("Sprites/deadChicken");
+
+            this.buttonSfx = content.Load<SoundEffect>("Sound/selectionClick");
+            this.buttonSound = buttonSfx.CreateInstance();
 
             this.currHum = 0;
             this.currSun = 0;
@@ -445,16 +447,19 @@ namespace LettuceFarm.States
 
         private void shopButton_Click(object sender, EventArgs e)
         {
+            this.buttonSound.Play();
             _global.ChangeState(_global.shop);
         }
 
         private void inventoryButton_Click(object sender, EventArgs e)
         {
+            this.buttonSound.Play();
             _global.ChangeState(_global.inventory);
         }
 
         private void menuButton_Click(object sender, EventArgs e)
         {
+            this.buttonSound.Play();
             _global.ChangeState(_global.menu);
         }
 
