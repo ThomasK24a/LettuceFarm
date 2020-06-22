@@ -17,6 +17,7 @@ namespace LettuceFarm.States
         Song song;
         SoundEffect buttonSfx;
         SoundEffectInstance buttonSound;
+
         public MenuState(Global game, GraphicsDevice graphicsDevice, ContentManager content)
             : base(game, graphicsDevice, content)
         {
@@ -28,7 +29,6 @@ namespace LettuceFarm.States
             this.buttonSound = buttonSfx.CreateInstance();
 
             MediaPlayer.IsRepeating = true;
-
             MediaPlayer.Play(song);
 
             var newGameButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), 1)

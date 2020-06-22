@@ -15,7 +15,6 @@ namespace LettuceFarm.States
         public List<IInventoryItem> invList;
         Button closeButton;
         private InventoryState inventory;
-
         SpriteFont font;
 
         public ShopState(Global game, GraphicsDevice graphicsDevice, ContentManager contentManager, InventoryState inventory)
@@ -81,7 +80,6 @@ namespace LettuceFarm.States
             this.invList.Add(chickenItem);
 
             TileItem tileItem = new TileItem(_content.Load<Texture2D>("Sprites/land"), new Vector2(), 10000, 0, "farmslot");
-
             this.invList.Add(tileItem);
         }
 

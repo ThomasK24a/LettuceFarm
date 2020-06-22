@@ -61,9 +61,7 @@ namespace LettuceFarm
                 if (_timer > FrameSpeed)
                 {
                     _timer = 0f;
-
                     CurrentFrame++;
-
                     if (CurrentFrame >= FrameCount)
                         CurrentFrame = 0;
                 }

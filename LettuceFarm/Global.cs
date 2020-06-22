@@ -1,6 +1,5 @@
 ﻿using LettuceFarm.States;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -19,6 +18,7 @@ namespace LettuceFarm
         MouseState mouseState;
         private State currentState;
         private State nextState;
+
         public void ChangeState(State state)
         {
             nextState = state;
@@ -49,6 +49,7 @@ namespace LettuceFarm
             spriteBatch = new SpriteBatch(GraphicsDevice);
             currentState = menu;
         }
+
         void _ChangeState(GameTime gameTime)
         {
             if (nextState != null)
@@ -71,6 +72,5 @@ namespace LettuceFarm
             currentState.Draw(gameTime, spriteBatch);
             base.Draw(gameTime);
         }
-
     }
 }

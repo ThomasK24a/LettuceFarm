@@ -207,7 +207,7 @@ namespace LettuceFarm.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Texture2D grass = _content.Load<Texture2D>("Grass");
-            
+
 
             spriteBatch.Begin();
 
@@ -227,11 +227,11 @@ namespace LettuceFarm.States
                 spriteBatch.Draw(selectedSeed.GetTexture(), new Vector2(200, 20), null, Color.White, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0f);
 
 
-            if(currRain == true)
+            if (currRain == true)
             {
-                spriteBatch.Draw(rainTexture, new Rectangle(0, 0, 800, 500), Color.White*0.7f);
+                spriteBatch.Draw(rainTexture, new Rectangle(0, 0, 800, 500), Color.White * 0.7f);
             }
-            
+
             foreach (var component in components)
                 component.Draw(gameTime, spriteBatch);
 

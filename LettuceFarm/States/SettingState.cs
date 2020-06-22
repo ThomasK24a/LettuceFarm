@@ -60,7 +60,6 @@ namespace LettuceFarm.States
 
             foreach (var component in components)
                 component.Draw(gameTime, spriteBatch);
-
             spriteBatch.End();
         }
 

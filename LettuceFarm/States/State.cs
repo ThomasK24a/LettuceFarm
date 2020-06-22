@@ -7,7 +7,6 @@ namespace LettuceFarm.States
 {
     public abstract class State
     {
-
         #region Fields
         protected List<Entity> components;
 
