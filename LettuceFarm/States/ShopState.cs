@@ -1,12 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LettuceFarm.Controls;
+using LettuceFarm.Game;
+using LettuceFarm.Game.Items;
+using LettuceFarm.GameEntity;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using LettuceFarm.Game;
 using System;
 using System.Collections.Generic;
-using LettuceFarm.Controls;
-using LettuceFarm.GameEntity;
-using LettuceFarm.Game.Items;
 
 namespace LettuceFarm.States
 {

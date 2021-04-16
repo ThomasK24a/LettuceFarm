@@ -13,7 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Manager\ChickenSprite.cs" />
+    <Compile Remove="Manager\**" />
+    <EmbeddedResource Remove="Manager\**" />
+    <None Remove="Manager\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,10 +32,6 @@
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.7.1.189" />
     <PackageReference Include="MonoGame.Framework.WindowsDX.Core" Version="3.8.0.3" />
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Manager\" />
   </ItemGroup>
 
 </Project>

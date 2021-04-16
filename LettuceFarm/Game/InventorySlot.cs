@@ -1,11 +1,11 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using LettuceFarm.Controls;
-using Microsoft.Xna.Framework.Content;
-using LettuceFarm.States;
+﻿using LettuceFarm.Controls;
 using LettuceFarm.GameEntity;
+using LettuceFarm.States;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace LettuceFarm.Game
 {
@@ -79,7 +79,7 @@ namespace LettuceFarm.Game
         {
             if (!this.seeditem.IsSelected())
             {
-                
+
                 this.seeditem.Select(true);
             }
             else
@@ -119,12 +119,12 @@ namespace LettuceFarm.Game
 
             if (this.isSeed)
             {
- 
+
                 selectButton.Update(gameTime);
             }
             else
             {
-             
+
                 sellButton.Update(gameTime);
             }
         }

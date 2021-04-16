@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.Direct3D9;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LettuceFarm.Controls
 {
@@ -35,7 +32,7 @@ namespace LettuceFarm.Controls
         {
             get
             {
-                return new Rectangle((int) Position.X, (int) Position.Y, Texture.Width, Texture.Height);
+                return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
             }
         }
 
@@ -50,7 +47,7 @@ namespace LettuceFarm.Controls
 
         public Button(Texture2D texture, SpriteFont font, Vector2 position, int frameCount) : base(texture, position, frameCount)
         {
-           _font = font;
+            _font = font;
 
             PenColour = Color.Black;
         }

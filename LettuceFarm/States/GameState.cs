@@ -1,17 +1,15 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LettuceFarm.Controls;
+using LettuceFarm.Game;
+using LettuceFarm.Game.Livestocks;
+using LettuceFarm.GameEntity;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using LettuceFarm.Controls;
-using System.Collections.Generic;
-using LettuceFarm.GameEntity;
-using LettuceFarm.Game;
 using Microsoft.Xna.Framework.Input;
-using LettuceFarm.Game.Livestocks;
+using System;
+using System.Collections.Generic;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
-using SharpDX.Mathematics.Interop;
-using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Audio;
 
 namespace LettuceFarm.States
 {

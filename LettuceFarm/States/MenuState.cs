@@ -1,11 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LettuceFarm.Controls;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using LettuceFarm.Controls;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Audio;
+using System;
+using System.Collections.Generic;
 
 namespace LettuceFarm.States
 {

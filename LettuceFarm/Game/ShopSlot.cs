@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using LettuceFarm.Controls;
-using Microsoft.Xna.Framework.Content;
+﻿using LettuceFarm.Controls;
 using LettuceFarm.States;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 namespace LettuceFarm.Game
 {
     class ShopSlot : Entity
